@@ -1,32 +1,30 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Cashier {
-    private Map<String, Integer> order;
     private final Cafe cafe;
 
-    public Cashier(Cafe cafe){
+    public Cashier(Cafe cafe) {
         this.cafe = cafe;
     }
 
-    public void setOrder(Map<String, Integer> orderBook){
-        this.order = orderBook;
-    }
-
-    public long calculateTotalPrice(){
+    public long calculateTotalPrice(Map<String, Integer> orders) {
         long totalPrice = 0L;
         long americanoPrice = 100L;
-        for(String key : order.keySet()){
-            if(key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * order.get(key);
+        for (String key : orders.keySet()) {
+            if (key.equalsIgnoreCase("AMERICANO"))
+                totalPrice += americanoPrice * orders.get(key);
         }
         return totalPrice;
     }
 
-    public boolean payment(String paymentMethod, long totalPrice){
-        // 지불요쳥.
-        return false;
+    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
+        return barista.makeCoffeeTo(receivedOrders);
+    }
+
+    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+        cafe.plusSales(totalPrice);
+        return sendTo(new Barista(0,0), receivedOrders);
     }
 }
