@@ -12,7 +12,7 @@ public class Customer {
         this.myOrders = orders;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    private void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 

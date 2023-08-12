@@ -11,11 +11,11 @@ public class Barista {
         this.status = status;
     }
 
-    public void setRank(int rank){
+    private void setRank(int rank){
         this.rank = rank;
     }
 
-    public void setStatus(int status){
+    private void setStatus(int status){
         this.status = status;
     }
 
