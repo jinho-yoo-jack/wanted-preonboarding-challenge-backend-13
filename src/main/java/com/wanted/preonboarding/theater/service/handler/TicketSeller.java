@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater;
+package com.wanted.preonboarding.theater.service.handler;
 
 public class TicketSeller {
     private final TicketOffice ticketOffice;

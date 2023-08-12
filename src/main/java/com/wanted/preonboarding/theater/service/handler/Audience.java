@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater;
+package com.wanted.preonboarding.theater.service.handler;
 
 public class Audience {
     private final Bag bag;

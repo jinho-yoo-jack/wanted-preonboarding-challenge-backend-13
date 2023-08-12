@@ -1,7 +1,6 @@
-package com.wanted.preonboarding.theater.controller;
+package com.wanted.preonboarding.cafe.controller;
 
 import com.wanted.preonboarding.cafe.service.CafeService;
-import com.wanted.preonboarding.theater.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,18 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/theater")
+@RequestMapping("/cafe")
 @RequiredArgsConstructor
-public class TheaterController {
-    private final TheaterService theaterService;
+public class CafeController {
+    private final CafeService cafeService;
 
     @GetMapping("hello")
     public String welcomeMessage(){
-        return "Welcome to The Wanted Theater";
+        return "Welcome to The Wanted coding cafe!!";
     }
 
-    @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    @GetMapping("order")
+    public String orderFromMenu(){
+        HashMap<String, Integer> menu = new HashMap<String, Integer>();
+        menu.put("AMERICANO", 3);
+        return cafeService.orderFrom(menu);
     }
 }

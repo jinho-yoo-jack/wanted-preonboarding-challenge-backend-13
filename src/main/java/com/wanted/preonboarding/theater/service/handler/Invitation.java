@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater;
+package com.wanted.preonboarding.theater.service.handler;
 
 import java.time.LocalDateTime;
 
