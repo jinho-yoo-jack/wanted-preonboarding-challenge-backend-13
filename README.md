@@ -28,7 +28,7 @@
 4. 이제부터 사전과제를 풀어봅니다.
 5. 모든 사전과제를 풀었다면 이제 원격 레파지토리에 commit 및 push 후 PR을 올려 해주세요.
 6. Example
-   ```
+   ```shell
     1. git checkout -b feature/migration2TcAsMasterSlaveStructure
     # 브랜치를 생성하고 해당 브랜치로 checkout.
     # feature의 브랜치명은 내부적으로 관리하는 issues번호나 프로젝트 관리도구에의 ID 값을 이용
