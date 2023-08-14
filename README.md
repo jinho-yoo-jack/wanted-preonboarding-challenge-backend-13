@@ -28,5 +28,20 @@
 4. 이제부터 사전과제를 풀어봅니다.
 5. 모든 사전과제를 풀었다면 이제 원격 레파지토리에 commit 및 push 후 PR을 올려 해주세요.
 6. Example
+   ```
+    1. git checkout -b feature/migration2TcAsMasterSlaveStructure
+    # 브랜치를 생성하고 해당 브랜치로 checkout.
+    # feature의 브랜치명은 내부적으로 관리하는 issues번호나 프로젝트 관리도구에의 ID 값을 이용
+    2. git add .
+    # 모든 변경사항을 tracking 되는 상태로 변경할거에요.
+    3. git commit -m “Commit Messsage for Modify Information”
+    # git commit를 수행하고 작업내용을 팀 내부 규약대로 작성
+    3-1. git push --set-upstream origin feature/migration2TcAsMasterSlaveStructure
+    # 해당 내용을 remote repository로 push
+    4. push하면 gitlab/github에 Pull Request나 Merge Request 생성하는 버튼이 활성화
+    5. Merge Request 버튼을 클릭 후, 숙제에 관한 내용 작성 후 PR 요청을 보내면 끝
+    6. Merge 승인이되면 WEB UI화면에서 merge 버튼이 활성화 됨.
+   ```
+   
 
 
