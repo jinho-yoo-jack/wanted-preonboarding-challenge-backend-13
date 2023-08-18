@@ -1,5 +1,8 @@
 package com.wanted.preonboarding.theater.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Theater {
 
     public void enter(Audience audience, TicketSeller ticketSeller) {

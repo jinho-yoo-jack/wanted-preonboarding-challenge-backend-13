@@ -2,3 +2,10 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  jpa:
+    properties:
+      hibernate:
+        show_sql:
+          - true
+        format_sql:
+          - true
