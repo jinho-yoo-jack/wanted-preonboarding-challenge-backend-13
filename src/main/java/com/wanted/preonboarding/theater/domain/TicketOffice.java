@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,10 +14,6 @@ public class TicketOffice {
 
     public Ticket getTicket(){
         return tickets.get(0);
-    }
-
-    public void minusAmount(long amount) {
-        this.amount -= amount;
     }
     public void plusAmount(long amount) {
         this.amount += amount;
