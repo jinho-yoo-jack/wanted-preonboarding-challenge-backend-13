@@ -1,6 +1,7 @@
 package com.wanted.preonboarding.theater.controller;
 
 import com.wanted.preonboarding.cafe.service.CafeService;
+import com.wanted.preonboarding.theater.dto.RequestMessage;
 import com.wanted.preonboarding.theater.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class TheaterController {
 
     @GetMapping("enter")
     public String enter(){
-        return theaterService.enter();
+        RequestMessage requestMessage = new RequestMessage(2L, 20000L, 20000L);
+        return theaterService.enter(requestMessage);
     }
 }
