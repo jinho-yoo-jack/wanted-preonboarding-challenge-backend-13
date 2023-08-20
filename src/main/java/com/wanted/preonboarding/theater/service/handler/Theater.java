@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Theater {
+//    private final TicketSeller ticketSeller;
 
     public void enter(Audience audience, TicketSeller ticketSeller){
         if(audience.getBag().hasInvitation()){

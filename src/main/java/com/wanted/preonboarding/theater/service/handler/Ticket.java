@@ -1,13 +1,13 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.Getter;
+
+// 티켓 클래스
+@Getter
 public class Ticket {
-    private Long fee;
+    private final Long fee;
 
-    public Ticket(Long fee) {
+    public Ticket(final Long fee) {
         this.fee = fee;
-    }
-
-    public Long getFee() {
-        return fee;
     }
 }
