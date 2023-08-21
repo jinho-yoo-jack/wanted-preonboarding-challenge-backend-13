@@ -1,24 +1,25 @@
 package com.wanted.preonboarding.cafe.service;
 
-import com.wanted.preonboarding.cafe.service.handler.Cafe;
-import com.wanted.preonboarding.cafe.service.handler.Cashier;
-import com.wanted.preonboarding.cafe.service.handler.Customer;
+import com.wanted.preonboarding.cafe.service.handler.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(HashMap<String, Integer> menu){
-        Cashier cashier = new Cashier(wantedCafe);
-        Map<String, Integer> myOrders = new HashMap<>();
-        myOrders.put("AMERICANO", 3);
-        Customer c1 = new Customer("Card", myOrders);
-        return c1.buyCoffee(cashier);
+    public String orderFrom(Customer customer){
+        if ( !customer.hasOrderMenu() ) {
+            throw new RuntimeException("주문이 없습니다.");
+        }
+        Cashier cashier = new Cashier(wantedCafe.getMenuList());
+        Long totalPrice = cashier.calculateTotalPrice(customer.getOrder().getOrderMenus());
+        log.info("totalPrice :: {}", totalPrice);
+        wantedCafe.plusSales(totalPrice);
+        Barista barista = new Barista(Rank.BEGINNER, Status.WAITING);
+        return barista.makeCoffeeTo(customer.getOrder().getOrderMenus());
     }
 }

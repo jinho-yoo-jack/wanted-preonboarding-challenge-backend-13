@@ -1,34 +1,38 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.Map;
+import lombok.Getter;
 
+import java.util.Set;
+
+@Getter
 public class Barista {
-    private int rank; // 0: Beginner 1: Middle 2: Master
-    private int status; // 0: Waiting 1: Making
+    private Rank rank; // 0: Beginner 1: Middle 2: Master
+    private Status status; // 0: Waiting 1: Making
 
-    public Barista(int rank, int status){
+    public Barista(Rank rank, Status status){
         this.rank = rank;
         this.status = status;
     }
 
-    private void setRank(int rank){
+    private void setRank(Rank rank){
         this.rank = rank;
     }
 
-    private void setStatus(int status){
+    private void setStatus(Status status){
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(Set<OrderMenu> orderMenuList) {
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
+        for(OrderMenu coffeeMenu : orderMenuList){
+            if (makeOrders.length() > 0) {
+                makeOrders.append("\n");
+            }
+            makeOrders.append(coffeeMenu.getName())
                     .append(":")
-                    .append(quantity);
+                    .append(coffeeMenu.getQuantity());
         }
         return makeOrders.toString();
     }
-
 
 }

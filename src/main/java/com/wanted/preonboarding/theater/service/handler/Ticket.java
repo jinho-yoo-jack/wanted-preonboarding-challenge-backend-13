@@ -1,5 +1,8 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.ToString;
+
+@ToString
 public class Ticket {
     private Long fee;
 
