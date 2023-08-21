@@ -1,30 +1,30 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 public class Cashier {
-    private final Cafe cafe;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    private final List<Menu> menuList;
+
+    public Cashier(List<Menu> menuList) {
+        this.menuList = menuList;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+    public Cashier(Menu... menus) {
+        this(Arrays.asList(menus));
+    }
+
+    public Long calculateTotalPrice(Set<OrderMenu> orderMenus) {
+        Long price = 0L;
+        for (OrderMenu orderMenu : orderMenus) {
+            Menu orderedMenu = this.menuList.stream()
+                    .filter(menu -> orderMenu.getName().equals(menu.getName()))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException(orderMenu.getName() + " 에 해당하는 메뉴가 존재하지 않습니다."));
+            price += orderedMenu.getPrice() * orderMenu.getQuantity();
         }
-        return totalPrice;
-    }
-
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        return price;
     }
 }
