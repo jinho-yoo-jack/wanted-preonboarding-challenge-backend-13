@@ -19,10 +19,13 @@ public class Bag {
     public boolean hasTicket() {
         return ticket != null;
     }
-    public void setTicket(Ticket ticket) {
+    public void receiveTicket(Ticket ticket) {
         this.ticket = ticket;
     }
-    public void minusAmount(long amount) {
+    public void buyTicket(long amount) {
+        if (this.amount < amount) {
+            throw new RuntimeException("티켓 구매 비용이 부족합니다.");
+        }
         this.amount -= amount;
     }
     public void plusAmount(long amount) {
