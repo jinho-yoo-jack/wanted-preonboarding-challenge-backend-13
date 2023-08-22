@@ -10,14 +10,15 @@ public class Theater {
 
     public TheaterResponse.Enter enter(Audience audience, TicketSeller ticketSeller){
         Bag audienceBag = audience.getBag(); // 고객의 가방
-        boolean hasInvitation = audienceBag.hasInvitation(); // 극장 초대 여부
         TicketOffice ticketOffice = ticketSeller.getTicketOffice(); // 티켓 관리 사무소
-        Ticket ticket = ticketOffice.getTicket(); // 티켓
 
-        return receiveTicket(audienceBag, hasInvitation, ticketOffice, ticket);
+        return receiveTicket(audienceBag, ticketOffice);
     }
 
-    private TheaterResponse.Enter receiveTicket(Bag audienceBag, boolean hasInvitation, TicketOffice ticketOffice, Ticket ticket) {
+    private TheaterResponse.Enter receiveTicket(Bag audienceBag, TicketOffice ticketOffice) {
+        boolean hasInvitation = audienceBag.hasInvitation(); // 극장 초대 여부
+        Ticket ticket = ticketOffice.getTicket(); // 티켓
+
         if(hasInvitation) {
             audienceBag.receiveTicket(ticket);
             return TheaterResponse.Enter.isTicketBought(false);
