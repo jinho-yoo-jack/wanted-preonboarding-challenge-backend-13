@@ -1,5 +1,8 @@
-package com.wanted.preonboarding.theater.domain;
+package com.wanted.preonboarding.theater.theater.domain;
 
+import com.wanted.preonboarding.theater.audience.domain.Audience;
+import com.wanted.preonboarding.theater.ticket.domain.Ticket;
+import com.wanted.preonboarding.theater.ticket.domain.TicketSeller;
 import org.springframework.stereotype.Component;
 
 @Component

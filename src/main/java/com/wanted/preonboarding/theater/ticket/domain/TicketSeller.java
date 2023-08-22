@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater.domain;
+package com.wanted.preonboarding.theater.ticket.domain;
 
 public class TicketSeller {
     private final TicketOffice ticketOffice;
