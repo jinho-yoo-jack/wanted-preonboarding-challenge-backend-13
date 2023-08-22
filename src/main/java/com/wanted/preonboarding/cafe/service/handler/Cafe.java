@@ -1,8 +1,9 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+@ToString
 @Component
 public class Cafe {
     private final String name;
@@ -18,6 +19,7 @@ public class Cafe {
     }
 
     public void plusSales(Long amount){
+
         this.sales += amount;
     }
 
