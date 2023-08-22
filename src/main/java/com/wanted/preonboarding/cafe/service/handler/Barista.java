@@ -1,6 +1,6 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.Map;
+import java.util.List;
 
 public class Barista {
     private int rank; // 0: Beginner 1: Middle 2: Master
@@ -19,14 +19,15 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(List<Order> orders){
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
-                    .append(":")
-                    .append(quantity);
-        }
+        orders.forEach(order -> {
+            int quantity = order.getCount();
+            makeOrders.append(order.getMenu())
+                .append(":")
+                .append(quantity)
+                .append("\n");
+        });
         return makeOrders.toString();
     }
 

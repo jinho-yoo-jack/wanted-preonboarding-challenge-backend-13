@@ -1,6 +1,5 @@
 package com.wanted.preonboarding.theater.dto;
 
-import com.wanted.preonboarding.theater.service.handler.Invitation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
