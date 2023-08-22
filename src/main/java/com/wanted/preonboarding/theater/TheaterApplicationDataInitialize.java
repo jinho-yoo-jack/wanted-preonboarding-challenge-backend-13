@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -29,31 +28,27 @@ public class TheaterApplicationDataInitialize {
             ticketService.add(ticket);
         }
 
-        // 티켓이 없는 관객
-        Invitation invitationWithoutTicket = new Invitation(LocalDateTime.now());
-        Bag bagWOT = new Bag(invitationWithoutTicket, 10000L);
-        Audience audienceWOT = new Audience(bagWOT);
-        audienceService.add(audienceWOT);
+        // Invitation이 없는 관객
+        Bag bagWithoutInvitation = new Bag( 10000L);
+        Audience audienceWithoutInvitation = new Audience(bagWithoutInvitation);
+        audienceService.add(audienceWithoutInvitation);
 
-        // 티켓이 있는 관객
-        Invitation invitationWithTicket = new Invitation(LocalDateTime.now());
-        Bag bagWT = new Bag(invitationWithoutTicket, 10000L);
-        Audience audienceWT = new Audience(bagWT);
-        audienceService.add(audienceWT);
+        // Invitation이 있는 관객
+        Invitation invitationWithInvitation = new Invitation(LocalDateTime.now());
+        Bag bagWithInvitation = new Bag(invitationWithInvitation, 10000L);
+        Audience audienceWithInvitation = new Audience(bagWithInvitation);
+        audienceService.add(audienceWithInvitation);
 
         log.info("최초 추가된 정보는 다음과 같습니다");
 
         List<Ticket> findTickets = ticketService.findAll();
         List<Long> ticketIds = findTickets.stream().map(Ticket::getId).toList();
-        log.info("티켓  ID : " + ticketIds.toString());
+        log.info("티켓  ID : " + ticketIds);
 
         List<Audience> findAudiences = audienceService.findAll();
         List<Long> audienceIds = findAudiences.stream().map(Audience::getId).toList();
-        log.info("관객 ID : " + audienceIds.toString());
+        log.info("관객 ID : " + audienceIds);
     }
-
-
-
 
 
 }

@@ -1,7 +1,7 @@
 package com.wanted.preonboarding.theater.theater.controller;
 
-import com.wanted.preonboarding.theater.theater.TheaterService;
-import com.wanted.preonboarding.theater.ticket.application.dto.RequestMessage;
+import com.wanted.preonboarding.theater.theater.application.TheaterService;
+import com.wanted.preonboarding.theater.theater.application.dto.RequestMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

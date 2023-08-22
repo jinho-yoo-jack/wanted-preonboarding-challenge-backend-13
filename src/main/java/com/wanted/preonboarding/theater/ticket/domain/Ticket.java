@@ -1,10 +1,5 @@
 package com.wanted.preonboarding.theater.ticket.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import java.util.Objects;
 
 
@@ -26,6 +21,10 @@ public class Ticket {
         return this.id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public Long getFee() {
         return fee;
     }
@@ -41,9 +40,5 @@ public class Ticket {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }
