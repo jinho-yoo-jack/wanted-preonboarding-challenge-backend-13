@@ -22,7 +22,7 @@ public class Barista {
     public String makeCoffeeTo(List<Order> orders){
         StringBuilder makeOrders = new StringBuilder();
         orders.forEach(order -> {
-            int quantity = order.getCount();
+            long quantity = order.getQuantity();
             makeOrders.append(order.getMenu())
                 .append(":")
                 .append(quantity)

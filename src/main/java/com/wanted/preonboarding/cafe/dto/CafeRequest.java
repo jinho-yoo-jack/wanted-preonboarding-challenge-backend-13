@@ -8,6 +8,6 @@ public class CafeRequest {
   @Data
   public static class Order {
     private Menu menu;
-    private Integer count;
+    private long quantity;
   }
 }

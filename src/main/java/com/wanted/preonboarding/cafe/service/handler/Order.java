@@ -9,14 +9,14 @@ import lombok.Getter;
 @Getter
 public class Order {
   private Menu menu;
-  private Integer count;
+  private long quantity;
 
   public static Order create(CafeRequest.Order request) {
-    return new Order(request.getMenu(), request.getCount());
+    return new Order(request.getMenu(), request.getQuantity());
   }
 
   public long getPrice() {
-    return this.menu.getPrice() * this.count;
+    return this.menu.getPrice() * this.quantity;
   }
 
 }
