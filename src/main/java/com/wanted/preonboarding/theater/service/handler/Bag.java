@@ -1,5 +1,8 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.ToString;
+
+@ToString
 public class Bag {
     private Long amount;
     private final Invitation invitation;

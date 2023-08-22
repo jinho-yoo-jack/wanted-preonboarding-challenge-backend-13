@@ -1,5 +1,10 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
 public class Ticket {
     private Long fee;
 
@@ -7,7 +12,4 @@ public class Ticket {
         this.fee = fee;
     }
 
-    public Long getFee() {
-        return fee;
-    }
 }

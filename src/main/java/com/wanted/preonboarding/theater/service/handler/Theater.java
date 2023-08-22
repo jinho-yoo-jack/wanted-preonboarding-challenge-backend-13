@@ -3,19 +3,21 @@ package com.wanted.preonboarding.theater.service.handler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class Theater {
 
+    private final List<EntryStrategy> entryStrategies;
+
     public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
-        }
+
+        EntryStrategy entryStrategy = entryStrategies.stream()
+                .filter(es -> es.isTargetAudience(audience.getState()))
+                .findAny()
+                .orElseThrow(RuntimeException::new);
+
+        entryStrategy.enter(audience, ticketSeller);
     }
 }
