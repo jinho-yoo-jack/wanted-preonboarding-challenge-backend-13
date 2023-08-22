@@ -1,27 +1,32 @@
 package com.wanted.preonboarding.theater.controller;
 
-import com.wanted.preonboarding.cafe.service.CafeService;
-import com.wanted.preonboarding.theater.service.TheaterService;
+import com.wanted.preonboarding.global.Response;
+import com.wanted.preonboarding.theater.service.TheaterServiceImpl;
+import com.wanted.preonboarding.theater.service.handler.AudienceDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/theater")
 @RequiredArgsConstructor
 public class TheaterController {
-    private final TheaterService theaterService;
+    private final TheaterServiceImpl theaterService;
 
-    @GetMapping("hello")
-    public String welcomeMessage(){
-        return "Welcome to The Wanted Theater";
+    @GetMapping("/hello")
+    public Response<String> welcomeMessage(){
+        return Response.success("Welcome to The Wanted Theater");
     }
 
-    @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    @PostMapping("/enter")
+    public Response<String> enter(@RequestBody AudienceDto audience) {
+        String result = theaterService.enter(audience);
+        return Response.success(result);
+    }
+
+    @PostMapping("/refund")
+    public Response<String> refund(@RequestBody AudienceDto audience) {
+        String result = theaterService.refund(audience);
+        return Response.success(result);
     }
 }
