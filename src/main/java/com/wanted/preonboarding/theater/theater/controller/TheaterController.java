@@ -4,6 +4,8 @@ import com.wanted.preonboarding.theater.theater.application.TheaterService;
 import com.wanted.preonboarding.theater.theater.application.dto.RequestMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +20,8 @@ public class TheaterController {
         return "Welcome to The Wanted Theater";
     }
 
-    @GetMapping("/enter")
-    public String enter(RequestMessage request) {
+    @PostMapping("/enter")
+    public String enter(@RequestBody RequestMessage request) {
         return theaterService.enter(request);
     }
 }

@@ -28,15 +28,19 @@ public class Audience {
         return bag.hasInvitation();
     }
 
-    public Bag getBag() {
-        return bag;
-    }
-
     public void putTicketInBag(Ticket ticket) {
         this.bag.setTicket(ticket);
     }
 
+    public boolean hasTicket() {
+        return this.bag.hasTicket();
+    }
+
     public void dischargeAmount(long money) {
         this.bag.minusAmount(money);
+    }
+
+    public long getAmountInBag() {
+        return this.bag.getAmount();
     }
 }
