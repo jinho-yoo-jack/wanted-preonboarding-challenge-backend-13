@@ -7,9 +7,9 @@ public class TicketOffice {
     private long amount;
     private final List<Ticket> tickets;
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
+    public TicketOffice(Long amount, List<Ticket> tickets) {
         this.amount = amount;
-        this.tickets = Arrays.asList(tickets);
+        this.tickets = tickets;
     }
 
     public Ticket getTicket(){
