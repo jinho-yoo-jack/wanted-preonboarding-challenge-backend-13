@@ -1,7 +1,8 @@
 package com.wanted.preonboarding.theater.service.handler;
 
 public class Ticket {
-    private Long fee;
+
+    private final Long fee;
 
     public Ticket(Long fee) {
         this.fee = fee;
