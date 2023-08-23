@@ -24,6 +24,10 @@ public class Audience {
         this.id = id;
     }
 
+    public boolean hasInvitation() {
+        return bag.hasInvitation();
+    }
+
     public Bag getBag() {
         return bag;
     }

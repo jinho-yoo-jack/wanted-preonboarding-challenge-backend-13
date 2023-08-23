@@ -25,7 +25,7 @@ public class TicketOffice {
                 .orElseThrow(() -> new IllegalArgumentException(TICKET_NOT_FOUND));
     }
 
-    public synchronized void plusAmount(long amount) {
+    public synchronized void chargeAmount(long amount) {
         this.amount += amount;
     }
 }
