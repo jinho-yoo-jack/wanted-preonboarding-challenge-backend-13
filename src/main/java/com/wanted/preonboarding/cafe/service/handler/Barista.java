@@ -1,7 +1,10 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import lombok.Getter;
+
 import java.util.Map;
 
+@Getter
 public class Barista {
     private int rank; // 0: Beginner 1: Middle 2: Master
     private int status; // 0: Waiting 1: Making
@@ -19,14 +22,18 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(Orders orders){
+        setStatus(1);
+        Map<Menu, Integer> orderItems = orders.getOrderItems();
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
+        for(Map.Entry<Menu, Integer> orderItem : orderItems.entrySet()){
+            int quantity = orderItem.getValue();
+            makeOrders.append(orderItem.getKey().getName())
                     .append(":")
-                    .append(quantity);
+                    .append(quantity)
+                    .append(" ");
         }
+        setStatus(0);
         return makeOrders.toString();
     }
 
