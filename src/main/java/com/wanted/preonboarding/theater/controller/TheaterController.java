@@ -1,13 +1,15 @@
 package com.wanted.preonboarding.theater.controller;
 
-import com.wanted.preonboarding.cafe.service.CafeService;
+import com.wanted.preonboarding.theater.controller.dto.EnterDto;
 import com.wanted.preonboarding.theater.service.TheaterService;
+import com.wanted.preonboarding.theater.service.handler.Audience;
+import com.wanted.preonboarding.theater.service.handler.Bag;
+import com.wanted.preonboarding.theater.service.handler.Invitation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/theater")
@@ -21,7 +23,17 @@ public class TheaterController {
     }
 
     @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    public String enter(@RequestBody EnterDto enterDto){
+        Audience audience = enterDtoToAudience(enterDto);
+        return theaterService.enter(audience);
+    }
+
+    private Audience enterDtoToAudience(EnterDto enterDto) {
+        if (enterDto.getWhen() == null) {
+            return new Audience(new Bag(enterDto.getAmount()));
+        } else {
+            Invitation invitation = new Invitation(enterDto.getWhen());
+            return new Audience(new Bag(invitation, enterDto.getAmount()));
+        }
     }
 }

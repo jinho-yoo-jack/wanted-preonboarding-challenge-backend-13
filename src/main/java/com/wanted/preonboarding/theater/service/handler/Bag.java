@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import com.wanted.preonboarding.theater.exception.NoMoneyException;
+
 public class Bag {
     private Long amount;
     private final Invitation invitation;
@@ -23,6 +25,9 @@ public class Bag {
         this.ticket = ticket;
     }
     public void minusAmount(long amount) {
+        if (this.amount < amount) {
+            throw new NoMoneyException("Not Enough Money");
+        }
         this.amount -= amount;
     }
     public void plusAmount(long amount) {

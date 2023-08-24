@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.service.Menu;
+
 import java.util.Map;
 
 public class Barista {
@@ -19,13 +21,14 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(Map<Menu, Integer> orders){
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
+        for(Menu menu : orders.keySet()){
+            int quantity = orders.get(menu);
+            makeOrders.append(menu.toString())
                     .append(":")
-                    .append(quantity);
+                    .append(quantity)
+                    .append(" ");
         }
         return makeOrders.toString();
     }

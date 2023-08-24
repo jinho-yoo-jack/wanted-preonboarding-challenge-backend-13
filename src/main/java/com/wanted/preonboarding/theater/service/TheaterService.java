@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 public class TheaterService {
     private final Theater theater;
 
-    public String enter(){
-        theater.enter(new Audience(new Bag(1000L)),
-                new TicketSeller(new TicketOffice(20000L, new Ticket(100L))));
-        return "Have a good time.";
+    public String enter(Audience audience) {
+        if (theater.enter(audience)) {
+            return "Have a good time.";
+        } else {
+            return "You are not allowed to enter.";
+        }
 
     }
 }
