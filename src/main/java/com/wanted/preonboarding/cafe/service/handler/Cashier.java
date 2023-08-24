@@ -1,7 +1,11 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.service.Menu;
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
+@Component
 public class Cashier {
     private final Cafe cafe;
 
@@ -9,22 +13,14 @@ public class Cashier {
         this.cafe = cafe;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
-        }
-        return totalPrice;
-    }
-
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+    public String takeOrder(Order order) {
+        long totalPrice = order.getTotalPrice();
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        return sendTo(new Barista(0, 0), order.getOrder());
+    }
+
+
+    private String sendTo(Barista barista, Map<Menu, Integer> receivedOrders) {
+        return barista.makeCoffeeTo(receivedOrders);
     }
 }

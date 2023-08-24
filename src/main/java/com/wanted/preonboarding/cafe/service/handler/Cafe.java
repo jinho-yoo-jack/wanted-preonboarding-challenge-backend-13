@@ -3,14 +3,16 @@ package com.wanted.preonboarding.cafe.service.handler;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 @Component
 public class Cafe {
     private final String name;
-    private Long sales;
+    private final AtomicLong sales;
 
     public Cafe(){
         this.name = "wantedCodingCafe";
-        this.sales = 10000L;
+        this.sales = new AtomicLong(10000L);
     }
 
     public String getCafeName(){
@@ -18,10 +20,10 @@ public class Cafe {
     }
 
     public void plusSales(Long amount){
-        this.sales += amount;
+        sales.addAndGet(amount);
     }
 
     public void minusSales(Long amount){
-        this.sales -= amount;
+        sales.addAndGet(-amount);
     }
 }
