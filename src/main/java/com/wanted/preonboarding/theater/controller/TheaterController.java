@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/theater")
 @RequiredArgsConstructor
 public class TheaterController {
-    private final TheaterServiceImpl theaterService;
+    
+    private final TheaterService theaterService;
 
     @GetMapping("/hello")
     public Response<String> welcomeMessage(){
