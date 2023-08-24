@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater.ticket.application;
+package com.wanted.preonboarding.theater.ticket.service;
 
 import com.wanted.preonboarding.theater.ticket.domain.Ticket;
 import com.wanted.preonboarding.theater.ticket.domain.TicketRepository;

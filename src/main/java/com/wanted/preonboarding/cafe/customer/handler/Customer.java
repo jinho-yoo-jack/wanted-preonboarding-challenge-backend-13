@@ -1,6 +1,7 @@
-package com.wanted.preonboarding.cafe.service.handler;
+package com.wanted.preonboarding.cafe.customer.handler;
 
-import java.util.HashMap;
+import com.wanted.preonboarding.cafe.cashier.handler.Cashier;
+
 import java.util.Map;
 
 public class Customer {

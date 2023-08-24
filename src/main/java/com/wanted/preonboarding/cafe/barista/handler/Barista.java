@@ -1,5 +1,9 @@
-package com.wanted.preonboarding.cafe.service.handler;
+package com.wanted.preonboarding.cafe.barista.handler;
 
+import com.wanted.preonboarding.cafe.cafe.domain.Beverage;
+import com.wanted.preonboarding.cafe.cafe.service.dto.OrderItem;
+
+import java.util.List;
 import java.util.Map;
 
 public class Barista {
@@ -28,6 +32,10 @@ public class Barista {
                     .append(quantity);
         }
         return makeOrders.toString();
+    }
+
+    public String makeBeverageTo(List<OrderItem> orders) {
+        return null;
     }
 
 

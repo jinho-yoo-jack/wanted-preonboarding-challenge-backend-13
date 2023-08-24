@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater.audience.application;
+package com.wanted.preonboarding.theater.audience.service;
 
 import com.wanted.preonboarding.theater.audience.domain.Audience;
 import com.wanted.preonboarding.theater.audience.domain.AudienceRepository;

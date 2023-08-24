@@ -1,7 +1,7 @@
-package com.wanted.preonboarding.theater.theater.domain;
+package com.wanted.preonboarding.theater.theater.handler;
 
 import com.wanted.preonboarding.theater.audience.domain.Audience;
-import com.wanted.preonboarding.theater.ticket.application.TicketOffice;
+import com.wanted.preonboarding.theater.ticket.service.TicketOffice;
 import com.wanted.preonboarding.theater.ticket.domain.Ticket;
 
 public class TicketSeller {

@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater.ticket.application;
+package com.wanted.preonboarding.theater.ticket.service;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
