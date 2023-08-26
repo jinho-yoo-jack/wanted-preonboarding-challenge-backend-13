@@ -1,5 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+// Bag -> Wallet, amount -> money 로 의미 구체화
 public class Wallet {
     private Long money;
     private final Invitation invitation;

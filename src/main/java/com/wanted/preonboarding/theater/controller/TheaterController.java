@@ -21,7 +21,14 @@ public class TheaterController {
     }
 
     @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    public String enter(@RequestBody TheaterEnterReequest theaterEnterRequest){
+        Audience audience = theaterEnterRequest.getAudience();
+        return theaterService.enter(audience);
+    }
+
+    @Builder
+    @Getter
+    public static class TheaterEnterReequest {
+        Audience audience;
     }
 }
