@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Customer {
     private String paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private final List<OrderMenu> myOrders;
 
-    public Customer(String paymentMethod, Map<String, Integer> orders) {
+    public Customer(String paymentMethod, List<OrderMenu> orders) {
         this.paymentMethod = paymentMethod;
         this.myOrders = orders;
     }

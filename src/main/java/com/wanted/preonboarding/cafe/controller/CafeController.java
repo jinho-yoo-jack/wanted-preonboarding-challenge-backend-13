@@ -20,9 +20,13 @@ public class CafeController {
     }
 
     @GetMapping("order")
-    public String orderFromMenu(){
-        HashMap<String, Integer> menu = new HashMap<String, Integer>();
-        menu.put("AMERICANO", 3);
-        return cafeService.orderFrom(menu);
+    public String orderFromMenu(CafeOrderFromMenuRequest cafeOrderFromMenuRequest){
+        List<OrderMenu> menuList = cafeOrderFromMenuRequest.getMenuList();
+        return cafeService.orderFrom(menuList);
+    }
+
+    @Getter
+    public static class CafeOrderFromMenuRequest {
+        List<OrderMenu> menuList;
     }
 }
