@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.exception;
+package com.wanted.preonboarding.theater.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

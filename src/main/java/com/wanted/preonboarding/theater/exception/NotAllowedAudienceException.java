@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.exception;
+package com.wanted.preonboarding.theater.exception;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

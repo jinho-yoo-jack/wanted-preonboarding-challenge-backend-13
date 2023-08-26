@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.exception;
+package com.wanted.preonboarding.theater.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

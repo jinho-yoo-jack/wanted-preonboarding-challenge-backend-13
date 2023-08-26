@@ -1,6 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import com.wanted.preonboarding.exception.NotAllowedAudienceException;
+import com.wanted.preonboarding.theater.exception.NotAllowedAudienceException;
 import com.wanted.preonboarding.theater.entity.Audience;
 import com.wanted.preonboarding.theater.entity.Ticket;
 import com.wanted.preonboarding.theater.entity.TicketSeller;
