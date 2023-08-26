@@ -14,11 +14,9 @@ import java.util.Map;
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(HashMap<String, Integer> menu){
+    public String orderFrom(List<OrderMenu> menuList){
         Cashier cashier = new Cashier(wantedCafe);
-        Map<String, Integer> myOrders = new HashMap<>();
-        myOrders.put("AMERICANO", 3);
-        Customer c1 = new Customer("Card", myOrders);
+        Customer c1 = new Customer("Card", menuList);   // "Card"도 PayMethod enum으로 변경
         return c1.buyCoffee(cashier);
     }
 }

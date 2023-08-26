@@ -1,11 +1,11 @@
 package com.wanted.preonboarding.theater.service.handler;
 
 public class Audience {
-    private final Bag bag;
+    private final Wallet wallet;
 
-    public Audience(Bag bag){
-        this.bag = bag;
+    public Audience(Wallet wallet){
+        this.wallet = wallet;
     }
 
-    public Bag getBag(){ return bag;}
+    public Wallet getWallet(){ return wallet;}
 }

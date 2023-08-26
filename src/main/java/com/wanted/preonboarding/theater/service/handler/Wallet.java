@@ -1,16 +1,17 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class Bag {
-    private Long amount;
+// Bag -> Wallet, amount -> money 로 의미 구체화
+public class Wallet {
+    private Long money;
     private final Invitation invitation;
     private Ticket ticket;
 
-    public Bag(long amount){
-        this(null, amount);
+    public Wallet(long money){
+        this(null, money);
     }
-    public Bag(Invitation invitation, long amount){
+    public Wallet(Invitation invitation, long money){
         this.invitation = invitation;
-        this.amount = amount;
+        this.money = money;
     }
 
     public boolean hasInvitation() {
@@ -22,10 +23,10 @@ public class Bag {
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
-    public void minusAmount(long amount) {
-        this.amount -= amount;
+    public void minusMoney(long money) {
+        this.money -= money;
     }
-    public void plusAmount(long amount) {
-        this.amount += amount;
+    public void plusMoney(long money) {
+        this.money += money;
     }
 }

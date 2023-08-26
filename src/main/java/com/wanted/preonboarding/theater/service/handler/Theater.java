@@ -6,16 +6,17 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Theater {
+    private final TicketSellerRepository ticketSellerRepository;
 
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
+    public void enter(Audience audience){
+        TicketSeller ticketSeller = ticketSellerRepository.getTicketSeller();
+        // 혹은 setter로 주입 받는 방식
+        // new TicketSeller(TicketOffice.builder().sales(20000L).ticketFee(100L).build());
+
+        if(audience.getWallet().hasInvitation()){
+            ticketSeller.giveTicketByInvitation(audience);
         }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
+            ticketSeller.sellTicket(audience);
         }
     }
 }

@@ -10,4 +10,16 @@ public class TicketSeller {
     public TicketOffice getTicketOffice(){
         return ticketOffice;
     }
+
+    public void giveTicketByInvitation(Audience audience) {
+        Ticket ticket = ticketSeller.getTicketOffice().getTicket();
+        audience.getBag().setTicket(ticket);
+    }
+
+    public void sellTicket(Audience audience) {
+        Ticket ticket = ticketSeller.getTicketOffice().getTicket();
+        audience.getBag().minusAmount(ticket.getFee());
+        ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
+        audience.getBag().setTicket(ticket);
+    }
 }
