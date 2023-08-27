@@ -7,7 +7,11 @@ public class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    public TicketOffice getTicketOffice(){
-        return ticketOffice;
+    public Ticket getTicket(){
+        return ticketOffice.getTicket();
+    }
+
+    public void plusAmount(long fee) {
+        this.ticketOffice.setAmount(fee);
     }
 }

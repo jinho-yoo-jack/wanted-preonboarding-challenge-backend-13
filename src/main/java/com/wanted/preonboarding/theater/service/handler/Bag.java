@@ -13,12 +13,6 @@ public class Bag {
         this.amount = amount;
     }
 
-    public boolean hasInvitation() {
-        return invitation != null;
-    }
-    public boolean hasTicket() {
-        return ticket != null;
-    }
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
@@ -27,5 +21,9 @@ public class Bag {
     }
     public void plusAmount(long amount) {
         this.amount += amount;
+    }
+
+    public Invitation getInvitation() {
+        return invitation;
     }
 }
