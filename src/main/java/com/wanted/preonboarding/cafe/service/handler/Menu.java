@@ -1,10 +1,5 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import com.wanted.preonboarding.theater.service.handler.Ticket;
-import lombok.Getter;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 

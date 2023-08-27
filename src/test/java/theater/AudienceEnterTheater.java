@@ -4,9 +4,6 @@ import com.wanted.preonboarding.theater.service.TheaterService;
 import com.wanted.preonboarding.theater.service.handler.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AudienceEnterTheater {
 
     @Test
