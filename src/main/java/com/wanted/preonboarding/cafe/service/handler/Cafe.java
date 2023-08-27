@@ -1,27 +1,20 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+
+import java.math.BigInteger;
 
 @Component
 public class Cafe {
     private final String name;
-    private Long sales;
+    private BigInteger sales;
 
     public Cafe(){
         this.name = "wantedCodingCafe";
-        this.sales = 10000L;
+        this.sales = BigInteger.valueOf(10000);
     }
 
-    public String getCafeName(){
-        return name;
-    }
-
-    public void plusSales(Long amount){
-        this.sales += amount;
-    }
-
-    public void minusSales(Long amount){
-        this.sales -= amount;
+    public void plusSales(BigInteger amount){
+        this.sales = this.sales.add(amount);
     }
 }
