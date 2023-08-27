@@ -1,30 +1,28 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Cashier {
-    private final Cafe cafe;
-
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
-    }
-
+	//데이터 베이스를 써야하는 부분을 임의로 연결 (동시성문제 있을 수 있음)
+	private Map<String, Long> beverageList= new HashMap<>();
+	
+	//세가지 정도 음료로 초기화
+	public Cashier () {
+		beverageList.put("Americano", 2000L);
+		beverageList.put("Latte", 2500L);
+		beverageList.put("ColdBrew", 4000L);
+	}
+	
+	// 총 금액 계산
     public long calculateTotalPrice(Map<String, Integer> orders) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
         for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+        	totalPrice += beverageList.get(key) * orders.get(key);
         }
         return totalPrice;
     }
-
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
-    }
+    
+    
+    
 }

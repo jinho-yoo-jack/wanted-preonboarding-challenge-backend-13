@@ -1,23 +1,36 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Cafe {
-    private final String name;
+    private String name;
     private Long sales;
+    private Cashier cashier;
+    private Barista barista;
 
-    public Cafe(){
-        this.name = "wantedCodingCafe";
-        this.sales = 10000L;
+    public Barista getBarista() {
+		return barista;
+	}
+
+	public void setBarista(Barista barista) {
+		this.barista = barista;
+	}
+
+	public Cafe (Cashier cashier) {
+    	this.name = "wantedCodingCafe";
+		this.cashier = cashier;
     }
 
     public String getCafeName(){
         return name;
     }
-
-    public void plusSales(Long amount){
+    
+    public Cashier getCashier() {
+    	return cashier;
+    }
+    
+	public void plusSales(Long amount){
         this.sales += amount;
     }
 

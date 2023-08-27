@@ -8,4 +8,16 @@ public class Audience {
     }
 
     public Bag getBag(){ return bag;}
+    
+    public boolean hasTicket() {
+        return bag.hasTicket();
+    } 
+    
+    public void enterTheater(Theater theater) {
+        if (hasTicket()) {
+            theater.checkTicket(this);
+        } else {
+            theater.sellTicket(this);
+        }
+    }
 }

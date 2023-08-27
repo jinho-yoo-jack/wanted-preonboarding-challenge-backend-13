@@ -6,16 +6,23 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Theater {
-
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
-        }
+	private TicketSeller ticketSeller;
+	
+	public Theater(TicketSeller ticketSeller) {
+		this.ticketSeller = ticketSeller;
+	}
+	
+	public TicketSeller getTicketSeller() {
+		return ticketSeller;
+	}
+	
+    public void checkTicket(Audience audience) {
+        // 티켓 확인 로직을 추가할 수 있다 
+    	// 예를 들어 일련번호라던지, 만료일 확인 등등 Ticket에 여러가지를 줘서 바꿀수 있다
     }
+
+    public void sellTicket(Audience audience) {
+        ticketSeller.ticketing(audience);
+    }
+	
 }
