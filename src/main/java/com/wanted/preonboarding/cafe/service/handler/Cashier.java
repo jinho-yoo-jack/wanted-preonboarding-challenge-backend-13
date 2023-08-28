@@ -1,6 +1,10 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import java.util.List;
 import java.util.Map;
+
+import com.wanted.preonboarding.cafe.service.Dtos.RequestOrders;
+import com.wanted.preonboarding.cafe.service.enums.DrinkEnum;
 
 public class Cashier {
     private final Cafe cafe;
@@ -11,20 +15,18 @@ public class Cashier {
 
     public long calculateTotalPrice(Map<String, Integer> orders) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
+
         for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+            String drinkName = key.toUpperCase();
+            totalPrice += DrinkEnum.getPriceByName(drinkName) * orders.get(key);
         }
         return totalPrice;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
     public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        Barista barista1 = new Barista(0, 0);
+        return barista1.makeCoffeeTo(receivedOrders);
+
     }
 }
