@@ -1,14 +1,18 @@
 package com.wanted.preonboarding.theater.controller;
 
-import com.wanted.preonboarding.cafe.service.CafeService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wanted.preonboarding.theater.dto.enterRequest;
 import com.wanted.preonboarding.theater.service.TheaterService;
+import com.wanted.preonboarding.theater.service.handler.Audience;
+import com.wanted.preonboarding.theater.service.handler.Bag;
+import com.wanted.preonboarding.theater.service.handler.Invitation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.time.LocalDateTime;
 
+@Slf4j
 @RestController
 @RequestMapping("/theater")
 @RequiredArgsConstructor
@@ -20,8 +24,16 @@ public class TheaterController {
         return "Welcome to The Wanted Theater";
     }
 
-    @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    @PostMapping("enter")
+    public String enter(@RequestBody enterRequest enterRequest) {
+        Audience audience = createAudience(enterRequest);
+        return theaterService.enter(audience);
+    }
+
+    private static Audience createAudience(enterRequest enterRequest) {
+        LocalDateTime invitationCode = enterRequest.getInvitationCode();
+        Invitation invitation = invitationCode != null ? new Invitation(invitationCode):null;
+        Bag bag = new Bag(invitation, enterRequest.getAmount());
+        return new Audience(bag);
     }
 }
