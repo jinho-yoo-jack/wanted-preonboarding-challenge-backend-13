@@ -22,7 +22,4 @@ public class Cashier {
         }
         return totalPrice;
     }
-    
-    
-    
 }

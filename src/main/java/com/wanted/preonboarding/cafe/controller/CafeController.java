@@ -33,7 +33,7 @@ public class CafeController {
     	model.addAttribute("orders", requestMessage);
     	model.addAttribute("totalPrice", totalPrice);
         return "payment";
-    }
+    }                     
     
     @GetMapping("payment")
     public String payOrder(Model model, @RequestParam String paymentMethod) {
@@ -47,7 +47,11 @@ public class CafeController {
 		} catch (Exception e) {
 			// 예외 추가
 		}
-
     	return result;
+    }
+    @GetMapping("complete")
+    public String completeOrder(Model model, @RequestParam String orderNo) {
+        cafeService.completeOrder(orderNo);
+    	return orderNo;
     }
 }

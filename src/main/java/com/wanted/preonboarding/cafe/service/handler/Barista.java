@@ -43,4 +43,13 @@ public class Barista {
         }
         return makeOrders.toString();
     }
+    
+    public Map<String, Integer> getOrder(String orderNo){
+    	return this.orderList.get(orderNo);
+    }
+    
+    public void completeOrder(String orderNo) {
+    	this.orderList.remove(orderNo);
+    }
+    
 }
