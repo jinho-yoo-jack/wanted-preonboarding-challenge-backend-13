@@ -1,11 +1,13 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Cafe {
     private final String name;
+    @Getter
     private Long sales;
 
     public Cafe(){
@@ -24,4 +26,5 @@ public class Cafe {
     public void minusSales(Long amount){
         this.sales -= amount;
     }
+
 }
