@@ -1,5 +1,9 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import com.wanted.preonboarding.theater.domain.RequestMessage;
+import lombok.Getter;
+
+@Getter
 public class Bag {
     private Long amount;
     private final Invitation invitation;
@@ -22,10 +26,14 @@ public class Bag {
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
-    public void minusAmount(long amount) {
+    public void minusAmount(long amount) throws RuntimeException{
+        if (this.amount < amount){
+            throw new RuntimeException();
+        }
         this.amount -= amount;
     }
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
 }
