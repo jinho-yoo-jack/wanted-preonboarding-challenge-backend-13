@@ -1,5 +1,8 @@
 package com.wanted.preonboarding.cafe.service;
 
+import com.wanted.preonboarding.cafe.entity.Drinks;
+import com.wanted.preonboarding.cafe.entity.Order;
+import com.wanted.preonboarding.cafe.entity.Orders;
 import com.wanted.preonboarding.cafe.service.handler.Cafe;
 import com.wanted.preonboarding.cafe.service.handler.Cashier;
 import com.wanted.preonboarding.cafe.service.handler.Customer;
@@ -14,11 +17,9 @@ import java.util.Map;
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(HashMap<String, Integer> menu){
+    public String orderFrom(Orders orders) {
         Cashier cashier = new Cashier(wantedCafe);
-        Map<String, Integer> myOrders = new HashMap<>();
-        myOrders.put("AMERICANO", 3);
-        Customer c1 = new Customer("Card", myOrders);
+        Customer c1 = new Customer("Card", orders);
         return c1.buyCoffee(cashier);
     }
 }
