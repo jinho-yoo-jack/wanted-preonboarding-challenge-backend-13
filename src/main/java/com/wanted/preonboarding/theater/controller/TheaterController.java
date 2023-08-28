@@ -2,11 +2,15 @@ package com.wanted.preonboarding.theater.controller;
 
 import com.wanted.preonboarding.cafe.service.CafeService;
 import com.wanted.preonboarding.theater.service.TheaterService;
+import com.wanted.preonboarding.theater.service.handler.Audience;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @RestController
@@ -21,7 +25,14 @@ public class TheaterController {
     }
 
     @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    public String enter(AudienceEnterTheaterRequest request) {
+        Audience audience = Audience.of(request.getAmount(), request.getInvitedAt());
+        return theaterService.enter(audience);
+    }
+
+    @Getter
+    public static class AudienceEnterTheaterRequest {
+        private long amount;
+        private LocalDateTime invitedAt;
     }
 }
