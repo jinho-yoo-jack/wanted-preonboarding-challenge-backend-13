@@ -7,15 +7,17 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Theater {
 
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
+    public String enter(Audience audience, Ticket ticket) {
+        TicketSeller ticketseller = new TicketSeller(new TicketOffice(20000L, ticket));
+
+        if (audience.hasTicket()) {
+            return "The ticket has been verified.";
+        } else if (audience.hasInvitation()) {
+            ticketseller.convertInvitationToTicket(audience);
+            return "The invitation has been converted into a ticket.";
+        } else {
+            ticketseller.sellTicket(audience);
+            return "The ticket has been purchased.";
         }
     }
 }
