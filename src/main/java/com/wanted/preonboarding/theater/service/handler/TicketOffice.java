@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
 
