@@ -26,13 +26,12 @@ public class CafeController {
 
     @GetMapping("order")
     public String orderFromMenu(@RequestBody CaffeOrderRequest request){
-        return cafeService.order(request.getCaffeOrders(), request.getPaymentMethod());
+        return cafeService.order(request.getCaffeOrders());
     }
 
     @Getter
     static class CaffeOrderRequest {
         private List<CaffeOrder> caffeOrders;
-        private PaymentMethod paymentMethod;
 
         public CaffeOrders getCaffeOrders() {
             return new CaffeOrders(caffeOrders);

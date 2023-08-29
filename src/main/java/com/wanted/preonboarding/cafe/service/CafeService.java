@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String order(CaffeOrders caffeOrders, PaymentMethod paymentMethod){
+    public String order(CaffeOrders caffeOrders){
         Cashier cashier = new Cashier(wantedCafe);
-        Customer customer = new Customer(paymentMethod, caffeOrders);
+        Customer customer = new Customer(PaymentMethod.Card, caffeOrders);
         return customer.buyCoffee(cashier);
     }
 }
