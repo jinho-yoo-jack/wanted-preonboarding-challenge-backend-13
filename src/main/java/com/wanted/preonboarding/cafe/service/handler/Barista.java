@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
 public class Barista {

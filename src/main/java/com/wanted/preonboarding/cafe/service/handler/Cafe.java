@@ -1,14 +1,17 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Component
 public class Cafe {
     private final String name;
+    private final Barista barista;
     private Long sales;
 
     public Cafe(){
+        this.barista = new Barista(0, 0);
         this.name = "wantedCodingCafe";
         this.sales = 10000L;
     }
@@ -23,5 +26,9 @@ public class Cafe {
 
     public void minusSales(Long amount){
         this.sales -= amount;
+    }
+
+    public String sendTo(Map<String, Integer> receivedOrders) {
+        return this.barista.makeCoffeeTo(receivedOrders);
     }
 }
