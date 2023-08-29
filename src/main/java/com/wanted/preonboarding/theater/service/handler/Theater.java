@@ -1,6 +1,5 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import com.wanted.preonboarding.theater.domain.RequestMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

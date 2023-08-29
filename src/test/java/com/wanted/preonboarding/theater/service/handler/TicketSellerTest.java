@@ -1,6 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import com.wanted.preonboarding.theater.domain.RequestMessage;
+import com.wanted.preonboarding.theater.domain.AudienceRequestDto;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,7 +9,7 @@ class TicketSellerTest {
 
     @Test
     public void 티켓판매(){
-        RequestMessage rm = RequestMessage.builder()
+        AudienceRequestDto rm = AudienceRequestDto.builder()
                 .when(null)
                 .amount(50000L)
                 .build();

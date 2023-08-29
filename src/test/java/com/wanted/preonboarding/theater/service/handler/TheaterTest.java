@@ -1,6 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import com.wanted.preonboarding.theater.domain.RequestMessage;
+import com.wanted.preonboarding.theater.domain.AudienceRequestDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ class TheaterTest {
 
     @Test
     public void 입장_통과_초대권소지(){
-        RequestMessage rm = RequestMessage.builder()
+        AudienceRequestDto rm = AudienceRequestDto.builder()
                 .when(LocalDateTime.now())
                 .amount(0L)
                 .build();
@@ -29,7 +29,7 @@ class TheaterTest {
 
     @Test
     public void 입장불가_금액부족(){
-        RequestMessage rm = RequestMessage.builder()
+        AudienceRequestDto rm = AudienceRequestDto.builder()
                 .when(null)
                 .amount(0L)
                 .build();
@@ -40,7 +40,7 @@ class TheaterTest {
 
     @Test
     public void 입장_통과_티켓구매(){
-        RequestMessage rm = RequestMessage.builder()
+        AudienceRequestDto rm = AudienceRequestDto.builder()
                 .when(null)
                 .amount(50000L)
                 .build();
