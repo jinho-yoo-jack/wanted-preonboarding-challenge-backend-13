@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TicketOffice {
-    private long amount;
+    private Long amount;
     private final List<Ticket> tickets;
 
     public TicketOffice(Long amount, Ticket ... tickets) {
