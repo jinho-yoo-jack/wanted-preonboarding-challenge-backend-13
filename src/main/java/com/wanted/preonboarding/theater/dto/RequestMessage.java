@@ -19,7 +19,7 @@ public class RequestMessage {
     public Audience toAudience() {
         return Audience.builder()
                 .bag(Bag.builder()
-                                .invitation(Invitation.builder().when(when).build())
+                                .invitation(when == null ? null : Invitation.builder().when(when).build())
                                 .amount(amount)
                                 .build()
                 )
