@@ -2,18 +2,12 @@ package com.wanted.preonboarding.theater.service;
 
 import static org.assertj.core.api.Assertions.*;
 
-import com.wanted.preonboarding.theater.service.handler.Audience;
-import com.wanted.preonboarding.theater.service.handler.Bag;
-import com.wanted.preonboarding.theater.service.handler.Invitation;
-import com.wanted.preonboarding.theater.service.handler.Ticket;
-import com.wanted.preonboarding.theater.service.handler.TicketOffice;
-import com.wanted.preonboarding.theater.service.handler.TicketSeller;
-import java.util.Arrays;
+import com.wanted.preonboarding.theater.service.dto.TheaterEnterRequestDto;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class TheaterServiceTest {
@@ -32,14 +26,32 @@ class TheaterServiceTest {
     }
 
     @Test
-    @DisplayName("관객이 티켓을 가지고 있으면, 극장에 입장시킨다.")
-    void enter() {
+    @DisplayName("관객이 초대권을 소유하고 있다면, 극장에 입장시킨다.")
+    void enter_invitation() {
         // given
-        Audience audience = new Audience(new Bag(new Invitation(), 1000));
-        TicketSeller ticketSeller = new TicketSeller(new TicketOffice(20000L, new Ticket(100L)));
+        TheaterEnterRequestDto enterRequestDto = new TheaterEnterRequestDto(
+                LocalDateTime.of(2023, 8, 30, 15, 0 ,0),
+                15000
+        );
 
         // when
-        String enterMessage = theaterService.enter();
+        String enterMessage = theaterService.enter(enterRequestDto);
+
+        // then
+        assertThat(enterMessage).isEqualTo("Have a good time.");
+    }
+
+    @Test
+    @DisplayName("초대권이 없는 관객은 티켓 구매 후, 극장에 입장시킨다.")
+    void enter_no_invitation() {
+        // given
+        TheaterEnterRequestDto enterRequestDto = new TheaterEnterRequestDto(
+                null,
+                15000
+        );
+
+        // when
+        String enterMessage = theaterService.enter(enterRequestDto);
 
         // then
         assertThat(enterMessage).isEqualTo("Have a good time.");

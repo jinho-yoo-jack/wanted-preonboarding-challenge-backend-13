@@ -1,30 +1,23 @@
 package com.wanted.preonboarding.theater.service.dto;
 
+import com.wanted.preonboarding.theater.service.handler.Bag;
+import com.wanted.preonboarding.theater.service.handler.Invitation;
 import java.time.LocalDateTime;
 
 public class TheaterEnterRequestDto {
-    private boolean hasInvitation;
-    private LocalDateTime invitationDate;
-    private long amount;
+    private final LocalDateTime invitationDate;
+    private final long amount;
 
-    public TheaterEnterRequestDto() {
-    }
-
-    public TheaterEnterRequestDto(boolean hasInvitation, LocalDateTime invitationDate, long amount) {
-        this.hasInvitation = hasInvitation;
+    public TheaterEnterRequestDto(LocalDateTime invitationDate, long amount) {
         this.invitationDate = invitationDate;
         this.amount = amount;
     }
 
-    public boolean hasInvitation() {
-        return hasInvitation;
+    private Invitation toInvitation() {
+        return new Invitation(invitationDate);
     }
 
-    public LocalDateTime getInvitationDate() {
-        return this.invitationDate;
-    }
-
-    public long getAmount() {
-        return amount;
+    public Bag toBag() {
+        return new Bag(toInvitation(), amount);
     }
 }

@@ -9,14 +9,11 @@ public class TicketSeller {
 
     public void sellTicketTo(Audience audience) {
         Ticket ticket = ticketOffice.sellTicket();
-
-        audience.getBag().setTicket(ticket);
-        audience.getBag().minusAmount(ticket.getFee());
+        audience.buyTicket(ticket);
     }
 
     public void giveTicketTo(Audience audience) {
         Ticket ticket = ticketOffice.giveTicket();
-
-        audience.getBag().setTicket(ticket);
+        audience.receiveTicket(ticket);
     }
 }

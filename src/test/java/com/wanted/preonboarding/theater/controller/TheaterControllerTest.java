@@ -5,9 +5,11 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanted.preonboarding.theater.controller.request.TheaterEnterRequest;
 import com.wanted.preonboarding.theater.service.TheaterService;
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +31,11 @@ class TheaterControllerTest {
     TheaterService theaterService;
 
     @Test
-    @DisplayName("티켓을 보유한 고객은 극장으로 입장시킨다.")
-    void enter_theater_for_audience_has_ticket() throws Exception {
+    @DisplayName("초대권을 보유한 고객은 극장으로 입장시킨다.")
+    void enter_theater_for_audience_has_invitation() throws Exception {
         // given
-        // 티켓이 있으면 입장시키고 없으면 구매 후 입장시킨다.
-        // 티켓은 있을 수 도, 없을 수 도 있다.
-        TheaterEnterRequest theaterEnterRequest = new TheaterEnterRequest(true, 10000);
+        LocalDateTime invitationDate = LocalDateTime.of(2023, 8, 29, 14, 0, 0);
+        TheaterEnterRequest theaterEnterRequest = new TheaterEnterRequest(invitationDate, 10000);
         String content = objectMapper.writeValueAsString(theaterEnterRequest);
 
         when(theaterService.enter(any())).thenReturn(
@@ -42,7 +43,27 @@ class TheaterControllerTest {
         );
 
         // when & then
-        mockMvc.perform(get("/theater/enter")
+        mockMvc.perform(post("/theater/enter")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is("Have a good time.")));
+    }
+
+    @Test
+    @DisplayName("초대권이 없는 고객은 티켓 구매 후, 극장에 입장시킨다.")
+    void enter_theater_for_audience_has_not_invitation() throws Exception {
+        // given
+        TheaterEnterRequest theaterEnterRequest = new TheaterEnterRequest(null, 10000);
+        String content = objectMapper.writeValueAsString(theaterEnterRequest);
+
+        when(theaterService.enter(any())).thenReturn(
+                "Have a good time."
+        );
+
+        // when & then
+        mockMvc.perform(post("/theater/enter")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content)
                 )
