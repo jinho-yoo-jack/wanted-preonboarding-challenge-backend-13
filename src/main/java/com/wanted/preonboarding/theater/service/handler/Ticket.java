@@ -1,11 +1,13 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class Ticket {
-    private Long fee;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
-    public Ticket(Long fee) {
-        this.fee = fee;
-    }
+@AllArgsConstructor
+@Builder
+public class Ticket {
+
+    private Long fee;
 
     public Long getFee() {
         return fee;
