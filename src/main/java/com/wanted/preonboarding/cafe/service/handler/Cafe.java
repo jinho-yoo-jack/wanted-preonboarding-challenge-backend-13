@@ -1,6 +1,5 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component

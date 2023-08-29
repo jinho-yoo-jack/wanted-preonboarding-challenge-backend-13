@@ -1,14 +1,15 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.Builder;
+
 public class Bag {
     private Long amount;
     private final Invitation invitation;
     private Ticket ticket;
 
-    public Bag(long amount){
-        this(null, amount);
-    }
-    public Bag(Invitation invitation, long amount){
+
+    @Builder
+    public Bag(Invitation invitation, Long amount){
         this.invitation = invitation;
         this.amount = amount;
     }
