@@ -1,5 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import com.wanted.preonboarding.theater.dto.AudienceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -7,15 +8,20 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Theater {
 
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
-        }
+    private final TicketSeller ticketSeller;
+
+    public Ticket check() {
+        return ticketSeller.getTicketOffice().getTicket();
+    }
+    public AudienceDto sell(AudienceDto audience, Ticket ticket) {
+        Long price = ticket.getFee(); // 티켓 가격
+        audience.setAmount(audience.getAmount()-price);
+        ticketSeller.getTicketOffice().plusAmount(price);
+        return audience;
+    }
+
+    public AudienceDto ticketing(AudienceDto audience){
+        audience.setTicket(true);
+        return audience;
     }
 }

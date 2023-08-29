@@ -1,15 +1,19 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class TicketOffice {
     private long amount;
-    private final List<Ticket> tickets;
+    private List<Ticket> tickets;
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
-        this.amount = amount;
-        this.tickets = Arrays.asList(tickets);
+    public TicketOffice() {
+        this.amount = 20000L;
+        this.tickets = Arrays.asList(new Ticket(100L));
     }
 
     public Ticket getTicket(){
