@@ -24,8 +24,9 @@ public class Barista {
         for(String coffeeName : orders.keySet()){
             int quantity = orders.get(coffeeName);
             makeOrders.append(coffeeName)
-                    .append(":")
-                    .append(quantity);
+                    .append(" : ")
+                    .append(quantity)
+                    .append("\n");
         }
         return makeOrders.toString();
     }
