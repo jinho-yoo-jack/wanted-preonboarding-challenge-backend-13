@@ -1,7 +1,14 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
 
-public class Invitation {
-    private LocalDateTime when;
+import java.time.LocalDate;
+
+@Getter
+public class Invitation { //초대장있으면 구매 안해도됨
+    private LocalDate when;
+
+    public Invitation(LocalDate when) {
+        this.when = when;
+    }
 }
