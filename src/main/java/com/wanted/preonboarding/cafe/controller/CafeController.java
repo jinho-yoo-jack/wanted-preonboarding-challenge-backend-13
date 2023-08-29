@@ -1,12 +1,17 @@
 package com.wanted.preonboarding.cafe.controller;
 
 import com.wanted.preonboarding.cafe.service.CafeService;
+import com.wanted.preonboarding.cafe.service.handler.CaffeOrder;
+import com.wanted.preonboarding.cafe.service.handler.CaffeOrders;
+import com.wanted.preonboarding.cafe.service.handler.PaymentMethod;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cafe")
@@ -20,9 +25,17 @@ public class CafeController {
     }
 
     @GetMapping("order")
-    public String orderFromMenu(){
-        HashMap<String, Integer> menu = new HashMap<String, Integer>();
-        menu.put("AMERICANO", 3);
-        return cafeService.orderFrom(menu);
+    public String orderFromMenu(@RequestBody CaffeOrderRequest request){
+        return cafeService.order(request.getCaffeOrders(), request.getPaymentMethod());
+    }
+
+    @Getter
+    static class CaffeOrderRequest {
+        private List<CaffeOrder> caffeOrders;
+        private PaymentMethod paymentMethod;
+
+        public CaffeOrders getCaffeOrders() {
+            return new CaffeOrders(caffeOrders);
+        }
     }
 }
