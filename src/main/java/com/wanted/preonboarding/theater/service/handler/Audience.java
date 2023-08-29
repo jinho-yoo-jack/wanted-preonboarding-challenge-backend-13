@@ -8,4 +8,8 @@ public class Audience {
     }
 
     public Bag getBag(){ return bag;}
+
+    public boolean hasInvitation() {
+        return this.bag.hasInvitation();
+    }
 }
