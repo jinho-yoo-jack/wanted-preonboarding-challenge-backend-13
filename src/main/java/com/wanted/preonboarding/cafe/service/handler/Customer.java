@@ -16,8 +16,7 @@ public class Customer {
         this.paymentMethod = paymentMethod;
     }
 
-    public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
+    public long buyCoffee(Cashier cashier) {
+        return cashier.calculateTotalPrice(myOrders);
     }
 }
