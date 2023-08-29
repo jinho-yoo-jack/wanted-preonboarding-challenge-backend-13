@@ -1,5 +1,10 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+@Builder
+@AllArgsConstructor
 public class Bag {
     private Long amount;
     private final Invitation invitation;
