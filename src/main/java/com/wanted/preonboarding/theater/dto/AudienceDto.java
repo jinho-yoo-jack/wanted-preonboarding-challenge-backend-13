@@ -10,5 +10,4 @@ public class AudienceDto {
     private Long amount;
     private boolean invitation;
     private boolean ticket;
-    private String message;
 }
