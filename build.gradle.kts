@@ -24,6 +24,10 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation ("org.springframework.boot:spring-boot-starter-validation") // validation for dto
+    implementation ("org.apache.commons:commons-lang3") // serialization in hashmap
+    testImplementation("junit:junit:4.13.1")
+    testImplementation("junit:junit:4.13.1")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.projectlombok:lombok")
