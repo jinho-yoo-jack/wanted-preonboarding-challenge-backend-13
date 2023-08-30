@@ -7,9 +7,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class Theater {
 
-    private TicketSeller ticketSeller;
+    private final TicketSeller ticketSeller =  new TicketSeller(new TicketOffice(20000L, new Ticket(100L)));
     public void enter(Audience audience){
-        TicketSeller ticketSeller = new TicketSeller(new TicketOffice(20000L, new Ticket(100L)));
         ticketSeller.sellTicket(audience);
     }
 }
