@@ -3,6 +3,7 @@ package com.wanted.preonboarding.theater.dto;
 import com.wanted.preonboarding.theater.entity.Audience;
 import com.wanted.preonboarding.theater.entity.Bag;
 import com.wanted.preonboarding.theater.entity.Invitation;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import org.springframework.lang.Nullable;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@Builder
 public class AudienceInputDTO {
     @NonNull
     private Long amount;

@@ -30,6 +30,7 @@ public class TheaterController {
         if(audienceInputDTO.getWhen() != null){
             return theaterService.enter(audience,invitedTheaterImpl);
         }
+
         return theaterService.enter(audience,ticketTheaterImpl);
     }
 

@@ -1,13 +1,12 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.wanted.preonboarding.cafe.entity.Order;
 
 public class Customer {
     private String paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private final Order myOrders;
 
-    public Customer(String paymentMethod, Map<String, Integer> orders) {
+    public Customer(String paymentMethod, Order orders) {
         this.paymentMethod = paymentMethod;
         this.myOrders = orders;
     }
