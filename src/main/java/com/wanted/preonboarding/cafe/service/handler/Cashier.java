@@ -11,20 +11,20 @@ public class Cashier {
 
     public long calculateTotalPrice(Map<String, Integer> orders) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+        for (String key : orders.keySet()){
+            long price = cafe.getMenuPrice(key);
+            int quantity = orders.get(key);
+            totalPrice += price * quantity;
         }
         return totalPrice;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
+    private String sendTo(Map<String, Integer> receivedOrders) {
+        return cafe.getKitchen().makeBeverage(receivedOrders);
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+    public String takeOrder(Map<String, Integer> receivedOrders) {
+        cafe.plusSales(calculateTotalPrice(receivedOrders));
+        return sendTo(receivedOrders);
     }
 }
