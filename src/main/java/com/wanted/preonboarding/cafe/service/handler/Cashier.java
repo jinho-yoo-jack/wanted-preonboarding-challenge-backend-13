@@ -3,6 +3,7 @@ package com.wanted.preonboarding.cafe.service.handler;
 import java.util.Map;
 
 public class Cashier {
+
     private final Cafe cafe;
 
     public Cashier(Cafe cafe) {
@@ -10,11 +11,9 @@ public class Cashier {
     }
 
     public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+        int totalPrice = 0;
+        for (String order: orders.keySet()) {
+            totalPrice += cafe.getPriceOf(order);
         }
         return totalPrice;
     }
