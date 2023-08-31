@@ -28,4 +28,15 @@ public class Bag {
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
+    public Long setTicketsAccordingToInvitation(Ticket ticket) {
+        if(hasInvitation()){
+            setTicket(ticket);
+            return 0L;
+        }else {
+            minusAmount(ticket.getFee());
+            setTicket(ticket);
+            return ticket.getFee();
+        }
+    }
 }

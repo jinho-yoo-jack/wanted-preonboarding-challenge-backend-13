@@ -8,4 +8,8 @@ public class Audience {
     }
 
     public Bag getBag(){ return bag;}
+
+    public Long buyTicket(Ticket ticket) {
+        return bag.setTicketsAccordingToInvitation(ticket);
+    }
 }
