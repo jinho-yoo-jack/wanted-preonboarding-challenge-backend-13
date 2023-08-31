@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.service.handler.domain.Drink;
+import java.util.List;
 import java.util.Map;
 
 public class Cashier {
@@ -9,22 +11,20 @@ public class Cashier {
         this.cafe = cafe;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
-        }
-        return totalPrice;
-    }
-
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+    public CafeOrder takeOrder(Map<Drink, Integer> receivedOrders) {
+        long totalPrice = calculateDrinks(receivedOrders);
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        List<CafeOrderItem> items = sendTo(new Barista(), receivedOrders);
+        return new CafeOrder(items, totalPrice);
+    }
+
+    public long calculateDrinks(Map<Drink, Integer> menus) {
+        return menus.keySet().stream()
+                .mapToLong(drink -> drink.calculateDrinkPrice(menus.get(drink)))
+                .sum();
+    }
+
+    private List<CafeOrderItem> sendTo(Barista barista, Map<Drink, Integer> receivedOrders) {
+        return barista.makeDrink(receivedOrders);
     }
 }
