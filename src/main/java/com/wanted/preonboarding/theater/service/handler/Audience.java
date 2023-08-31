@@ -1,11 +1,38 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class Audience {
-    private final Bag bag;
+import com.wanted.preonboarding.theater.dto.request.RequestMessage;
+import com.wanted.preonboarding.theater.exception.NotEnoughAmountException;
+import lombok.AllArgsConstructor;
 
-    public Audience(Bag bag){
-        this.bag = bag;
+@AllArgsConstructor
+public class Audience {
+    private final Invitation invitation;
+    private Ticket ticket;
+    private Long amount;
+
+
+    public Audience(RequestMessage requestMessage){
+        this.invitation = new Invitation(requestMessage.getInvitationDate());
+        this.amount = requestMessage.getAmount() == null ? 0 : requestMessage.getAmount();
     }
 
-    public Bag getBag(){ return bag;}
+    public boolean hasInvitation() {
+        return invitation.isValid();
+    }
+    public void minusAmount(long amount) throws NotEnoughAmountException {
+        if(this.amount - amount < 0) {
+            throw new NotEnoughAmountException("티켓을 살 돈이 부족합니다.");
+        }
+        this.amount -= amount;
+    }
+    public void plusAmount(long amount) {
+        this.amount += amount;
+    }
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    public Ticket getTicket() {
+        return this.getTicket();
+    }
 }
