@@ -1,6 +1,9 @@
 package com.wanted.preonboarding.theater.service;
 
-import com.wanted.preonboarding.theater.service.handler.*;
+import com.wanted.preonboarding.theater.dto.RequestMessage;
+import com.wanted.preonboarding.theater.service.handler.Audience;
+import com.wanted.preonboarding.theater.service.handler.Bag;
+import com.wanted.preonboarding.theater.service.handler.Theater;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +12,13 @@ import org.springframework.stereotype.Service;
 public class TheaterService {
     private final Theater theater;
 
-    public String enter(){
-        theater.enter(new Audience(new Bag(1000L)),
-                new TicketSeller(new TicketOffice(20000L, new Ticket(100L))));
+    public String enter(RequestMessage requestMessage) {
+        Audience audience = createAudience(requestMessage);
+        theater.enter(audience);
         return "Have a good time.";
+    }
 
+    private Audience createAudience(RequestMessage requestMessage) {
+        return new Audience(new Bag(requestMessage));
     }
 }
