@@ -1,11 +1,13 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * 관객 클래스
+ */
+@Getter
+@AllArgsConstructor
 public class Audience {
     private final Bag bag;
-
-    public Audience(Bag bag){
-        this.bag = bag;
-    }
-
-    public Bag getBag(){ return bag;}
 }

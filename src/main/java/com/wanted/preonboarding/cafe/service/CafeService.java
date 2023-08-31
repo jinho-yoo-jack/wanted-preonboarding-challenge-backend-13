@@ -1,24 +1,25 @@
 package com.wanted.preonboarding.cafe.service;
 
-import com.wanted.preonboarding.cafe.service.handler.Cafe;
 import com.wanted.preonboarding.cafe.service.handler.Cashier;
 import com.wanted.preonboarding.cafe.service.handler.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class CafeService {
-    private final Cafe wantedCafe;
+    private final Cashier cashier;
 
-    public String orderFrom(HashMap<String, Integer> menu){
-        Cashier cashier = new Cashier(wantedCafe);
-        Map<String, Integer> myOrders = new HashMap<>();
-        myOrders.put("AMERICANO", 3);
-        Customer c1 = new Customer("Card", myOrders);
-        return c1.buyCoffee(cashier);
+    /**
+     * 주문을 받아서 처리하는 메소드
+     * @param orders 주문
+     * @param paymentMethod 결제 방법
+     * @return 주문 내역
+     */
+    public String orderFrom(Map<String, Integer> orders, String paymentMethod) throws InterruptedException {
+        Customer customer = new Customer(paymentMethod, orders);
+        return cashier.takeOrder(orders, customer);
     }
 }
