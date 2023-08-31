@@ -1,17 +1,14 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.service.handler.consumer;
 
+import com.wanted.preonboarding.theater.service.handler.seller.Ticket;
+import lombok.Builder;
+
+
+@Builder
 public class Bag {
     private Long amount;
     private final Invitation invitation;
     private Ticket ticket;
-
-    public Bag(long amount){
-        this(null, amount);
-    }
-    public Bag(Invitation invitation, long amount){
-        this.invitation = invitation;
-        this.amount = amount;
-    }
 
     public boolean hasInvitation() {
         return invitation != null;
@@ -24,6 +21,10 @@ public class Bag {
     }
     public void minusAmount(long amount) {
         this.amount -= amount;
+    }
+
+    public Long getAmount() {
+        return amount;
     }
     public void plusAmount(long amount) {
         this.amount += amount;
