@@ -8,7 +8,7 @@ import java.util.Map;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Barista {
-    private int rank; // 0: Beginner 1: Middle 2: Master
-    private int status; // 0: Waiting 1: Making
+public class Orders {
+    private String paymentMethod;
+    private Map<String, Integer> menuMap;
 }

@@ -4,9 +4,9 @@ import lombok.*;
 
 @Builder
 @Getter
-@ToString
 @AllArgsConstructor
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TicketSeller {
-    private TicketOffice ticketOffice;
+public class AudienceRequest {
+    private Bag bag;
 }

@@ -1,11 +1,12 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.*;
+
+@Builder
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Audience {
-    private final Bag bag;
-
-    public Audience(Bag bag){
-        this.bag = bag;
-    }
-
-    public Bag getBag(){ return bag;}
+    private Bag bag;
 }
