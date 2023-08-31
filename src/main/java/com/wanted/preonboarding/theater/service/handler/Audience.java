@@ -8,4 +8,18 @@ public class Audience {
     }
 
     public Bag getBag(){ return bag;}
+
+
+    public boolean hasInvitation() {
+        return this.bag.hasInvitation();
+    }
+
+    public void receiveTicket(Ticket ticket) {
+        this.bag.setTicket(ticket);
+    }
+
+    public void buyTicket(Ticket ticket) {
+        receiveTicket(ticket);
+        this.bag.minusAmount(ticket.getFee());
+    }
 }
