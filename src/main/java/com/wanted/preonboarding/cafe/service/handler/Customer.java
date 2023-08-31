@@ -1,6 +1,5 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Customer {
@@ -12,12 +11,8 @@ public class Customer {
         this.myOrders = orders;
     }
 
-    private void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
+    public String buyCoffee(Cafe cafe) {
+        long totalPrice = cafe.getCashier().calculateTotalPrice(cafe, myOrders);
+        return cafe.getCashier().takeOrder(cafe, myOrders, totalPrice);
     }
 }
