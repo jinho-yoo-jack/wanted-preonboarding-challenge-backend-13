@@ -1,6 +1,6 @@
-package com.wanted.preonboarding.cafe.controller;
+package com.wanted.preonboarding.domain.cafe.controller;
 
-import com.wanted.preonboarding.cafe.service.CafeService;
+import com.wanted.preonboarding.domain.cafe.service.CafeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

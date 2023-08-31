@@ -1,8 +1,8 @@
-package com.wanted.preonboarding.cafe.service;
+package com.wanted.preonboarding.domain.cafe.service;
 
-import com.wanted.preonboarding.cafe.service.handler.Cafe;
-import com.wanted.preonboarding.cafe.service.handler.Cashier;
-import com.wanted.preonboarding.cafe.service.handler.Customer;
+import com.wanted.preonboarding.domain.cafe.service.handler.Cafe;
+import com.wanted.preonboarding.domain.cafe.service.handler.Cashier;
+import com.wanted.preonboarding.domain.cafe.service.handler.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

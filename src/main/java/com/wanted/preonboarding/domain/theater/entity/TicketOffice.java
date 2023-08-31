@@ -1,8 +1,13 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.domain.theater.entity;
 
 import java.util.Arrays;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class TicketOffice {
 
   private long amount;

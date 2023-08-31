@@ -1,5 +1,8 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.domain.theater.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Audience {
 
   private final Bag bag;
@@ -11,4 +14,5 @@ public class Audience {
   public Bag getBag() {
     return bag;
   }
+
 }
