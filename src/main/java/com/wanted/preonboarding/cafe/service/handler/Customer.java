@@ -1,23 +1,22 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.service.handler.domain.Menu;
+import com.wanted.preonboarding.cafe.service.handler.domain.PaymentMethod;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Customer {
-    private String paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private final PaymentMethod paymentMethod;
+    private final CafeOrderMenus myOrders;
 
-    public Customer(String paymentMethod, Map<String, Integer> orders) {
+    public Customer(PaymentMethod paymentMethod, Map<Menu, Integer> menus) {
         this.paymentMethod = paymentMethod;
-        this.myOrders = orders;
+        this.myOrders = new CafeOrderMenus(menus);
     }
 
-    private void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
 
-    public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
+    public CafeOrder buyCoffee(Cashier cashier) {
+        return cashier.takeOrder(myOrders);
     }
 }

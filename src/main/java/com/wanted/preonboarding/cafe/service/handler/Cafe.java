@@ -17,11 +17,18 @@ public class Cafe {
         return name;
     }
 
+    public long getSales() {return sales;}
+
     public void plusSales(Long amount){
         this.sales += amount;
     }
 
     public void minusSales(Long amount){
         this.sales -= amount;
+    }
+
+    public CafeOrder receivedOrderOf(Customer customer) {
+        Cashier cashier = new Cashier(this);
+        return customer.buyCoffee(cashier);
     }
 }
