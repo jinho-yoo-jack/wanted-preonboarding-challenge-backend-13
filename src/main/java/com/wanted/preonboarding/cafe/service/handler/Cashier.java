@@ -1,5 +1,6 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Cashier {
@@ -9,12 +10,10 @@ public class Cashier {
         this.cafe = cafe;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
+    public long calculateTotalPrice(HashMap<String, Item> storage, Map<String, Integer> orders) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
         for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+            totalPrice += storage.get(key).getPrice() * orders.get(key); //price * quantity
         }
         return totalPrice;
     }

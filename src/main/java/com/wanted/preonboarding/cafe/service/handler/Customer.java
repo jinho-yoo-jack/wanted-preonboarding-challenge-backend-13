@@ -1,23 +1,20 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.HashMap;
+import lombok.Getter;
+
 import java.util.Map;
 
+@Getter
 public class Customer {
-    private String paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private PayType paymentMethod;
+    private final Map<String, Integer> items;
 
-    public Customer(String paymentMethod, Map<String, Integer> orders) {
+    public Customer(PayType paymentMethod, Map<String, Integer> ItemQuantity) {
         this.paymentMethod = paymentMethod;
-        this.myOrders = orders;
+        this.items = ItemQuantity;
     }
 
-    private void setPaymentMethod(String paymentMethod) {
+    private void setPaymentMethod(PayType paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
     }
 }

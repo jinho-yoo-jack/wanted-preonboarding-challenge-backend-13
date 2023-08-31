@@ -22,4 +22,15 @@ public class TicketOffice {
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
+    public Ticket exchangeInvitationWithTicket(Ticket ticket) {
+        // TODO: 티켓-초대권 교환 로직 추가
+        return ticket;
+    }
+
+    public Ticket sellTicket(Ticket ticket) {
+        plusAmount(ticket.getFee());
+        // TODO : 티켓 판매 로직 추가
+        return ticket;
+    }
 }
