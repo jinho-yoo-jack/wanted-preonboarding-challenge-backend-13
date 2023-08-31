@@ -4,20 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Customer {
-    private String paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private Order order;
 
-    public Customer(String paymentMethod, Map<String, Integer> orders) {
-        this.paymentMethod = paymentMethod;
-        this.myOrders = orders;
-    }
-
-    private void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public Customer(Order order) {
+        this.order = order;
     }
 
     public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
+        long totalPrice = cashier.calculateTotalPrice(order);
+        return cashier.takeOrder(order, totalPrice);
     }
 }

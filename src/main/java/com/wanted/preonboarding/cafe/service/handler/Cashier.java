@@ -9,22 +9,23 @@ public class Cashier {
         this.cafe = cafe;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
+    public long calculateTotalPrice(Order order) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+
+        for (String drinkName : order.getMenu().keySet()) {
+            Long price = Menu.valueOf(drinkName).getPrice();
+            totalPrice += price * order.getMenu().get(drinkName);
         }
+
         return totalPrice;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
+    private String sendTo(Barista barista, Order receivedOrder) {
+        return barista.makeCoffeeTo(receivedOrder.getMenu());
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+    public String takeOrder(Order receivedOrder, long totalPrice) {
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        return sendTo(new Barista(0, 0), receivedOrder);
     }
 }
