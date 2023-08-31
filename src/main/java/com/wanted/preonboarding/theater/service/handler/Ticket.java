@@ -1,13 +1,13 @@
 package com.wanted.preonboarding.theater.service.handler;
 
 public class Ticket {
-    private Long fee;
+    private final Money fee;
 
-    public Ticket(Long fee) {
-        this.fee = fee;
+    public Ticket(Long money) {
+        this.fee = new Money(money);
     }
 
-    public Long getFee() {
+    public Money getFee() {
         return fee;
     }
 }

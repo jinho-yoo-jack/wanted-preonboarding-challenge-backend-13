@@ -1,25 +1,38 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+@Component
 public class TicketOffice {
-    private long amount;
+    private Money amount;
     private final List<Ticket> tickets;
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
-        this.amount = amount;
-        this.tickets = Arrays.asList(tickets);
+    public TicketOffice(TicketPolicies ticketPolicies) {
+        this.amount = new Money(ticketPolicies.ticketOfficeAmount());
+        this.tickets = ticketPolicies.ticketAmount();
     }
 
-    public Ticket getTicket(){
-        return tickets.get(0);
+    public Ticket changeInvitiactionByTicket(Audience audience) {
+        return audience.exchangeTicket(getTicket());
     }
 
-    public void minusAmount(long amount) {
-        this.amount -= amount;
+    public boolean sellTicketTo(Audience audience) {
+        Money beforeSell = amount;
+        Money afterSell = plusAmount(audience.buy(getTicket()));
+
+        return beforeSell != afterSell;
     }
-    public void plusAmount(long amount) {
-        this.amount += amount;
+
+    private void minusAmount(Money amount) {
+        this.amount = this.amount.minus(amount);
+    }
+
+    private Money plusAmount(Money amount) {
+        return this.amount = this.amount.plus(amount);
+    }
+
+    private Ticket getTicket() {
+        return tickets.remove(0);
     }
 }

@@ -1,14 +1,18 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.Getter;
+
+@Getter
 public class Bag {
-    private Long amount;
-    private final Invitation invitation;
+    private Money amount;
+    private Invitation invitation;
     private Ticket ticket;
 
-    public Bag(long amount){
+    public Bag(Money amount) {
         this(null, amount);
     }
-    public Bag(Invitation invitation, long amount){
+
+    public Bag(Invitation invitation, Money amount) {
         this.invitation = invitation;
         this.amount = amount;
     }
@@ -16,16 +20,27 @@ public class Bag {
     public boolean hasInvitation() {
         return invitation != null;
     }
+
     public boolean hasTicket() {
         return ticket != null;
     }
-    public void setTicket(Ticket ticket) {
+
+
+    public void minusAmount(Money money) {
+        this.amount = this.amount.minus(money);
+    }
+
+    public void plusAmount(Money money) {
+        this.amount = this.amount.plus(money);
+    }
+
+    public void exchageTicket(Ticket ticket) {
+        this.invitation = null;
         this.ticket = ticket;
     }
-    public void minusAmount(long amount) {
-        this.amount -= amount;
-    }
-    public void plusAmount(long amount) {
-        this.amount += amount;
+
+    public void buy(Ticket ticket) {
+        minusAmount(ticket.getFee());
+        this.ticket = ticket;
     }
 }

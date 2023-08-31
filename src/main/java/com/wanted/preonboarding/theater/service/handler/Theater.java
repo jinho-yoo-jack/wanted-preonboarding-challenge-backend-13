@@ -6,16 +6,24 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class Theater {
+    private final TicketSeller ticketSeller;
 
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
+    public String enter(Audience audience) {
+        if (audience.hastTicket()) {
+            return "Have a good time.";
         }
+
+        throw new IllegalArgumentException("Fail to buy a ticket.");
+    }
+
+    public String sellTicketTo(Audience audience) {
+        if (ticketSeller.sellTicketTo(audience)) {
+            return "Success to buy a ticket.";
+        }
+        throw new IllegalArgumentException("Fail to buy a ticket.");
+    }
+
+    public void changeInvitation(Audience audience) {
+        ticketSeller.changeInvitiactionByTicket(audience);
     }
 }
