@@ -28,4 +28,8 @@ public class Bag {
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
+    public long getAmount() {
+        return amount;
+    }
 }
