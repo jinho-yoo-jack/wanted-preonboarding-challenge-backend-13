@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TicketOffice {
-    private long amount;
+    private long money;
     private final List<Ticket> tickets;
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
-        this.amount = amount;
+    public TicketOffice(Long money, Ticket ... tickets) {
+        this.money = money;
         this.tickets = Arrays.asList(tickets);
     }
 
@@ -16,10 +16,10 @@ public class TicketOffice {
         return tickets.get(0);
     }
 
-    public void minusAmount(long amount) {
-        this.amount -= amount;
+    public void minusMoney(long amount) {
+        this.money -= amount;
     }
-    public void plusAmount(long amount) {
-        this.amount += amount;
+    public void plusMoney(long amount) {
+        this.money += amount;
     }
 }
