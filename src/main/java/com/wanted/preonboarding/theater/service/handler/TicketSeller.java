@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 public class TicketSeller {
     private final TicketOffice ticketOffice;
 
-    public void checkTicket(Audience audience) {
+    public boolean checkTicket(Audience audience) {
         if (audience.getBag().hasInvitation()) {
             ticketOffice.changeTicket(audience);
+            return true;
         } else {
-            ticketOffice.sellTicket(audience);
+            return ticketOffice.sellTicket(audience);
         }
     }
 }
