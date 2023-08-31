@@ -16,10 +16,14 @@ public class TicketOffice {
         return tickets.get(0);
     }
 
-    public void minusAmount(long amount) {
+    public void sellTicketTo(Audience audience) {
+        plusAmount(audience.buy(getTicket()));
+    }
+
+    private void minusAmount(long amount) {
         this.amount -= amount;
     }
-    public void plusAmount(long amount) {
+    private void plusAmount(long amount) {
         this.amount += amount;
     }
 }

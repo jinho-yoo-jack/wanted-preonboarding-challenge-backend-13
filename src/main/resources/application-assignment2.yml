@@ -1,0 +1,8 @@
+menu:
+  items:
+    - name: AMERICANO
+      price: 3000
+    - name: LATTE
+      price: 4000
+    - name: ESPRESSO
+      price: 3500

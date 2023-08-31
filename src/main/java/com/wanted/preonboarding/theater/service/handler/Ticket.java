@@ -1,10 +1,17 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class Ticket {
-    private Long fee;
+import jakarta.annotation.Nonnull;
 
-    public Ticket(Long fee) {
+public final class Ticket {
+
+    private final Long fee;
+
+    private Ticket(Long fee) {
         this.fee = fee;
+    }
+
+    public static Ticket create(@Nonnull Long fee) {
+        return new Ticket(fee);
     }
 
     public Long getFee() {
