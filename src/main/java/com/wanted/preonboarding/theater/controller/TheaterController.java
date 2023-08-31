@@ -6,6 +6,7 @@ import com.wanted.preonboarding.theater.service.handler.Audience;
 import com.wanted.preonboarding.theater.service.handler.AudienceRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 @RequestMapping("/theater")
 @RequiredArgsConstructor
 public class TheaterController {
+
     private final TheaterService theaterService;
 
     /**
@@ -30,8 +32,8 @@ public class TheaterController {
     public ResponseEntity<String> welcomeMessage(){
         log.info("TheaterController.welcomeMessage");
 
-        String response = "Welcome to The Wanted Theater";
-        return ResponseEntity.ok(response);
+        final String response = "Welcome to The Wanted Theater";
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /**
@@ -42,9 +44,9 @@ public class TheaterController {
     public ResponseEntity<String> enter(@RequestBody AudienceRequest audienceRequest){
         log.info("TheaterController.enter: {}", audienceRequest);
 
-        String response = theaterService.enter(Audience.builder()
+        final String response = theaterService.enter(Audience.builder()
                 .bag(audienceRequest.getBag())
                 .build());
-        return ResponseEntity.ok(response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
