@@ -18,21 +18,21 @@ import java.util.Map;
 public class CafeService {
     private final Cafe wantedCafe;
 
-    private final HashMap<String, Item> storage = new HashMap<String, Item>();
+    private final HashMap<String, Item> menu = new HashMap<String, Item>();
     private boolean isNotExist(String name) {
-        return !storage.containsKey(name);
+        return !menu.containsKey(name);
     }
 
     private void minusStock(String name, Integer amount) throws Exception {
         if (isNotExist(name))
             throw new Exception("존재하지 않는 상품입니다.");
 
-        Item item = storage.get(name);
+        Item item = menu.get(name);
         if (item.getStock() < amount)
-            throw new Exception(name + "의 재고가 부족합니다. (현재 재고 : " + storage.get(name) + ")");
+            throw new Exception(name + "의 재고가 부족합니다. (현재 재고 : " + menu.get(name) + ")");
 
         item.minusStock(amount); //재고감소
-        log.debug("[MINUS] {} 재고: {} -> {}", name, amount, storage.get(name).getStock());
+        log.debug("[MINUS] {} 재고: {} -> {}", name, amount, menu.get(name).getStock());
     }
 
     public String order(Customer customer) throws Exception {
@@ -41,7 +41,7 @@ public class CafeService {
         // 결제
         Map<String, Integer> bill = payFor(customer.getItems());
         // 가격 합산
-        final Long totalPrice = cashier.calculateTotalPrice(storage, bill);
+        final Long totalPrice = cashier.calculateTotalPrice(menu, bill);
         log.debug("결제금액 : {}", totalPrice);
         // 결제 후 음료 제조
         return cashier.takeOrder(bill, totalPrice);
@@ -52,15 +52,17 @@ public class CafeService {
         if (isNotExist(name))
             throw new Exception("존재하지 않는 상품입니다.");
 
-        Item item = storage.get(name);
+        Item item = menu.get(name);
         item.plusStock(amount); //재고추가
 
-        log.debug("[ADD] {} 재고: {} -> {}", name, amount, storage.get(name).getStock());
-        return name + ":" + storage.get(name);
+        log.debug("[ADD] {} 재고: {} -> {}", name, amount, menu.get(name).getStock());
+        return name + ":" + menu.get(name);
     }
 
     public  String addNewItem(String name, Item item) throws Exception {
-        storage.put(name, item);
+        if (menu.size() > 3)
+            return "음료 종류는 3개 까지만 등록 가능합니다";
+        menu.put(name, item);
         log.debug("[New] {} : {} -> {}", name, item.getPrice(), item.getStock());
         return name + "(" + item.getPrice() + "원) " + item.getStock() + "개가 재고에 추가되었습니다.";
     }
@@ -75,7 +77,7 @@ public class CafeService {
             } catch (Exception e) { // 구매할 수 없는 경우 제외하고 가격 계산
                 continue;
             }
-            result.put(name, storage.get(name).getStock());
+            result.put(name, menu.get(name).getStock());
         }
         return result;
     }
