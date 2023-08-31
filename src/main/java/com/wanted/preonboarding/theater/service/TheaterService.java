@@ -14,7 +14,7 @@ public class TheaterService {
 
     public String enter(RequestMessage requestMessage) {
         Audience audience = createAudience(requestMessage);
-        return theater.enter(audience)? "Have a good time." : "I'm sorry, but entering inside might not be possible.";
+        return theater.enter(audience) ? "Have a good time." : "I'm sorry, but entering inside might not be possible.";
     }
 
     private Audience createAudience(RequestMessage requestMessage) {

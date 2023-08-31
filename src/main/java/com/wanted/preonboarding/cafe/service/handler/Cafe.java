@@ -14,7 +14,7 @@ public class Cafe {
     private Cashier cashier;
 
     @Autowired
-    public Cafe(Barista barista, Menu menu, Cashier cashier){
+    public Cafe(Barista barista, Menu menu, Cashier cashier) {
         this.name = "wantedCodingCafe";
         this.sales = 10000L;
         this.barista = barista;
@@ -22,7 +22,7 @@ public class Cafe {
         this.cashier = cashier;
     }
 
-    public void plusSales(Long amount){
+    public void plusSales(Long amount) {
         this.sales += amount;
     }
 }

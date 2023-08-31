@@ -15,7 +15,7 @@ import java.util.Map;
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(List<OrderRequest> orders){
+    public String orderFrom(List<OrderRequest> orders) {
         Map<String, Integer> myOrders = new HashMap<>();
         for (OrderRequest order : orders) {
             myOrders.put(order.getName(), order.getAmount());

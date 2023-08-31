@@ -17,12 +17,12 @@ public class CafeController {
     private final CafeService cafeService;
 
     @GetMapping("hello")
-    public String welcomeMessage(){
+    public String welcomeMessage() {
         return "Welcome to The Wanted coding cafe!!";
     }
 
     @GetMapping("order")
-    public String orderFromMenu(@RequestBody List<OrderRequest> orders){
+    public String orderFromMenu(@RequestBody List<OrderRequest> orders) {
         return cafeService.orderFrom(orders);
     }
 }
