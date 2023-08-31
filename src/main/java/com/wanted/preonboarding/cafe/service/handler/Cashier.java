@@ -1,30 +1,35 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 import java.util.Map;
 
+@Component
 public class Cashier {
-    private final Cafe cafe;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    public Cashier() {
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
+    public long calculateTotalPrice(Cafe cafe, Map<String, Integer> orders) {
+        int totalPrice = 0;
+        List<Beverage> beverageList = cafe.getMenu().getBeverageList();
         for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+            for (Beverage beverage : beverageList) {
+                if (key.equals(beverage.getName())) {
+                    totalPrice += beverage.getFee() * orders.get(key);
+                }
+            }
         }
         return totalPrice;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
+    private String sendTo(Cafe cafe, Map<String, Integer> receivedOrders) {
+        return cafe.getBarista().makeCoffeeTo(cafe, receivedOrders);
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+    public String takeOrder(Cafe cafe, Map<String, Integer> receivedOrders, long totalPrice) {
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        return sendTo(cafe, receivedOrders);
     }
 }

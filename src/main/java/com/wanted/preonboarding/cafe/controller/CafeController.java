@@ -1,12 +1,14 @@
 package com.wanted.preonboarding.cafe.controller;
 
+import com.wanted.preonboarding.cafe.dto.OrderRequest;
 import com.wanted.preonboarding.cafe.service.CafeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cafe")
@@ -20,9 +22,7 @@ public class CafeController {
     }
 
     @GetMapping("order")
-    public String orderFromMenu(){
-        HashMap<String, Integer> menu = new HashMap<String, Integer>();
-        menu.put("AMERICANO", 3);
-        return cafeService.orderFrom(menu);
+    public String orderFromMenu(@RequestBody List<OrderRequest> orders){
+        return cafeService.orderFrom(orders);
     }
 }
