@@ -1,6 +1,5 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,11 +16,11 @@ public class Cafe {
         return name;
     }
 
-    public void plusSales(Long amount){
+    public void plusSales(long amount){
         this.sales += amount;
     }
 
-    public void minusSales(Long amount){
+    public void minusSales(long amount){
         this.sales -= amount;
     }
 }
