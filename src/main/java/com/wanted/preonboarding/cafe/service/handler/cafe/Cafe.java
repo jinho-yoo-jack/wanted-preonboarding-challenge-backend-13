@@ -1,11 +1,13 @@
-package com.wanted.preonboarding.cafe.service.handler;
+package com.wanted.preonboarding.cafe.service.handler.cafe;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Cafe {
     private final String name;
+
+    private Menu menu;
+
     private Long sales;
 
     public Cafe(){
