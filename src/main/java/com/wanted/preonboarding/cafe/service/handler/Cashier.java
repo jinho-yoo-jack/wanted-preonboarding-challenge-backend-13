@@ -1,30 +1,35 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.Map;
+import com.wanted.preonboarding.cafe.MENU;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Cashier {
-    private final Cafe cafe;
+    private Long sales;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    public Cashier() {
+        this.sales = 10000L;
     }
-
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+    /** 주문 금액 계산 */
+    public long calculateTotalPrice(OrderRequest orderRequest){
+        long sum = 0;
+        for (Order order : orderRequest.getOrderList()) {
+            int count = order.getCount();
+            MENU menu = order.getMenu();
+            int price = menu.getPrice();
+            sum += price * count;
         }
-        return totalPrice;
+        log.error("주문 총액 [{}]", sum);
+        return sum;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
+    void plusSales(Long amount){
+        this.sales += amount;
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+    void minusSales(Long amount){
+        this.sales -= amount;
     }
+
+
 }
