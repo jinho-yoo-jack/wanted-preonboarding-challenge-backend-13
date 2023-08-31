@@ -1,16 +1,17 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+@AllArgsConstructor
+@Builder
 public class Bag {
-    private Long amount;
+    private long amount;
     private final Invitation invitation;
     private Ticket ticket;
 
-    public Bag(long amount){
-        this(null, amount);
-    }
-    public Bag(Invitation invitation, long amount){
-        this.invitation = invitation;
-        this.amount = amount;
+    public long getAmount() {
+        return amount;
     }
 
     public boolean hasInvitation() {

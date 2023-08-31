@@ -1,12 +1,15 @@
 package com.wanted.preonboarding.cafe.controller;
 
-import com.wanted.preonboarding.cafe.service.CafeService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import com.wanted.preonboarding.cafe.dto.OrderDTO;
+import com.wanted.preonboarding.cafe.service.CafeService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/cafe")
@@ -19,10 +22,8 @@ public class CafeController {
         return "Welcome to The Wanted coding cafe!!";
     }
 
-    @GetMapping("order")
-    public String orderFromMenu(){
-        HashMap<String, Integer> menu = new HashMap<String, Integer>();
-        menu.put("AMERICANO", 3);
-        return cafeService.orderFrom(menu);
+    @PostMapping("order")
+    public String orderFromMenu(@RequestBody OrderDTO orderDTO){
+        return cafeService.orderFrom(orderDTO);
     }
 }
