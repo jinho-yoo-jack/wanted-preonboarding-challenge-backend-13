@@ -7,9 +7,9 @@ import lombok.Builder;
 @Builder
 public class Ticket {
 
-    private Long fee;
+    private long fee;
 
-    public Long getFee() {
+    public long getFee() {
         return fee;
     }
 }

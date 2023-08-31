@@ -1,7 +1,5 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import org.springframework.util.Assert;
-
 import lombok.Builder;
 
 public class Audience {
@@ -22,24 +20,16 @@ public class Audience {
         return bag.hasTicket();
     }
 
-    public void exchangeFor(Ticket ticket) {
-        Assert.notNull(ticket, "Ticket is required.");
-
-        if (!hasInvitation()) {
-            throw new RuntimeException("Have no invitation.");
-        }
-
+    public void takeTicketFrom(TicketSeller ticketSeller) {
+        Ticket ticket = ticketSeller.issueTicketTo(this);
         bag.setTicket(ticket);
     }
 
-    public void buy(Ticket ticket) {
-        Assert.notNull(ticket, "Ticket is required.");
-
-        if (bag.getAmount() < ticket.getFee()) {
+    public void pay(long fee) {
+        if (bag.getAmount() < fee) {
             throw new RuntimeException("Be short of money.");
         }
 
-        bag.setTicket(ticket);
-        bag.minusAmount(ticket.getFee());
+        this.bag.minusAmount(fee);
     }
 }

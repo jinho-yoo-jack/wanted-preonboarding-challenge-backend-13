@@ -1,7 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import lombok.RequiredArgsConstructor;
 
@@ -9,12 +8,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Theater {
     public void enter(Audience audience, TicketSeller ticketSeller){
-        Assert.notNull(audience, "Audience is required.");
-
         if (!audience.hasTicket()) {
-            ticketSeller.sellTicketsTo(audience);
+            // 티켓이 없으면 티켓 발급
+            audience.takeTicketFrom(ticketSeller);
         }
 
-        // enter
+        // 티켓이 있으면 입장
     }
 }
