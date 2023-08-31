@@ -12,17 +12,18 @@ import java.util.HashMap;
 @RequestMapping("/cafe")
 @RequiredArgsConstructor
 public class CafeController {
-    private final CafeService cafeService;
 
-    @GetMapping("hello")
-    public String welcomeMessage(){
-        return "Welcome to The Wanted coding cafe!!";
-    }
+  private final CafeService cafeService;
 
-    @GetMapping("order")
-    public String orderFromMenu(){
-        HashMap<String, Integer> menu = new HashMap<String, Integer>();
-        menu.put("AMERICANO", 3);
-        return cafeService.orderFrom(menu);
-    }
+  @GetMapping("hello")
+  public String welcomeMessage() {
+    return "Welcome to The Wanted coding cafe!!";
+  }
+
+  @GetMapping("order")
+  public String orderFromMenu() {
+    HashMap<String, Integer> menu = new HashMap<String, Integer>();
+    menu.put("AMERICANO", 3);
+    return cafeService.orderFrom(menu);
+  }
 }
