@@ -12,4 +12,8 @@ public class CafeOrderItem {
     private Drink drink;
     private int quantity;
     private boolean isMade;
+
+    public static CafeOrderItem makeSuccess(Drink drink, int quantity) {
+        return new CafeOrderItem(drink, quantity, true);
+    }
 }

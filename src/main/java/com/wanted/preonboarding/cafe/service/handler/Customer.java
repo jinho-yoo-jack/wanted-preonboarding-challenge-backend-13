@@ -8,11 +8,11 @@ import lombok.Getter;
 @Getter
 public class Customer {
     private final PaymentMethod paymentMethod;
-    private final Map<Drink, Integer> myOrders;
+    private final CafeOrderMenus myOrders;
 
     public Customer(PaymentMethod paymentMethod, Map<Drink, Integer> menus) {
         this.paymentMethod = paymentMethod;
-        this.myOrders = menus;
+        this.myOrders = new CafeOrderMenus(menus);
     }
 
     public CafeOrder buyCoffee(Cashier cashier) {

@@ -1,10 +1,8 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
 import com.wanted.preonboarding.cafe.service.handler.domain.BaristaRank;
-import com.wanted.preonboarding.cafe.service.handler.domain.Drink;
 import com.wanted.preonboarding.cafe.service.handler.domain.MakingStatus;
 import java.util.List;
-import java.util.Map;
 import lombok.Getter;
 
 @Getter
@@ -21,10 +19,10 @@ public class Barista {
         this.status = status;
     }
 
-    public List<CafeOrderItem> makeDrink(Map<Drink, Integer> orders) {
-        return orders.keySet()
+    public List<CafeOrderItem> makeDrink(CafeOrderMenus cafeOrderMenus) {
+        return cafeOrderMenus.getMenus().keySet()
                 .stream()
-                .map(drink -> new CafeOrderItem(drink, orders.get(drink), true))
+                .map(drink -> CafeOrderItem.makeSuccess(drink, cafeOrderMenus.getQuantityOf(drink)))
                 .toList();
     }
 }

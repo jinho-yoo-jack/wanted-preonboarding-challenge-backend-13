@@ -15,6 +15,7 @@ public class Cafe {
     public String getCafeName(){
         return name;
     }
+    public long getSales() {return sales;}
 
     public void plusSales(Long amount){
         this.sales += amount;

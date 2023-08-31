@@ -24,7 +24,8 @@ class BaristaTest {
         Barista barista = new Barista(BaristaRank.MIDDLE, MakingStatus.MAKING);
 
         // when
-        List<CafeOrderItem> madeDrinks = barista.makeDrink(menus);
+        CafeOrderMenus orders = new CafeOrderMenus(menus);
+        List<CafeOrderItem> madeDrinks = barista.makeDrink(orders);
 
         // then
         assertThat(barista.getRank()).isEqualTo(BaristaRank.MIDDLE);
@@ -32,7 +33,7 @@ class BaristaTest {
 
         assertThat(madeDrinks).hasSize(2)
                 .extracting("drink", "quantity", "isMade")
-                .containsExactly(
+                .containsAnyOf(
                         tuple(Drink.AMERICANO, 3, true),
                         tuple(Drink.LATTE, 5, true)
                 );

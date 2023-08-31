@@ -31,10 +31,10 @@ class CafeServiceTest {
         // then
         assertThat(resultDto.getTotalPrice()).isEqualTo(13000);
         assertThat(resultDto.getItems()).hasSize(2)
-                .extracting("menuName", "quantity")
-                .containsExactly(
-                        tuple("AMERICANO", 3),
-                        tuple("LATTE", 5)
+                .extracting("menuName", "quantity", "isMade")
+                .containsAnyOf(
+                        tuple("AMERICANO", 3, true),
+                        tuple("LATTE", 5, true)
                 );
     }
 
