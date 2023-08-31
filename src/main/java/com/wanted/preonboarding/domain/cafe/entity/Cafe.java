@@ -1,9 +1,10 @@
-package com.wanted.preonboarding.domain.cafe.service.handler;
+package com.wanted.preonboarding.domain.cafe.entity;
 
-import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 @Component
+@Getter
 public class Cafe {
 
   private final String name;
@@ -11,7 +12,7 @@ public class Cafe {
 
   public Cafe() {
     this.name = "wantedCodingCafe";
-    this.sales = 10000L;
+    this.sales = 0L;
   }
 
   public String getCafeName() {

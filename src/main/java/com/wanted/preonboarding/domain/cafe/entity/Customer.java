@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.domain.cafe.service.handler;
+package com.wanted.preonboarding.domain.cafe.entity;
 
 import java.util.Map;
 
