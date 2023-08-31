@@ -1,12 +1,14 @@
 package com.wanted.preonboarding.cafe.service;
 
 import com.wanted.preonboarding.cafe.service.handler.Cafe;
-import com.wanted.preonboarding.cafe.service.handler.Cashier;
+import com.wanted.preonboarding.cafe.service.handler.CafeOrder;
 import com.wanted.preonboarding.cafe.service.handler.Customer;
+import com.wanted.preonboarding.cafe.service.handler.domain.Drink;
+import com.wanted.preonboarding.cafe.service.handler.domain.PaymentMethod;
+import com.wanted.preonboarding.cafe.service.handler.dto.CafeOrderResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -14,11 +16,10 @@ import java.util.Map;
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(HashMap<String, Integer> menu){
-        Cashier cashier = new Cashier(wantedCafe);
-        Map<String, Integer> myOrders = new HashMap<>();
-        myOrders.put("AMERICANO", 3);
-        Customer c1 = new Customer("Card", myOrders);
-        return c1.buyCoffee(cashier);
+    public CafeOrderResultDto orderFrom(Map<Drink, Integer> menu){
+        Customer customer = new Customer(PaymentMethod.CARD, menu);
+        CafeOrder cafeOrder = wantedCafe.receivedOrderOf(customer);
+
+        return CafeOrderResultDto.of(cafeOrder);
     }
 }
