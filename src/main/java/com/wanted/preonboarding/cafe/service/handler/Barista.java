@@ -21,11 +21,10 @@ public class Barista {
 
     public String makeCoffeeTo(Map<String, Integer> orders){
         StringBuilder makeOrders = new StringBuilder();
+        
         for(String coffeeName : orders.keySet()){
             int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
-                    .append(":")
-                    .append(quantity);
+            makeOrders.append("주문하신 ").append(coffeeName).append(" ").append(quantity).append("잔 나왔습니다!");
         }
         return makeOrders.toString();
     }
