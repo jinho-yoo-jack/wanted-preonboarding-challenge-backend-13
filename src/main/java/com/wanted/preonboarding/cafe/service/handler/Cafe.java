@@ -1,26 +1,22 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Component
+import java.util.Map;
+import java.util.concurrent.LinkedBlockingDeque;
+
+@Getter
+@AllArgsConstructor
 public class Cafe {
     private final String name;
     private Long sales;
-
-    public Cafe(){
-        this.name = "wantedCodingCafe";
-        this.sales = 10000L;
-    }
-
-    public String getCafeName(){
-        return name;
-    }
+    private Map<String, Integer> menu;
+    private LinkedBlockingDeque<Barista> baristas;
 
     public void plusSales(Long amount){
         this.sales += amount;
     }
-
     public void minusSales(Long amount){
         this.sales -= amount;
     }
