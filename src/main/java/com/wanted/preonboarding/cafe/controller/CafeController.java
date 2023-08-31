@@ -15,12 +15,12 @@ public class CafeController {
     private final CafeService cafeService;
 
     @GetMapping("hello")
-    public String welcomeMessage(){
+    public String welcomeMessage() {
         return "Welcome to The Wanted coding cafe!!";
     }
 
     @GetMapping("order")
-    public String orderFromMenu(){
+    public String orderFromMenu() {
         HashMap<String, Integer> menu = new HashMap<String, Integer>();
         menu.put("AMERICANO", 3);
         return cafeService.orderFrom(menu);
