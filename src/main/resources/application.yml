@@ -4,4 +4,4 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   profiles:
     active:
-      assignment1
+      assignment1, assignment2

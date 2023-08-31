@@ -1,33 +1,47 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import java.util.List;
 import java.util.Map;
 
 public class Barista {
-    private int rank; // 0: Beginner 1: Middle 2: Master
-    private int status; // 0: Waiting 1: Making
+    private final Rank rank;
+    private Status status;
+    private final CoffeeMaker coffeeMaker;
 
-    public Barista(int rank, int status){
-        this.rank = rank;
+    private void setStatus(Status status) {
         this.status = status;
     }
 
-    private void setRank(int rank){
+    public Barista(Rank rank, Status status){
         this.rank = rank;
-    }
-
-    private void setStatus(int status){
         this.status = status;
+        this.coffeeMaker = CoffeeMakerFactory.create(rank, status);
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffee(Order order){
+        setStatus(Status.MAKING);
+        MadeCoffeeMap madeCoffeeMap = coffeeMaker.makeCoffee(order);
+        return getString(madeCoffeeMap.getMadeCoffees());
+    }
+
+    private static String getString(Map<MenuItem, List<Coffee>> madeCoffees) {
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
+        for (MenuItem menuItem : madeCoffees.keySet()) {
+            int quantity = madeCoffees.get(menuItem).size();
+            makeOrders.append(menuItem.getName())
                     .append(":")
-                    .append(quantity);
+                    .append(quantity)
+                    .append("\n");
         }
         return makeOrders.toString();
+    }
+
+    public enum Rank {
+        BEGINNER, MIDDLE, MASTER;
+    }
+
+    public enum Status {
+        WAITING, MAKING
     }
 
 
