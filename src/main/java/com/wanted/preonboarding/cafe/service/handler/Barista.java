@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.dto.request.Order;
+import java.util.List;
 import java.util.Map;
 
 public class Barista {
@@ -26,6 +28,17 @@ public class Barista {
             makeOrders.append(coffeeName)
                     .append(":")
                     .append(quantity);
+        }
+        return makeOrders.toString();
+    }
+
+    public String makeCoffeeTo(List<Order> orders){
+        StringBuilder makeOrders = new StringBuilder();
+        for(Order order : orders){
+            makeOrders.append(order.getName())
+                .append(":")
+                .append(order.getQuantity())
+                .append("\n");
         }
         return makeOrders.toString();
     }

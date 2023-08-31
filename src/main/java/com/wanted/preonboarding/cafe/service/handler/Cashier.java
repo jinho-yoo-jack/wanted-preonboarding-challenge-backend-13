@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.dto.request.Order;
+import java.util.List;
 import java.util.Map;
 
 public class Cashier {
@@ -15,6 +17,14 @@ public class Cashier {
         for (String key : orders.keySet()) {
             if (key.equalsIgnoreCase("AMERICANO"))
                 totalPrice += americanoPrice * orders.get(key);
+        }
+        return totalPrice;
+    }
+
+    public Long calculateTotalPrice(List<Order> orderList, Map<String, Long> menu) {
+        Long totalPrice = 0L;
+        for(Order order : orderList) {
+            totalPrice += menu.get(order.getName()) * order.getQuantity();
         }
         return totalPrice;
     }
