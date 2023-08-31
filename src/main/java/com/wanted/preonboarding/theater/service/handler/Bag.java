@@ -2,7 +2,7 @@ package com.wanted.preonboarding.theater.service.handler;
 
 public class Bag {
     private Long amount;
-    private final Invitation invitation;
+    private Invitation invitation;
     private Ticket ticket;
 
     public Bag(long amount){
@@ -12,7 +12,11 @@ public class Bag {
         this.invitation = invitation;
         this.amount = amount;
     }
-
+    
+    public void setInvitation(Invitation invitation) {
+    	this.invitation = invitation;
+    }
+    
     public boolean hasInvitation() {
         return invitation != null;
     }
@@ -28,4 +32,12 @@ public class Bag {
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+	public Long getAmount() {
+		return amount;
+	}
+	public void setAmount(Long amount) {
+		this.amount = amount;
+	}
+    
+    
 }

@@ -7,5 +7,7 @@ public class Audience {
         this.bag = bag;
     }
 
-    public Bag getBag(){ return bag;}
+    public Bag getBag(){
+    	return bag;
+    }
 }
