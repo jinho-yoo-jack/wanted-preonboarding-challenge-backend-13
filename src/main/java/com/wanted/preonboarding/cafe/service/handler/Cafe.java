@@ -1,27 +1,39 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class Cafe {
-    private final String name;
+    private String name;
     private Long sales;
 
-    public Cafe(){
-        this.name = "wantedCodingCafe";
-        this.sales = 10000L;
-    }
+    @Autowired
+    private final Cashier cashier;
+    
+    @Autowired
+    private final Barista barista;
 
     public String getCafeName(){
         return name;
     }
-
-    public void plusSales(Long amount){
+    
+	public void plusSales(Long amount){
         this.sales += amount;
     }
 
     public void minusSales(Long amount){
         this.sales -= amount;
     }
+
+	public Cashier getCashier() {
+		return cashier;
+	}
+
+	public Barista getBarista() {
+		return barista;
+	}
 }

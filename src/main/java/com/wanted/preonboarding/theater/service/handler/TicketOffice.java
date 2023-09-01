@@ -1,25 +1,41 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
 public class TicketOffice {
     private long amount;
     private final List<Ticket> tickets;
+    
+	public long getAmount() {
+		return amount;
+	}
+	
+	public void plusAmount(long amount) {
+		this.amount += amount;
+	}
+	
+	public void minusAmount(long amount) {
+		this.amount -= amount;
+	}
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
-        this.amount = amount;
-        this.tickets = Arrays.asList(tickets);
-    }
 
-    public Ticket getTicket(){
-        return tickets.get(0);
-    }
+	public void setAmount(long amount) {
+		this.amount = amount;
+	}
 
-    public void minusAmount(long amount) {
-        this.amount -= amount;
-    }
-    public void plusAmount(long amount) {
-        this.amount += amount;
-    }
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+	
+	public Ticket getTicket() {
+		return tickets.get(0);
+	}
+
+	
 }

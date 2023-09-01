@@ -1,10 +1,17 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Bag {
     private Long amount;
     private final Invitation invitation;
     private Ticket ticket;
-
+    
+    public Bag() {
+    	invitation = null;
+    }
+    
     public Bag(long amount){
         this(null, amount);
     }
