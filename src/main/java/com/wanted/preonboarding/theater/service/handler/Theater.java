@@ -1,21 +1,31 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-import lombok.RequiredArgsConstructor;
+import com.wanted.preonboarding.theater.service.TheaterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class Theater {
+    private TicketSeller ticketSeller;
 
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
+    @Autowired
+    public Theater() {
+        this.ticketSeller = new TicketSeller(new TicketOffice(20000L, new Ticket(100L)));
+    }
+
+    public void enter(Audience audience) {
+        if (hasInvitation(audience)) {
+            Ticket ticket = ticketSeller.getTicket();
+            audience.changeInvitationToTicket(ticket);
+        } else {
+            Ticket ticket = ticketSeller.sellTicket();
+            audience.buyTicket(ticket);
         }
     }
+
+    private boolean hasInvitation(Audience audience) {
+        return audience.hasInvitation();
+    }
+
+
 }

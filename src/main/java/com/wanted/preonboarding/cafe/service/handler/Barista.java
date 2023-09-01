@@ -3,23 +3,23 @@ package com.wanted.preonboarding.cafe.service.handler;
 import java.util.Map;
 
 public class Barista {
-    private int rank; // 0: Beginner 1: Middle 2: Master
-    private int status; // 0: Waiting 1: Making
+    private Rank rank; // 0: Beginner 1: Middle 2: Master
+    private Status status; // 0: Waiting 1: Making
 
-    public Barista(int rank, int status){
+    public Barista(Rank rank, Status status){
         this.rank = rank;
         this.status = status;
     }
 
-    private void setRank(int rank){
-        this.rank = rank;
-    }
-
-    private void setStatus(int status){
+    public void updateWorkingStatus(Status status) {
         this.status = status;
+    }
+    public boolean isWaiting(){
+        return this.status == Status.WAITING;
     }
 
     public String makeCoffeeTo(Map<String, Integer> orders){
+        this.updateWorkingStatus(Status.WORKING);
         StringBuilder makeOrders = new StringBuilder();
         for(String coffeeName : orders.keySet()){
             int quantity = orders.get(coffeeName);
@@ -27,6 +27,7 @@ public class Barista {
                     .append(":")
                     .append(quantity);
         }
+        this.updateWorkingStatus(Status.WAITING);
         return makeOrders.toString();
     }
 
