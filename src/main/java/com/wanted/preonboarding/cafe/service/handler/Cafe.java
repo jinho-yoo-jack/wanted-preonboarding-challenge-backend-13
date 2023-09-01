@@ -5,13 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Cafe {
-    private final String name;
-    private Long sales;
-
-    public Cafe(){
-        this.name = "wantedCodingCafe";
-        this.sales = 10000L;
-    }
+    private final String name = "wantedCodingCafe";
+    private Long sales = 10000L;
 
     public String getCafeName(){
         return name;
