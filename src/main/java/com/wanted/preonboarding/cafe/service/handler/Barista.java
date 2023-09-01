@@ -18,6 +18,7 @@ public class Barista {
                 .append(":")
                 .append(order.getCount());
         });
+
         return makeOrders.toString();
     }
 }
