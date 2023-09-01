@@ -1,33 +1,24 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
+@RequiredArgsConstructor
 public class Cafe {
     private String name;
     private Long sales;
-    private Cashier cashier;
-    private Barista barista;
 
-    public Barista getBarista() {
-		return barista;
-	}
-
-	public void setBarista(Barista barista) {
-		this.barista = barista;
-	}
-
-	public Cafe (Cashier cashier) {
-    	this.name = "wantedCodingCafe";
-		this.cashier = cashier;
-    }
+    @Autowired
+    private final Cashier cashier;
+    
+    @Autowired
+    private final Barista barista;
 
     public String getCafeName(){
         return name;
-    }
-    
-    public Cashier getCashier() {
-    	return cashier;
     }
     
 	public void plusSales(Long amount){
@@ -37,4 +28,12 @@ public class Cafe {
     public void minusSales(Long amount){
         this.sales -= amount;
     }
+
+	public Cashier getCashier() {
+		return cashier;
+	}
+
+	public Barista getBarista() {
+		return barista;
+	}
 }

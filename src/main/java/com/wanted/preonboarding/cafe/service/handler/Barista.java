@@ -3,6 +3,9 @@ package com.wanted.preonboarding.cafe.service.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Barista {
     private int rank; // 0: Beginner 1: Middle 2: Master
     private int status; // 0: Waiting 1: Making
@@ -10,7 +13,12 @@ public class Barista {
     //데이터 베이스를 써야하는 부분을 임의로 연결 (동시성문제 있을 수 있음)
     private Map<String, Map<String, Integer>> orderList = new HashMap<String, Map<String, Integer>>();
     private String orderNumber = "100";
-
+    
+    public Barista(){
+        this.rank = 0;
+        this.status = 0;
+    }
+    
     public Barista(int rank, int status){
         this.rank = rank;
         this.status = status;

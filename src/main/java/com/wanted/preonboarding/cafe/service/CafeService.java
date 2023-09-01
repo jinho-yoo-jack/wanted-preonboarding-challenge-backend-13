@@ -3,11 +3,9 @@ package com.wanted.preonboarding.cafe.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wanted.preonboarding.cafe.service.handler.Cafe;
-import com.wanted.preonboarding.cafe.service.handler.Cashier;
 import com.wanted.preonboarding.cafe.service.handler.Customer;
 
 import jakarta.transaction.Transactional;
@@ -17,11 +15,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CafeService {
     private final Cafe wantedCafe;
-    
-    @Autowired
-    public CafeService (Cashier cashier) {
-    	wantedCafe = new Cafe(cashier);
-    }
     
     
     public long order(HashMap<String, Integer> orders){

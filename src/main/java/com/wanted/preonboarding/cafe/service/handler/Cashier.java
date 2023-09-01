@@ -3,6 +3,9 @@ package com.wanted.preonboarding.cafe.service.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Cashier {
 	//데이터 베이스를 써야하는 부분을 임의로 연결 (동시성문제 있을 수 있음)
 	private Map<String, Long> beverageList= new HashMap<>();

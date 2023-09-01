@@ -1,11 +1,16 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class Audience {
-    private final Bag bag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-    public Audience(Bag bag){
-        this.bag = bag;
-    }
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class Audience {
+
+	@Autowired
+	private final Bag bag;
 
     public Bag getBag(){ return bag;}
     
@@ -17,7 +22,7 @@ public class Audience {
         if (hasTicket()) {
             theater.checkTicket(this);
         } else {
-            theater.sellTicket(this);
+            theater.ticketing(this);
         }
     }
 }

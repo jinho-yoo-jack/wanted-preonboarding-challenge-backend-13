@@ -9,19 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TheaterService {
-    private final Theater theater;
     
-    //판매원이 배치된 theater 생성
-    @Autowired
-    public TheaterService(TicketSeller ticketSeller) {
-    	this.theater = new Theater(ticketSeller);
-    }
+	@Autowired
+	private final Theater theater;
+    
 
     public String enter(RequestMessage requestMessage) {
         Audience audience = new Audience(new Bag(requestMessage.getInvitation(), requestMessage.getAmount()));
         
         //티켓 판매
-        theater.getTicketSeller().ticketing(audience);
+        theater.ticketing(audience);
         
         //티켓 검증
         audience.enterTheater(theater);
