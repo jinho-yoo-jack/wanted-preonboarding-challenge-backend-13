@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wanted.preonboarding.cafe.domain.Menu;
 import com.wanted.preonboarding.cafe.domain.Order;
+import com.wanted.preonboarding.cafe.domain.PaymentType;
 import com.wanted.preonboarding.cafe.dto.OrderRequest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +35,7 @@ class CafeControllerTest {
     @DisplayName("성공")
     void success() throws Exception {
         //given
-        final OrderRequest orderRequest = new OrderRequest("Card", List.of(new Order(Menu.AMERICANO, 3)));
+        final OrderRequest orderRequest = new OrderRequest(PaymentType.CARD, List.of(new Order(Menu.AMERICANO, 3)));
 
         final String requestBody = objectMapper.writeValueAsString(orderRequest);
 

@@ -1,6 +1,8 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
 import com.wanted.preonboarding.cafe.domain.Order;
+import com.wanted.preonboarding.cafe.domain.Rank;
+import com.wanted.preonboarding.cafe.domain.Status;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -25,6 +27,6 @@ public class Cashier {
 
     public String takeOrder(List<Order> receivedOrders, long totalPrice) {
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        return sendTo(new Barista(Rank.BEGINNER, Status.WAITING), receivedOrders);
     }
 }
