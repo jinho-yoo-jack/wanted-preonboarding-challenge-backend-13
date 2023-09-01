@@ -1,6 +1,8 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.Map;
+import com.wanted.preonboarding.cafe.domain.Order;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Cashier {
     private final Cafe cafe;
@@ -9,21 +11,19 @@ public class Cashier {
         this.cafe = cafe;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
-        }
-        return totalPrice;
+    public long calculateTotalPrice(List<Order> orders) {
+        AtomicLong totalPrice = new AtomicLong(0L);
+        orders.forEach(order -> {
+            totalPrice.addAndGet(order.getMenu().getAmount() * order.getCount());
+        });
+        return totalPrice.get();
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
+    private String sendTo(Barista barista, List<Order> receivedOrders) {
         return barista.makeCoffeeTo(receivedOrders);
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+    public String takeOrder(List<Order> receivedOrders, long totalPrice) {
         cafe.plusSales(totalPrice);
         return sendTo(new Barista(0,0), receivedOrders);
     }
