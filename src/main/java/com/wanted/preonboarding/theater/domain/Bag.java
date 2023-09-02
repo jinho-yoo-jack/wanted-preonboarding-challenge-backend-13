@@ -1,13 +1,20 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.domain;
+
+import com.wanted.preonboarding.theater.dto.ViewRequest;
 
 public class Bag {
     private Long amount;
     private final Invitation invitation;
     private Ticket ticket;
 
+    public static Bag fromViewRequest(ViewRequest viewRequest) {
+        return new Bag(viewRequest.getAmount());
+    }
+
     public Bag(long amount){
         this(null, amount);
     }
+
     public Bag(Invitation invitation, long amount){
         this.invitation = invitation;
         this.amount = amount;
