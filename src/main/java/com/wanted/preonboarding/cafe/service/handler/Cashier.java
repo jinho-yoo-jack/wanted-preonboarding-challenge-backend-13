@@ -1,30 +1,52 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.enums.BaristaEnum;
+import com.wanted.preonboarding.cafe.enums.MenuEnum;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 
+@Component
+@RequiredArgsConstructor
 public class Cashier {
     private final Cafe cafe;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    public String takeOrder(Map<String, Long> orders) {
+        if (hasOverMenuCount(orders)) {
+            long totalPrice = calculateTotalPrice(orders);
+            cafe.plusSales(totalPrice);
+
+            return sendTo(Barista.builder()
+                    .rank(BaristaEnum.BEGINNER_WAIT.getRank())
+                    .status(BaristaEnum.BEGINNER_WAIT.getStatus())
+                    .build(), orders);
+        } else {
+            return null;
+        }
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
+    private String sendTo(Barista barista, Map<String, Long> orders) {
+        return barista.makeCoffeeTo(orders);
+    }
+
+    private long calculateTotalPrice(Map<String, Long> orders) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
+
         for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+            if (key.equalsIgnoreCase(MenuEnum.AMERICANO.name())) {
+                totalPrice += MenuEnum.AMERICANO.getPrice() * orders.get(key);
+            } else if (key.equalsIgnoreCase(MenuEnum.JUICE.name())) {
+                totalPrice += MenuEnum.JUICE.getPrice() * orders.get(key);
+            } else {
+                totalPrice += MenuEnum.TEA.getPrice() * orders.get(key);
+            }
         }
+
         return totalPrice;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+    private boolean hasOverMenuCount(Map<String, Long> orders) {
+        return orders.size() <= 3;
     }
 }
