@@ -1,11 +1,9 @@
 package com.wanted.preonboarding.cafe.domain;
 
 import com.wanted.preonboarding.cafe.dto.OrderRequest;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 @Slf4j
 @Getter
@@ -20,11 +18,11 @@ public class Cafe {
         return String.format("Welcome to The %s!!", name);
     }
 
-    public void plusSales(Long amount){
+    public void plusSales(Long amount) {
         this.sales += amount;
     }
 
-    public void minusSales(Long amount){
+    public void minusSales(Long amount) {
         this.sales -= amount;
     }
 

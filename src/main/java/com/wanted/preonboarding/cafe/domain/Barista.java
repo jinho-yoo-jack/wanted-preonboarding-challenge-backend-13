@@ -1,10 +1,8 @@
 package com.wanted.preonboarding.cafe.domain;
 
-import com.wanted.preonboarding.cafe.domain.Order;
-import com.wanted.preonboarding.cafe.domain.Rank;
-import com.wanted.preonboarding.cafe.domain.Status;
-import java.util.List;
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 public class Barista {
@@ -14,14 +12,14 @@ public class Barista {
     /**
      * 커피를 제조합니다.
      */
-    public String makeCoffeeTo(List<Order> orders){
+    public String makeCoffeeTo(List<Order> orders) {
         this.status = Status.MAKING;
 
         StringBuilder makeOrders = new StringBuilder();
         orders.forEach(order -> {
             makeOrders.append(order.getMenu())
-                .append(":")
-                .append(order.getCount());
+                    .append(":")
+                    .append(order.getCount());
         });
 
         this.status = Status.WAITING;

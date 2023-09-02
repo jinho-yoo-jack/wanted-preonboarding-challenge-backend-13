@@ -11,7 +11,7 @@ public enum PaymentType {
     CASH;
 
     @JsonCreator
-    public static PaymentType fromInput(String input){
+    public static PaymentType fromInput(String input) {
         return Arrays.stream(PaymentType.values())
                 .filter(paymentType -> paymentType.name().equals(input))
                 .findFirst()

@@ -3,7 +3,6 @@ package com.wanted.preonboarding.cafe.controller;
 import com.wanted.preonboarding.cafe.domain.InvalidResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,7 +14,7 @@ import java.util.List;
 public class CafeControllerAdvice {
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     @ExceptionHandler(RuntimeException.class)
-    public String runtimeExceptionHandler(RuntimeException e){
+    public String runtimeExceptionHandler(RuntimeException e) {
         return e.getMessage();
     }
 

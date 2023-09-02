@@ -17,7 +17,7 @@ public enum Menu {
     private final Long amount;
 
     @JsonCreator
-    public static Menu fromInput(String input){
+    public static Menu fromInput(String input) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.name().equals(input))
                 .findFirst()

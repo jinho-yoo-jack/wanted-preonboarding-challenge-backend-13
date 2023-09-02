@@ -1,7 +1,7 @@
 package com.wanted.preonboarding.cafe.service;
 
-import com.wanted.preonboarding.cafe.dto.OrderRequest;
 import com.wanted.preonboarding.cafe.domain.Cafe;
+import com.wanted.preonboarding.cafe.dto.OrderRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class CafeService {
         return wantedCafe.welcomeMessage();
     }
 
-    public String orderFrom(OrderRequest orderRequest){
+    public String orderFrom(OrderRequest orderRequest) {
         return wantedCafe.orderReception(orderRequest);
     }
 }

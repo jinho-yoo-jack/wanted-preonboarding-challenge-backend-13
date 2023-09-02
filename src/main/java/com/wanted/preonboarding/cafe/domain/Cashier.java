@@ -13,7 +13,7 @@ public class Cashier {
     }
 
     public String sendTo(Barista barista, List<Order> receivedOrders) {
-        if(!barista.isBusy()) {
+        if (!barista.isBusy()) {
             return barista.makeCoffeeTo(receivedOrders);
         }
 

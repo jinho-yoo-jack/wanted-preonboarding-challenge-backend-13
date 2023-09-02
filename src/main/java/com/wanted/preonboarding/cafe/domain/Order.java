@@ -7,7 +7,8 @@ import lombok.Getter;
 
 import java.util.Objects;
 
-import static com.wanted.preonboarding.cafe.domain.ValidateMessage.*;
+import static com.wanted.preonboarding.cafe.domain.ValidateMessage.INVALID_MENU;
+import static com.wanted.preonboarding.cafe.domain.ValidateMessage.INVALID_ORDER_SIZE;
 
 @Getter
 @AllArgsConstructor
