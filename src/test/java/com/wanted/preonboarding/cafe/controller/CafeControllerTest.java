@@ -67,7 +67,7 @@ class CafeControllerTest {
             final String requestBody = objectMapper.writeValueAsString(orderRequest);
 
             final String expectedResponse = "AMERICANO:3";
-            given(cafeService.orderFrom(eq(orderRequest))).willReturn(expectedResponse);
+            given(cafeService.orderFrom(any(OrderRequest.class))).willReturn(expectedResponse);
 
             //when
             MvcResult mvcResult = mockMvc.perform(get(endPoint + "/order")
