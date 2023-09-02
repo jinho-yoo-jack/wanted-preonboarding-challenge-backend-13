@@ -22,6 +22,7 @@ class CafeController {
 
     @GetMapping("order")
     public String orderFromMenu(@RequestBody @Valid OrderRequest orderRequest) {
-        return cafeService.orderFrom(orderRequest);
+        String result = cafeService.orderFrom(orderRequest);
+        return result;
     }
 }
