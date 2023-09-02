@@ -1,10 +1,6 @@
-package com.wanted.preonboarding.cafe.service.handler;
+package com.wanted.preonboarding.cafe.domain;
 
-import com.wanted.preonboarding.cafe.domain.Menu;
-import com.wanted.preonboarding.cafe.domain.Order;
-import com.wanted.preonboarding.cafe.domain.Rank;
-import com.wanted.preonboarding.cafe.domain.Status;
-import org.assertj.core.api.Assertions;
+import com.wanted.preonboarding.cafe.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

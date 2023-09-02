@@ -1,7 +1,7 @@
 package com.wanted.preonboarding.cafe.service;
 
 import com.wanted.preonboarding.cafe.dto.OrderRequest;
-import com.wanted.preonboarding.cafe.service.handler.Cafe;
+import com.wanted.preonboarding.cafe.domain.Cafe;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
