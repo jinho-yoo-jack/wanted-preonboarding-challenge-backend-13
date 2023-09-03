@@ -7,6 +7,10 @@ public class TicketOffice {
     private long amount;
     private final List<Ticket> tickets;
 
+    public TicketOffice(Long amount, List<Ticket> ticketList) {
+        this.amount = amount;
+        this.tickets = ticketList;
+    }
     public TicketOffice(Long amount, Ticket ... tickets) {
         this.amount = amount;
         this.tickets = Arrays.asList(tickets);
