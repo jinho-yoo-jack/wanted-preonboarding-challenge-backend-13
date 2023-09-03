@@ -1,21 +1,33 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import lombok.AllArgsConstructor;
+
 import java.util.Map;
 
+@AllArgsConstructor
 public class Cashier {
-    private final Cafe cafe;
+    private Status status;
+    private Cafe cafe;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    public boolean isWaiting() {
+        return status.equals(Status.WAITING);
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
+    public void updateWorkingStatus(Status status) {
+        this.status = status;
+    }
+
+    public long calculateTotalPrice(PaymentMethod method, Map<String, Integer> orders) {
+        this.updateWorkingStatus(Status.WORKING);
         long totalPrice = 0L;
-        long americanoPrice = 100L;
         for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+            Menu menu = Menu.valueOf(key);
+            Integer cost = menu.getCost();
+            Integer count = orders.get(key).intValue();
+            totalPrice += cost * count;
         }
+        this.cafe.plusSales(new Order(method, totalPrice));
+        this.updateWorkingStatus(Status.WAITING);
         return totalPrice;
     }
 
@@ -23,8 +35,4 @@ public class Cashier {
         return barista.makeCoffeeTo(receivedOrders);
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
-    }
 }
