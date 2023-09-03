@@ -1,21 +1,24 @@
 package com.wanted.preonboarding.theater.entity;
 
-import com.wanted.preonboarding.theater.entity.baseEntity.Ticket;
+import lombok.Builder;
 
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.List;
 
 public class TicketOffice {
     private long amount;
-    private final List<Ticket> tickets;
+    private final Deque<Ticket> tickets;
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
+    @Builder
+    public TicketOffice(Long amount, List<Ticket> tickets) {
         this.amount = amount;
-        this.tickets = Arrays.asList(tickets);
+        this.tickets = new ArrayDeque<>(tickets);
     }
 
     public Ticket getTicket(){
-        return tickets.get(0);
+        return (!tickets.isEmpty()) ? tickets.pop() : null;
     }
 
     public void minusAmount(long amount) {
