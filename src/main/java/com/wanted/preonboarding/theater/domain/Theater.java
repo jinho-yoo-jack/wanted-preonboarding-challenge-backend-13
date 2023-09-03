@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Theater {
     private final TicketSeller ticketSeller;
 
-    public void enter(Audience audience, TicketSeller ticketSeller){
+    public void enter(Audience audience, TicketSeller ticketSeller) {
         if (audience.hasTicket()) {
             return;
         }

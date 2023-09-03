@@ -1,6 +1,7 @@
 package com.wanted.preonboarding.cafe.domain;
 
 import com.wanted.preonboarding.cafe.domain.menu.CafeMenu;
+
 import java.util.List;
 
 public class Barista {

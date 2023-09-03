@@ -1,10 +1,10 @@
 package com.wanted.preonboarding.cafe.domain.menu;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.wanted.preonboarding.cafe.domain.menu.Menu;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MenuTest {
     @Test

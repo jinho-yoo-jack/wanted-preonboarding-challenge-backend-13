@@ -27,15 +27,19 @@ public class Bag {
     public boolean hasInvitation() {
         return invitation != null;
     }
+
     public boolean hasTicket() {
         return ticket != null;
     }
+
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
+
     private void minusAmount(long amount) {
         this.amount -= amount;
     }
+
     public void plusAmount(long amount) {
         this.amount += amount;
     }

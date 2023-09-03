@@ -1,15 +1,11 @@
 package com.wanted.preonboarding.cafe.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.wanted.preonboarding.cafe.domain.menu.Americano;
-import com.wanted.preonboarding.cafe.domain.menu.CafeMenu;
-import com.wanted.preonboarding.cafe.domain.menu.CafeMenuFactory;
-import com.wanted.preonboarding.cafe.domain.menu.Espresso;
-import com.wanted.preonboarding.cafe.domain.menu.Latte;
-import com.wanted.preonboarding.cafe.domain.menu.Menu;
+import com.wanted.preonboarding.cafe.domain.menu.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CafeMenuFactoryTest {
 

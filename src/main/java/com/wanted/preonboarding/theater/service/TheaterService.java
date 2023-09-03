@@ -11,7 +11,7 @@ public class TheaterService {
     private final Theater theater;
     private final TicketSeller ticketSeller;
 
-    public String enter(RequestMessage message){
+    public String enter(RequestMessage message) {
         Ticket ticket = null;
         Invitation invitation = null;
         if (message.isInvitation()) {

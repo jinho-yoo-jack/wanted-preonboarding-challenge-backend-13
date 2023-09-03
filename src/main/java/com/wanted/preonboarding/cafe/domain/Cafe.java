@@ -1,7 +1,6 @@
 package com.wanted.preonboarding.cafe.domain;
 
 import java.util.List;
-import org.springframework.stereotype.Component;
 
 public class Cafe {
     private final String name;

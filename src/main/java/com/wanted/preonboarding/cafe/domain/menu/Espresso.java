@@ -1,6 +1,6 @@
 package com.wanted.preonboarding.cafe.domain.menu;
 
-public class Espresso extends CafeMenu{
+public class Espresso extends CafeMenu {
     public Espresso() {
         super("Espresso", 1500L);
     }
