@@ -1,30 +1,30 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.MENU;
+import com.wanted.preonboarding.cafe.OrderDto;
+import org.aspectj.weaver.ast.Or;
+
+import java.util.List;
 import java.util.Map;
 
 public class Cashier {
-    private final Cafe cafe;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
-    }
-
-    public long calculateTotalPrice(Map<String, Integer> orders) {
+    public long calculateTotalPrice(List<Order> orders) {
         long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
+
+        for (Order order : orders) {
+            int cnt = order.getCount();
+            int price = order.getMenu().getPrice();
+            totalPrice += (long) cnt * price;
         }
         return totalPrice;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
+    private String sendTo(Barista barista, List<Order> receivedOrders) {
         return barista.makeCoffeeTo(receivedOrders);
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+    public String takeOrder(List<Order> receivedOrders, int baristaRank) {
+        return sendTo(new Barista(baristaRank,0), receivedOrders);
     }
 }

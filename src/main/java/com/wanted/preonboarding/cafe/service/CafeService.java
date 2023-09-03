@@ -1,24 +1,22 @@
 package com.wanted.preonboarding.cafe.service;
 
+import com.wanted.preonboarding.cafe.OrderDto;
 import com.wanted.preonboarding.cafe.service.handler.Cafe;
-import com.wanted.preonboarding.cafe.service.handler.Cashier;
-import com.wanted.preonboarding.cafe.service.handler.Customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(HashMap<String, Integer> menu){
-        Cashier cashier = new Cashier(wantedCafe);
-        Map<String, Integer> myOrders = new HashMap<>();
-        myOrders.put("AMERICANO", 3);
-        Customer c1 = new Customer("Card", myOrders);
-        return c1.buyCoffee(cashier);
+    public String orderFrom(OrderDto orderDto){
+        return wantedCafe.makeCoffee(orderDto.getOrderList(), orderDto.getBaristaRank()); // 커피 만들기
+    }
+
+    public Long pay(OrderDto orderDto) {
+        Long total = wantedCafe.getCashier().calculateTotalPrice(orderDto.getOrderList());
+        wantedCafe.plusSales(total);
+        return total;
     }
 }
