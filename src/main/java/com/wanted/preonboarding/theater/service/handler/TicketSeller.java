@@ -10,4 +10,15 @@ public class TicketSeller {
     public TicketOffice getTicketOffice(){
         return ticketOffice;
     }
+
+    public Long getTicketFee(){
+        return ticketOffice.getTicket().getFee();
+    }
+    public void giveTicketTo(Audience audience){
+        audience.receiveTicket(ticketOffice.getTicket());
+    }
+
+    public void receiveFee(Long amount){
+        ticketOffice.plusAmount(amount);
+    }
 }
