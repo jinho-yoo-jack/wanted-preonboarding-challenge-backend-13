@@ -1,13 +1,17 @@
 package com.wanted.preonboarding.theater.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Ticket {
-    private Long fee;
+    private final Long fee;
+    private boolean isCheck = false;
 
     public Ticket(Long fee) {
         this.fee = fee;
     }
 
-    public Long getFee() {
-        return fee;
+    public void checkTicket() {
+        this.isCheck = true;
     }
 }

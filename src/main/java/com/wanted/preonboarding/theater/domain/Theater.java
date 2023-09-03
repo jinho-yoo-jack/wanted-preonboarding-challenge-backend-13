@@ -1,20 +1,32 @@
 package com.wanted.preonboarding.theater.domain;
 
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
+@Getter
+@Builder
 @Component
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Theater {
-    public void enter(Audience audience, TicketSeller ticketSeller){
-        if(audience.getBag().hasInvitation()){
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().setTicket(ticket);
-        }else {
-            Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-            audience.getBag().minusAmount(ticket.getFee());
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-            audience.getBag().setTicket(ticket);
-        }
+    private Long showFee;
+    private TicketOffice ticketOffice;
+
+    public boolean invitationCheck(Bag bag) {
+        return bag.hasInvitation();
+    }
+
+    public Ticket ticketOfficeGuide(Long amount) {
+        return ticketOffice.ticketIssue(amount);
+    }
+
+    public Ticket ticketOfficeGuide() {
+        return ticketOffice.ticketIssue();
+    }
+
+    public String enter(Ticket ticket) {
+        ticket.checkTicket();
+
+        return "Have a good time.";
     }
 }

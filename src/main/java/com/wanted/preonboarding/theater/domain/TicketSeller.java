@@ -1,13 +1,15 @@
 package com.wanted.preonboarding.theater.domain;
 
 public class TicketSeller {
-    private final TicketOffice ticketOffice;
 
-    public TicketSeller(TicketOffice ticketOffice){
-        this.ticketOffice = ticketOffice;
+    public Ticket sendTo(Ticket ticket, Long amount) {
+        if (!amount.equals(ticket.getFee())) {
+            throw new IllegalArgumentException();
+        }
+        return ticket;
     }
 
-    public TicketOffice getTicketOffice(){
-        return ticketOffice;
+    public Ticket sendTo(Ticket ticket) {
+        return ticket;
     }
 }
