@@ -1,5 +1,8 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.handler;
 
+import com.wanted.preonboarding.theater.entity.TicketSeller;
+import com.wanted.preonboarding.theater.entity.Audience;
+import com.wanted.preonboarding.theater.entity.baseEntity.Ticket;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

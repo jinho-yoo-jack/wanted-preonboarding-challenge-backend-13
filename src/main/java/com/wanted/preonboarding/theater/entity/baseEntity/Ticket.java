@@ -1,4 +1,4 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.entity.baseEntity;
 
 public class Ticket {
     private Long fee;

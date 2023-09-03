@@ -1,4 +1,6 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.entity;
+
+import com.wanted.preonboarding.theater.entity.baseEntity.Ticket;
 
 import java.util.Arrays;
 import java.util.List;

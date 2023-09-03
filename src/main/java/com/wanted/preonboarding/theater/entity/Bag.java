@@ -1,4 +1,7 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.entity;
+
+import com.wanted.preonboarding.theater.entity.baseEntity.Invitation;
+import com.wanted.preonboarding.theater.entity.baseEntity.Ticket;
 
 public class Bag {
     private Long amount;

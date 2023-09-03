@@ -1,4 +1,6 @@
-package com.wanted.preonboarding.theater.service.handler;
+package com.wanted.preonboarding.theater.entity;
+
+import com.wanted.preonboarding.theater.entity.Bag;
 
 public class Audience {
     private final Bag bag;
