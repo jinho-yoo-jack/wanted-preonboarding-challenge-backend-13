@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.service.dto.CustomerDto;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,5 +21,9 @@ public class Customer {
     public String buyCoffee(Cashier cashier) {
         long totalPrice = cashier.calculateTotalPrice(myOrders);
         return cashier.takeOrder(myOrders, totalPrice);
+    }
+
+    public static Customer from(CustomerDto customerDto){
+        return new Customer(customerDto.getPaymentMethod(),customerDto.getOrder());
     }
 }
