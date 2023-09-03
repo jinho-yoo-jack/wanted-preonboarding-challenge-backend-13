@@ -14,7 +14,7 @@ public class TheaterServiceTest {
 
     @Test
     @DisplayName("극장 입장")
-    public void enter() {
+    public void enterTest() {
         AudienceRequestDto dto = AudienceRequestDto.builder()
                 .money(10000L)
                 .build();
