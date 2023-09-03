@@ -1,11 +1,11 @@
 package com.wanted.preonboarding.theater.controller;
 
 import com.wanted.preonboarding.cafe.service.CafeService;
+import com.wanted.preonboarding.theater.service.AudienceRequestDto;
 import com.wanted.preonboarding.theater.service.TheaterService;
+import com.wanted.preonboarding.theater.service.handler.Audience;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -20,8 +20,8 @@ public class TheaterController {
         return "Welcome to The Wanted Theater";
     }
 
-    @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    @PostMapping("enter")
+    public String enter(@RequestBody AudienceRequestDto audienceRequestDto){
+        return theaterService.enter(Audience.builder().dto(audienceRequestDto).build());
     }
 }

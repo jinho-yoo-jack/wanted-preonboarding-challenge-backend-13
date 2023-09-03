@@ -1,15 +1,21 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class TicketOffice {
     private long amount;
     private final List<Ticket> tickets;
 
-    public TicketOffice(Long amount, Ticket ... tickets) {
+    public TicketOffice(long amount, Ticket ticket) {
         this.amount = amount;
-        this.tickets = Arrays.asList(tickets);
+        this.tickets = Arrays.asList(ticket);
     }
 
     public Ticket getTicket(){
