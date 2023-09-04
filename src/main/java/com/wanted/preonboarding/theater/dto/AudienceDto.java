@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 public class AudienceDto {
     private Long money;
-    private boolean hasInvitation;
+    private boolean invited;
+
 }
