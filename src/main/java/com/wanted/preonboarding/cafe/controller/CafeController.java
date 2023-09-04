@@ -27,7 +27,8 @@ public class CafeController {
 
     @GetMapping("order")
     public String orderFromMenu(@RequestBody OrderDto orderDto){
-        List<OrderItem> orderItems = orderDto.getItems().stream().map(item -> new OrderItem(item.getName(), item.getQuantity()))
+        List<OrderItem> orderItems = orderDto.getItems().stream()
+                .map(item -> new OrderItem(item.getName(), item.getQuantity()))
                 .collect(Collectors.toList());
         Order order = new Order(orderItems);
         return cafeService.orderFrom(order);
