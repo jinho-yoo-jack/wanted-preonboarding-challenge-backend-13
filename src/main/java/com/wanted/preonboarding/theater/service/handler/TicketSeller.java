@@ -1,13 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class TicketSeller {
-    private final TicketOffice ticketOffice;
+public interface TicketSeller {
 
-    public TicketSeller(TicketOffice ticketOffice){
-        this.ticketOffice = ticketOffice;
-    }
-
-    public TicketOffice getTicketOffice(){
-        return ticketOffice;
-    }
+    public TicketOffice getTicketOffice();
 }

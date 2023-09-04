@@ -25,7 +25,9 @@ public class Bag {
     public void minusAmount(long amount) {
         this.amount -= amount;
     }
+    public long getAmount() {return this.amount;}
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
 }
