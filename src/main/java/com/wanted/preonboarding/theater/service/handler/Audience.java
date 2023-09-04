@@ -7,5 +7,14 @@ public class Audience {
         this.bag = bag;
     }
 
-    public Bag getBag(){ return bag;}
+    public Long buyTicket(Ticket ticket){
+        bag.setTicket(ticket);
+
+        if(bag.hasInvitation()){
+            return 0L;
+        }else{
+            bag.minusAmount(ticket.getFee());
+            return ticket.getFee();
+        }
+    }
 }

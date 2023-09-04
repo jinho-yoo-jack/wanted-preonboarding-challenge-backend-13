@@ -2,6 +2,10 @@ package com.wanted.preonboarding.cafe.service.handler;
 
 import java.util.Map;
 
+/*
+    Barista : 주문을 받아 Coffee를 만드는 책임
+ */
+
 public class Barista {
     private int rank; // 0: Beginner 1: Middle 2: Master
     private int status; // 0: Waiting 1: Making
@@ -19,16 +23,11 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(Order order){
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
-                    .append(":")
-                    .append(quantity);
+        for(OrderItem orderItem : order.getItems()){
+            makeOrders.append(orderItem.toCoffee());
         }
         return makeOrders.toString();
     }
-
-
 }

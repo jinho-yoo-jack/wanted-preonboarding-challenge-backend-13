@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class Customer {
     private String paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private final Order order;
 
-    public Customer(String paymentMethod, Map<String, Integer> orders) {
+    public Customer(String paymentMethod, Order orders) {
         this.paymentMethod = paymentMethod;
-        this.myOrders = orders;
+        this.order = orders;
     }
 
     private void setPaymentMethod(String paymentMethod) {
@@ -17,7 +17,6 @@ public class Customer {
     }
 
     public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
+        return cashier.takeOrder(order);
     }
 }
