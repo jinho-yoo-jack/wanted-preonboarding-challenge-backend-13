@@ -13,6 +13,5 @@ public class TheaterService {
         theater.enter(new Audience(new Bag(1000L)),
                 new TicketSeller(new TicketOffice(20000L, new Ticket(100L))));
         return "Have a good time.";
-
     }
 }
