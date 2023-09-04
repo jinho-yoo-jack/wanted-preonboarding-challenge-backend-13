@@ -16,8 +16,10 @@ public class Customer {
         this.paymentMethod = paymentMethod;
     }
 
-    public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
-    }
+    // Customer객체에서 cashier가 계산하고 주문하는 코드가 들어가 있음.
+//    public String buyCoffee(Cashier cashier) {
+//        long totalPrice = cashier.calculateTotalPrice(myOrders);
+//        return cashier.takeOrder(myOrders, totalPrice);
+//    }
+
 }

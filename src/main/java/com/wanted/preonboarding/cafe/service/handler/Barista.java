@@ -1,5 +1,7 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import lombok.Getter;
+
 import java.util.Map;
 
 public class Barista {
@@ -18,6 +20,10 @@ public class Barista {
     private void setStatus(int status){
         this.status = status;
     }
+
+    public int getRank() { return this.rank; }
+
+    public int getStatus() {return this.status; }
 
     public String makeCoffeeTo(Map<String, Integer> orders){
         StringBuilder makeOrders = new StringBuilder();
