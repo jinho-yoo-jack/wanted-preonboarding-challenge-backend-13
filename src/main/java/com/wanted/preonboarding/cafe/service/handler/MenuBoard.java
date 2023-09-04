@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class MenuBoard {
 
-    private static Map<String, Integer> menus;
+    private static final Map<String, Integer> menus;
 
-    public MenuBoard() {
+    static {
         menus = new HashMap<>();
         menus.put("AMERICANO", 4000);
         menus.put("CAFE_LATTE", 5000);
