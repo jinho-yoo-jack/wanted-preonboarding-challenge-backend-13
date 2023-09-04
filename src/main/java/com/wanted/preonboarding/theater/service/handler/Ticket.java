@@ -1,6 +1,7 @@
 package com.wanted.preonboarding.theater.service.handler;
 
 public class Ticket {
+
     private Long fee;
 
     public Ticket(Long fee) {
@@ -10,4 +11,5 @@ public class Ticket {
     public Long getFee() {
         return fee;
     }
+
 }

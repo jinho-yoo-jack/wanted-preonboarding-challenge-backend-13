@@ -5,6 +5,7 @@ import com.wanted.preonboarding.theater.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 @RequestMapping("/theater")
 @RequiredArgsConstructor
 public class TheaterController {
+
     private final TheaterService theaterService;
 
     @GetMapping("hello")
@@ -21,7 +23,8 @@ public class TheaterController {
     }
 
     @GetMapping("enter")
-    public String enter(){
-        return theaterService.enter();
+    public String enter(@RequestParam("audience") Long id){
+        return theaterService.enter(id);
     }
+
 }

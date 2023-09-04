@@ -1,13 +1,18 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class TicketSeller {
-    private final TicketOffice ticketOffice;
+import lombok.RequiredArgsConstructor;
 
-    public TicketSeller(TicketOffice ticketOffice){
-        this.ticketOffice = ticketOffice;
-    }
+@RequiredArgsConstructor
+public class TicketSeller {
+
+    private final TicketOffice ticketOffice;
 
     public TicketOffice getTicketOffice(){
         return ticketOffice;
     }
+
+    public void sellTicket(Audience audience) {
+        ticketOffice.plusAmount(audience.buy(ticketOffice.getTicket()));
+    }
+
 }

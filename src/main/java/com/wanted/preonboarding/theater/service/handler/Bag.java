@@ -1,6 +1,7 @@
 package com.wanted.preonboarding.theater.service.handler;
 
 public class Bag {
+
     private Long amount;
     private final Invitation invitation;
     private Ticket ticket;
@@ -28,4 +29,5 @@ public class Bag {
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
 }

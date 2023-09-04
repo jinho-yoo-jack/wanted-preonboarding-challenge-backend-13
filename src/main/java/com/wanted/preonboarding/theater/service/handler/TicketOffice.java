@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TicketOffice {
+
     private long amount;
     private final List<Ticket> tickets;
 
@@ -22,4 +23,5 @@ public class TicketOffice {
     public void plusAmount(long amount) {
         this.amount += amount;
     }
+
 }
