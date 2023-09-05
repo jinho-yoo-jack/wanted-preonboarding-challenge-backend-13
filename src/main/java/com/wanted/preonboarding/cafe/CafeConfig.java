@@ -14,7 +14,7 @@ public class CafeConfig {
 
     @Bean
     public Cafe wantedCafe() {
-        WantedCafe wantedCafe = new WantedCafe("WantedCafe", 10000L, new ArrayList<>(), new ArrayList<>());
+        WantedCafe wantedCafe = new WantedCafe("WantedCafe", new ArrayList<>(), new ArrayList<>(), 10000L);
         List<Cashier> cashiers = wantedCafe.createCashiers(2);
         cashiers.forEach(wantedCafe::addCashier);
         List<Barista> baristas = wantedCafe.createBaristas(3);

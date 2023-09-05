@@ -3,22 +3,17 @@ package com.wanted.preonboarding.cafe.service.handler;
 
 import com.wanted.preonboarding.cafe.exception.CafeErrorCode;
 import com.wanted.preonboarding.cafe.exception.CafeException;
+import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 public class WantedCafe implements Cafe {
-    private String name;
+    private final String name;
+    private final List<Cashier> cashierList;
+    private final List<Barista> baristaList;
     private Long sales;
-    private List<Cashier> cashierList;
-    private List<Barista> baristaList;
-
-    public WantedCafe(String name, Long sales, List<Cashier> cashierList, List<Barista> baristaList){
-        this.name = name;
-        this.sales = sales;
-        this.cashierList = cashierList;
-        this.baristaList = baristaList;
-    }
 
     public void addCashier(Cashier cashier) {
         cashierList.add(cashier);

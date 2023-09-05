@@ -1,7 +1,7 @@
 package com.wanted.preonboarding.theater.controller;
 
 import com.wanted.preonboarding.global.Response;
-import com.wanted.preonboarding.theater.service.TheaterServiceImpl;
+import com.wanted.preonboarding.theater.service.TheaterService;
 import com.wanted.preonboarding.theater.service.handler.AudienceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

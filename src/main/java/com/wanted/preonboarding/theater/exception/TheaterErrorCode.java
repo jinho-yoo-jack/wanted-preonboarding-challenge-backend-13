@@ -15,6 +15,7 @@
         INVITATION_ALREADY_USED(HttpStatus.CONFLICT, "Invitation is already used"),
         INVITATION_EXPIRED(HttpStatus.BAD_REQUEST, "Invitation is already expired"),
         INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error occurs"),
+        ALL_TICKET_SELLER_IN_WORK(HttpStatus.CONFLICT, "All ticket seller in work. Please wait a few minutes"),
         ;
 
         private final HttpStatus status;

@@ -22,7 +22,7 @@ public class Invitation {
     }
 
     // 초대권을 사용했는지, 유효기간이 지났는지 검증.
-    public void verifyInvitation() {
+    public void verify() {
         isAlreadyUsed();
         isExpired();
     }

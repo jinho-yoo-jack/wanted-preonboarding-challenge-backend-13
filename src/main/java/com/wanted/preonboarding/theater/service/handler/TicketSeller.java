@@ -1,24 +1,33 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public record TicketSeller(TicketOffice ticketOffice) {
+import com.wanted.preonboarding.cafe.service.handler.Status;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    public Ticket getTicket() {
-        return this.ticketOffice().getTicket();
+@Getter
+@AllArgsConstructor
+public class TicketSeller {
+
+    private Status status;
+
+    public void sellTicketTo(Audience audience, Ticket ticket) {
+        startWork();
+        audience.buyTicket(ticket);
+        finishWork();
     }
 
-    public void addAmount(Long fee) {
-        this.ticketOffice().plusAmount(fee);
+    public void refundTicketTo(TicketOffice ticketOffice, Ticket ticket) {
+        startWork();
+        ticketOffice.setTicket(ticket);
+        ticketOffice.minusAmount(ticket.getFee());
+        finishWork();
     }
 
-    public void removeAmount(Long fee) {
-        this.ticketOffice().minusAmount(fee);
+    private void startWork() {
+        this.status = Status.WORKING;
     }
 
-    public Long getTicketPrice() {
-        return ticketOffice.getTicket().getFee();
-    }
-
-    public boolean verifyAudienceGotMoney(Audience audience) {
-        return audience.getMoney() > getTicketPrice();
+    private void finishWork() {
+        this.status = Status.WAITING;
     }
 }

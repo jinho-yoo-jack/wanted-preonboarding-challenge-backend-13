@@ -21,11 +21,15 @@ public class Audience {
         return this.bag.getAmount();
     }
 
+    public boolean hasInvitation() {
+        return this.bag.getInvitation().isPresent();
+    }
+
     public Optional<Invitation> getInvitation() {
         return this.bag.getInvitation();
     }
 
-    public void hasTicket() {
+    public void validHasTicket() {
         if (this.bag.getTicket() == null) {
             throw new TheaterException(TheaterErrorCode.NOT_FOUND_TICKET);
         }
@@ -35,8 +39,9 @@ public class Audience {
         return this.bag.getTicket();
     }
 
-    public void purchaseTicket(Ticket ticket) {
+    public void buyTicket(Ticket ticket) {
         this.bag.minusAmount(ticket.getFee());
+        takeTicket(ticket);
     }
 
     public void refundTicket(Ticket ticket) {

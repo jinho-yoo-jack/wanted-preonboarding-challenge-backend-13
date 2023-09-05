@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 
 @RequiredArgsConstructor
 @Transactional
@@ -17,20 +15,15 @@ import java.util.Optional;
 public class TheaterServiceImpl implements TheaterService {
 
     private final Theater theater;
-    private final TicketSeller ticketSeller;
     private final AudienceMapper audienceMapper;
 
     public String enter(AudienceDto audienceDto) {
         Audience audience = audienceMapper.toEntity(audienceDto);
-        Optional<Invitation> invitation = audience.getInvitation();
-        if (invitation.isPresent()) {
-            Invitation validInvitation = invitation.orElseThrow(() -> new TheaterException(TheaterErrorCode.NOT_FOUND_INVITATION));
-            validInvitation.verifyInvitation();
-            handleInvitation(audience, validInvitation);
-        } else if (ticketSeller.verifyAudienceGotMoney(audience)) {
-            handleTicketPurchase(audience);
+
+        if (audience.hasInvitation()) {
+            handleInvitation(audience);
         } else {
-            throw new TheaterException(TheaterErrorCode.NOT_ENOUGH_MONEY, audience.getName()+"'s money:"+audience.getMoney());
+            handlePurchase(audience);
         }
 
         return theater.enterSuccess(audience);
@@ -38,30 +31,42 @@ public class TheaterServiceImpl implements TheaterService {
 
     public String refund(AudienceDto audienceDto) {
         Audience audience = audienceMapper.toEntity(audienceDto);
-        audience.hasTicket();
+        audience.validHasTicket();
+        TicketOffice ticketOffice = theater.getTicketOffice();
+        TicketSeller ticketSeller = ticketOffice.findAvailableTicketSeller();
         Ticket ticket = audience.getTicket();
-        if (audience.getInvitation().isPresent()) {
+        if (audience.hasInvitation() && audience.getInvitation().get().isUsed()) {
             audience.removeTicket();
-            ticketSeller.ticketOffice().setTicket(ticket);
+            ticketOffice.setTicket(ticket);
+        } else {
+            audience.refundTicket(ticket);
+            ticketSeller.refundTicketTo(ticketOffice, ticket);
         }
-        audience.refundTicket(ticket);
-        ticketSeller.removeAmount(ticket.getFee());
 
         return audience.getName() + "'s refund success";
     }
 
     // 관객이 초대권이 있다면, 초대권과 티켓을 교환하여 관객에게 지급.
-    private void handleInvitation(Audience audience, Invitation invitation) {
-        invitation.modifyUsed();
-        Ticket ticket = ticketSeller.getTicket();
-        audience.takeTicket(ticket);
+    private void handleInvitation(Audience audience) {
+        Invitation invitation = audience.getInvitation().orElseThrow(() -> new TheaterException(TheaterErrorCode.NOT_FOUND_INVITATION));
+        invitation.verify();
+
+        Ticket freeTicket = theater.getTicketOffice().getTicket();
+        audience.takeTicket(freeTicket);
     }
 
     // 초대권이 없으면 판매원에게 티켓을 사서 관객에게 지급.
-    private void handleTicketPurchase(Audience audience) {
-        Ticket ticket = ticketSeller.getTicket();
-        audience.purchaseTicket(ticket);
-        ticketSeller.addAmount(ticket.getFee());
-        audience.takeTicket(ticket);
+    private void handlePurchase(Audience audience) {
+        TicketOffice ticketOffice = theater.getTicketOffice();
+        TicketSeller ticketSeller = ticketOffice.findAvailableTicketSeller();
+        long ticketPrice = ticketOffice.getTicketPrice();
+
+        if (audience.getMoney() < ticketPrice) {
+            throw new TheaterException(TheaterErrorCode.NOT_ENOUGH_MONEY);
+        }
+
+        Ticket ticket = ticketOffice.getTicket();
+        ticketSeller.sellTicketTo(audience, ticket);
+        ticketOffice.plusAmount(ticketPrice);
     }
 }
