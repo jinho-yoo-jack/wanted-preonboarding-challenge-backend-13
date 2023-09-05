@@ -7,7 +7,16 @@ public class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    public TicketOffice getTicketOffice(){
-        return ticketOffice;
+    public void checkTicket(Audience audience) {
+        if (audience.hasInvitation()) {
+            ticketOffice.exchangeInvitation(audience);
+        }
+        if (!audience.hasInvitation()) {
+            ticketOffice.sellTicket(audience);
+        }
+    }
+
+    public Long getAssets() {
+        return ticketOffice.getAssets();
     }
 }
