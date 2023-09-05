@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TheaterService {
+
     private final Theater theater;
 
-    public String enter(){
-        theater.enter(new Audience(new Bag(1000L)),
-                new TicketSeller(new TicketOffice(20000L, new Ticket(100L))));
+    public String enter() {
+        theater.enter(new Audience(new Bag(1000L)));
         return "Have a good time.";
 
     }

@@ -1,8 +1,11 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 public class TicketOffice {
     private long amount;
     private final List<Ticket> tickets;
@@ -19,7 +22,15 @@ public class TicketOffice {
     public void minusAmount(long amount) {
         this.amount -= amount;
     }
-    public void plusAmount(long amount) {
+
+    public void sellTicketTo(Audience audience) {
+        log.info("Before sell ticket amount: {}", amount);
+        plusAmount(audience.buy(getTicket()));
+        log.info("Ticket office sell ticket to audience, ticket office amount: {}", amount);
+    }
+
+    private void plusAmount(long amount) {
         this.amount += amount;
     }
+
 }
