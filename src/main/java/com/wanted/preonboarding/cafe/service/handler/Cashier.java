@@ -1,30 +1,40 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Cashier {
-    private final Cafe cafe;
+    private static final Cafe cafe = new Cafe();
+    private static final OrderBook orderBook  = new OrderBook();
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    public UUID takeOrder(Map<Beverage, Integer> receivedOrders) {
+        UUID newOrderId = createOrderId();
+        orderBook.add(newOrderId, new Order(receivedOrders));
+
+        return newOrderId;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
-        }
-        return totalPrice;
+    public String sendOrder(Barista toBarista, UUID withOrderId){
+        return toBarista.makeBeverageTo(withOrderId, orderBook.getOrder(withOrderId));
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
+    public String completeOrder(UUID u, String message){
+        orderBook.remove(u);
+        return message;
     }
 
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+    public long calculateTotalPrice(Map<Beverage, Integer> receivedOrders) {
+        AtomicLong totalPrice = new AtomicLong(0L);
+        receivedOrders.forEach(((beverage, quantity) -> {
+            totalPrice.addAndGet((long) beverage.calculatePrice() * quantity);
+        }));
+
+        return totalPrice.get();
     }
+
+    private UUID createOrderId(){
+        return UUID.randomUUID();
+    }
+
 }
