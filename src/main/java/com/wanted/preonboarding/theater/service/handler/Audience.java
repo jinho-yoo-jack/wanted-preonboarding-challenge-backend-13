@@ -8,4 +8,16 @@ public class Audience {
     }
 
     public Bag getBag(){ return bag;}
+
+    public Boolean hasInvitation() {
+       return this.bag.hasInvitation();
+    }
+
+    public void exchangeInvitation(Ticket ticket) {
+        this.bag.exchangeInvitation(ticket);
+    }
+
+    public Long buyTicket(Ticket ticket) {
+        return this.bag.buyTicket(ticket);
+    }
 }

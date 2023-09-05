@@ -13,19 +13,32 @@ public class Bag {
         this.amount = amount;
     }
 
+    public Long getAmount() {
+        return this.amount;
+    }
+
     public boolean hasInvitation() {
         return invitation != null;
     }
     public boolean hasTicket() {
         return ticket != null;
     }
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+
+    public void exchangeInvitation(Ticket ticket) {
+        if (this.hasInvitation()) {
+            this.ticket = ticket;
+            return;
+        }
+        throw new IllegalStateException("초대권이 없습니다.");
     }
-    public void minusAmount(long amount) {
-        this.amount -= amount;
-    }
-    public void plusAmount(long amount) {
-        this.amount += amount;
+
+    public Long buyTicket(Ticket ticket) {
+        Long ticketFee = ticket.getFee();
+        if(this.amount >= ticketFee) {
+            this.amount -= ticketFee;
+            this.ticket = ticket;
+            return ticketFee;
+        }
+        throw new IllegalStateException("소지한 금액이 충분하지 않습니다.");
     }
 }

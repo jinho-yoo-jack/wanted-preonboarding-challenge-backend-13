@@ -2,3 +2,11 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+theater:
+  ticket-office:
+    amount: 20000
+    ticket:
+      count: 100
+  ticket:
+    fee: 100
