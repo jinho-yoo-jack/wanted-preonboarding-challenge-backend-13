@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PreonboardingApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(PreonboardingApplication.class, args);
+
+
     }
 
 }

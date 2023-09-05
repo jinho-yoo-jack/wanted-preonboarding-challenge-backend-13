@@ -1,30 +1,30 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Cashier {
-    private final Cafe cafe;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    private Status status;
+
+    private void startWork() {
+        this.status = Status.WORKING;
     }
 
-    public long calculateTotalPrice(Map<String, Integer> orders) {
-        long totalPrice = 0L;
-        long americanoPrice = 100L;
-        for (String key : orders.keySet()) {
-            if (key.equalsIgnoreCase("AMERICANO"))
-                totalPrice += americanoPrice * orders.get(key);
-        }
-        return totalPrice;
+    private void finishWork() {
+        this.status = Status.WAITING;
     }
 
-    private String sendTo(Barista barista, Map<String, Integer> receivedOrders) {
-        return barista.makeCoffeeTo(receivedOrders);
-    }
-
-    public String takeOrder(Map<String, Integer> receivedOrders, long totalPrice) {
+    public void takeOrder(Cafe cafe, Orders orders) {
+        startWork();
+        long totalPrice = orders.calculateTotalPrice();
         cafe.plusSales(totalPrice);
-        return sendTo(new Barista(0,0), receivedOrders);
+        finishWork();
     }
+
 }
