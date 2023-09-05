@@ -8,9 +8,7 @@ import org.springframework.stereotype.Component;
 public class Theater {
 
     public void enter(Audience audience, TicketSeller ticketSeller){
-        Ticket ticket = ticketSeller.getTicketOffice().getTicket();
-        if (audience.buyTicket(ticket)) {
-            ticketSeller.getTicketOffice().plusAmount(ticket.getFee());
-        }
+        long ticketFee = ticketSeller.sellTo(audience);
+        ticketSeller.receivePay(ticketFee);
     }
 }

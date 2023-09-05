@@ -12,12 +12,7 @@ public class Audience {
         this.bag = bag;
     }
 
-    public boolean buyTicket(Ticket ticket) {
-        if (!bag.hasInvitation()) {
-            bag.minusAmount(ticket.getFee());
-            bag.setTicket(ticket);
-            return true;
-        }
-        return false;
+    public long buyTicket(Ticket ticket) {
+        return bag.checkInvitation(ticket);
     }
 }
