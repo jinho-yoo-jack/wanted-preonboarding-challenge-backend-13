@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class Theater {
 
     public String enterSuccess(Audience audience) {
-        return "Have a good time " + audience.name() + ".";
+        return "Have a good time " + audience.getName()+ ".";
     }
 }

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public record CustomerDto(String name, String payment, Map<String, Integer> orders) {
 
-    public Customer of() {
+    public Customer toEntity() {
         if (name == null || payment == null || orders == null) {
             throw new CafeException(CafeErrorCode.ORDER_REQUEST_ERROR);
         }
@@ -18,10 +18,7 @@ public record CustomerDto(String name, String payment, Map<String, Integer> orde
     }
 
     public Payment setPayment(String payment) {
-        return Arrays.stream(Payment.values())
-                .filter(p -> p.name().equalsIgnoreCase(payment))
-                .findAny()
-                .orElseThrow(() -> new CafeException(CafeErrorCode.PAYMENT_NOT_ACCEPTABLE));
+        return Payment.fromString(payment).orElseThrow();
     }
 
     public Orders setOrders(Map<String, Integer> orders) {

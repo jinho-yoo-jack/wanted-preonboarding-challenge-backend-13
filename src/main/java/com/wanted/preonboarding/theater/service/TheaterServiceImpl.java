@@ -1,40 +1,44 @@
 package com.wanted.preonboarding.theater.service;
 
+import com.wanted.preonboarding.theater.AudienceMapper;
 import com.wanted.preonboarding.theater.exception.TheaterErrorCode;
 import com.wanted.preonboarding.theater.exception.TheaterException;
 import com.wanted.preonboarding.theater.service.handler.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 
-@Service
 @RequiredArgsConstructor
+@Transactional
+@Service
 public class TheaterServiceImpl implements TheaterService {
 
     private final Theater theater;
     private final TicketSeller ticketSeller;
+    private final AudienceMapper audienceMapper;
 
     public String enter(AudienceDto audienceDto) {
-        Audience audience = audienceDto.of();
+        Audience audience = audienceMapper.toEntity(audienceDto);
         Optional<Invitation> invitation = audience.getInvitation();
         if (invitation.isPresent()) {
-            Invitation validInvitation = verifyInvitation(invitation);
+            Invitation validInvitation = invitation.orElseThrow(() -> new TheaterException(TheaterErrorCode.NOT_FOUND_INVITATION));
+            validInvitation.verifyInvitation();
             handleInvitation(audience, validInvitation);
         } else if (ticketSeller.verifyAudienceGotMoney(audience)) {
             handleTicketPurchase(audience);
         } else {
-            throw new TheaterException(TheaterErrorCode.NOT_ENOUGH_MONEY, audience.name()+"'s money:"+audience.getMoney());
+            throw new TheaterException(TheaterErrorCode.NOT_ENOUGH_MONEY, audience.getName()+"'s money:"+audience.getMoney());
         }
 
         return theater.enterSuccess(audience);
     }
 
     public String refund(AudienceDto audienceDto) {
-        Audience audience = audienceDto.of();
-        hasTicket(audience);
+        Audience audience = audienceMapper.toEntity(audienceDto);
+        audience.hasTicket();
         Ticket ticket = audience.getTicket();
         if (audience.getInvitation().isPresent()) {
             audience.removeTicket();
@@ -43,18 +47,7 @@ public class TheaterServiceImpl implements TheaterService {
         audience.refundTicket(ticket);
         ticketSeller.removeAmount(ticket.getFee());
 
-        return audience.name() + "'s refund success";
-    }
-
-    // 초대권을 사용했는지, 유효기간이 지났는지 검증.
-    private Invitation verifyInvitation(Optional<Invitation> invitation) {
-        Invitation target = invitation.orElseThrow(() -> new TheaterException(TheaterErrorCode.NOT_FOUND_INVITATION));
-        if (target.isUsed()) {
-            throw new TheaterException(TheaterErrorCode.INVITATION_ALREADY_USED);
-        } else if (target.getWhen().isBefore(LocalDateTime.now())) {
-            throw new TheaterException(TheaterErrorCode.INVITATION_EXPIRED);
-        }
-        return target;
+        return audience.getName() + "'s refund success";
     }
 
     // 관객이 초대권이 있다면, 초대권과 티켓을 교환하여 관객에게 지급.
@@ -70,11 +63,5 @@ public class TheaterServiceImpl implements TheaterService {
         audience.purchaseTicket(ticket);
         ticketSeller.addAmount(ticket.getFee());
         audience.takeTicket(ticket);
-    }
-
-    private static void hasTicket(Audience audience) {
-        if (!audience.hasTicket()) {
-            throw new TheaterException(TheaterErrorCode.NOT_FOUND_TICKET);
-        }
     }
 }

@@ -2,6 +2,8 @@ package com.wanted.preonboarding.cafe.exception;
 
 import lombok.Getter;
 
+import java.util.Optional;
+
 @Getter
 public class CafeException extends RuntimeException {
 
@@ -19,9 +21,8 @@ public class CafeException extends RuntimeException {
     }
 
     public String getMessage() {
-        if(message == null) {
-            return errorCode.getMessage();
-        }
-        return String.format("%s. %s", errorCode.getMessage(), message);
+        return Optional.ofNullable(message)
+                .orElse(errorCode.getMessage());
     }
+
 }

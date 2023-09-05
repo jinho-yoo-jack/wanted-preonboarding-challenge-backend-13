@@ -18,4 +18,15 @@ public record Orders(Map<Menu, Integer> orderItems) {
     public Map<Menu, Integer> getOrderItems() {
         return orderItems;
     }
+
+    public long calculateTotalPrice() {
+        long totalPrice = 0L;
+        Map<Menu, Integer> orderItems = this.getOrderItems();
+        for (Map.Entry<Menu, Integer> entry : orderItems.entrySet()) {
+            Menu menu = entry.getKey();
+            Integer quantity = entry.getValue();
+            totalPrice += (long) menu.getPrice() * quantity;
+        }
+        return totalPrice;
+    }
 }

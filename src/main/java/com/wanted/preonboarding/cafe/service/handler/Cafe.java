@@ -4,18 +4,26 @@ import java.util.List;
 
 public interface Cafe {
 
+    void plusSales(Long amount);
+
+    void minusSales(Long amount);
+
     void addCashier(Cashier cashier);
 
     void addBarista(Barista barista);
 
-    public List<Cashier> getCashierList();
+    List<Cashier> getCashierList();
 
-    public List<Barista> getBaristaList();
+    List<Barista> getBaristaList();
 
     String getCafeName();
 
-    void plusSales(Long amount);
+    List<Cashier> createCashiers(int count);
 
-    void minusSales(Long amount);
+    Cashier findAvailableCashier();
+
+    List<Barista> createBaristas(int count);
+
+    Barista findAvailableBarista();
 
 }

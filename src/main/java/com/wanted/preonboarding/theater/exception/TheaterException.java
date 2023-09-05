@@ -2,6 +2,8 @@ package com.wanted.preonboarding.theater.exception;
 
 import lombok.Getter;
 
+import java.util.Optional;
+
 @Getter
 public class TheaterException extends RuntimeException {
 
@@ -19,9 +21,7 @@ public class TheaterException extends RuntimeException {
     }
 
     public String getMessage() {
-        if(message == null) {
-            return errorCode.getMessage();
-        }
-        return String.format("%s. %s", errorCode.getMessage(), message);
+        return Optional.ofNullable(message)
+                .orElse(errorCode.getMessage());
     }
 }

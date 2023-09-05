@@ -1,29 +1,27 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
 @Getter
+@RequiredArgsConstructor
 public class Barista {
-    private int rank; // 0: Beginner 1: Middle 2: Master
-    private int status; // 0: Waiting 1: Making
+    private Rank rank;
+    private Status status;
 
-    public Barista(int rank, int status){
+    public Barista(Rank rank, Status status){
         this.rank = rank;
         this.status = status;
     }
 
-    private void setRank(int rank){
+    private void setRank(Rank rank){
         this.rank = rank;
-    }
-
-    private void setStatus(int status){
-        this.status = status;
     }
 
     public String makeCoffeeTo(Orders orders){
-        setStatus(1);
+        startWork();
         Map<Menu, Integer> orderItems = orders.getOrderItems();
         StringBuilder makeOrders = new StringBuilder();
         for(Map.Entry<Menu, Integer> orderItem : orderItems.entrySet()){
@@ -33,9 +31,14 @@ public class Barista {
                     .append(quantity)
                     .append(" ");
         }
-        setStatus(0);
+        finishWork();
         return makeOrders.toString();
     }
 
+    private void startWork(){
+        this.status = Status.WORKING;
+    }
+
+    private void finishWork() { this.status = Status.WAITING; }
 
 }

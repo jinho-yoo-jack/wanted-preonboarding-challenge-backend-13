@@ -1,37 +1,30 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import com.wanted.preonboarding.cafe.exception.CafeErrorCode;
-import com.wanted.preonboarding.cafe.exception.CafeException;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-import java.util.*;
 
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Cashier {
 
-    private final Cafe cafe;
+    private Status status;
 
-    public Cashier(Cafe cafe) {
-        this.cafe = cafe;
+    private void startWork() {
+        this.status = Status.WORKING;
     }
 
-    public long calculateTotalPrice(Orders orders) {
-        long totalPrice = 0L;
-        Map<Menu, Integer> orderItems = orders.getOrderItems();
-        for (Map.Entry<Menu, Integer> entry : orderItems.entrySet()) {
-            Menu menu = entry.getKey();
-            Integer quantity = entry.getValue();
-            totalPrice += (long) menu.getPrice() * quantity;
-        }
-        return totalPrice;
+    private void finishWork() {
+        this.status = Status.WAITING;
     }
 
-    private String sendTo(Barista barista, Orders orders) {
-        return barista.makeCoffeeTo(orders);
-    }
-
-    public String takeOrder(Orders orders, long totalPrice) {
+    public void takeOrder(Cafe cafe, Orders orders) {
+        startWork();
+        long totalPrice = orders.calculateTotalPrice();
         cafe.plusSales(totalPrice);
-        List<Barista> baristaList = cafe.getBaristaList();
-        Barista barista = baristaList.stream().filter(b -> b.getStatus() == 0).findAny().orElseThrow(() -> new CafeException(CafeErrorCode.ALL_BARISTAS_IN_WORK));
-        return sendTo(barista, orders);
+        finishWork();
     }
+
 }

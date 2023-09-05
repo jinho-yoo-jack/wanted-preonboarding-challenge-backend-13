@@ -7,9 +7,7 @@ public class Response<T> {
     private String resultCode;
     private T result;
 
-    public Response() {
-
-    }
+    public Response() {}
 
     public Response(String resultCode, T result) {
         this.resultCode = resultCode;

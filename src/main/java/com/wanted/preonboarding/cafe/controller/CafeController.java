@@ -6,7 +6,6 @@ import com.wanted.preonboarding.global.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 
 @RestController
 @RequestMapping("/cafe")

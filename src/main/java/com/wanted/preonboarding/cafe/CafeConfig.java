@@ -1,30 +1,25 @@
 package com.wanted.preonboarding.cafe;
 
-import com.wanted.preonboarding.cafe.service.handler.Barista;
-import com.wanted.preonboarding.cafe.service.handler.Cafe;
-import com.wanted.preonboarding.cafe.service.handler.Cashier;
-import com.wanted.preonboarding.cafe.service.handler.WantedCafe;
-import com.wanted.preonboarding.theater.service.handler.Ticket;
-import com.wanted.preonboarding.theater.service.handler.TicketOffice;
-import com.wanted.preonboarding.theater.service.handler.TicketSeller;
+import com.wanted.preonboarding.cafe.service.handler.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Configuration
 public class CafeConfig {
 
     @Bean
-    public Cafe cafe() {
+    public Cafe wantedCafe() {
         WantedCafe wantedCafe = new WantedCafe("WantedCafe", 10000L, new ArrayList<>(), new ArrayList<>());
-        wantedCafe.addCashier(new Cashier(wantedCafe));
-        wantedCafe.addBarista(new Barista(0,0));
-        wantedCafe.addBarista(new Barista(1,0));
-        wantedCafe.addBarista(new Barista(2,0));
+        List<Cashier> cashiers = wantedCafe.createCashiers(2);
+        cashiers.forEach(wantedCafe::addCashier);
+        List<Barista> baristas = wantedCafe.createBaristas(3);
+        baristas.forEach(wantedCafe::addBarista);
 
         return wantedCafe;
     }
-
 }

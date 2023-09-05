@@ -2,10 +2,10 @@ package com.wanted.preonboarding.theater.service.handler;
 
 import java.util.Optional;
 
-class Bag {
+public class Bag {
 
     private Long amount;
-    private final Invitation invitation;
+    private Invitation invitation;
     private Ticket ticket;
 
     public Bag(long amount){
