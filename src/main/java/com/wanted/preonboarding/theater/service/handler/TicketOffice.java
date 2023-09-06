@@ -3,6 +3,13 @@ package com.wanted.preonboarding.theater.service.handler;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * 리펙토링한 부분:
+ *                  - plusAmount()는 private으로 함.
+ *                    대신 티켓구매 발생 시 amount를 증가하는 로직 호출은 increateAmountWithFee()을 따로 만들고 public으로 함. (은닉화)
+ *
+ */
 public class TicketOffice {
     private long amount;
     private final List<Ticket> tickets;
@@ -12,14 +19,19 @@ public class TicketOffice {
         this.tickets = Arrays.asList(tickets);
     }
 
+
+    public void increaseAmountWithFee(long fee) {
+        plusAmount(fee);
+    }
+
     public Ticket getTicket(){
         return tickets.get(0);
     }
 
-    public void minusAmount(long amount) {
+    private void minusAmount(long amount) {
         this.amount -= amount;
     }
-    public void plusAmount(long amount) {
+    private void plusAmount(long amount) {
         this.amount += amount;
     }
 }
