@@ -1,21 +1,22 @@
 package com.wanted.preonboarding.cafe.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wanted.preonboarding.cafe.dto.CustomerRequest;
+import com.wanted.preonboarding.cafe.dto.CustomerRequestDto;
 import com.wanted.preonboarding.cafe.service.CafeService;
-import com.wanted.preonboarding.theater.service.TheaterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,15 +49,16 @@ class CafeControllerTest {
     }
 
     @Test
-    @DisplayName("메뉴를 주문한다.  ")
+    @DisplayName("메뉴를 주문한다.")
     void order() throws Exception {
         // given
-        HashMap<String, Integer> map = new HashMap<>();
-        map.put("AMERICANO", 3);
-        given(cafeService.orderFrom(map)).willReturn("AMERICANO:3");
+        CustomerRequestDto requestDto = new CustomerRequestDto(List.of(new CustomerRequest("AMERICANO", 1L)));
+        given(cafeService.orderFrom(any(CustomerRequestDto.class))).willReturn("AMERICANO:3");
 
         // when
-        ResultActions actions = mvc.perform(get(ORDER_API));
+        ResultActions actions = mvc.perform(get(ORDER_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(requestDto)));
 
         // then
         String responseBody = actions.andReturn().getResponse().getContentAsString();

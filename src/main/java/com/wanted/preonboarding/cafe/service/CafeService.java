@@ -1,32 +1,31 @@
 package com.wanted.preonboarding.cafe.service;
 
-import com.wanted.preonboarding.cafe.entity.Coffee;
+import com.wanted.preonboarding.cafe.dto.CustomerRequest;
+import com.wanted.preonboarding.cafe.dto.CustomerRequestDto;
 import com.wanted.preonboarding.cafe.entity.Order;
 import com.wanted.preonboarding.cafe.service.handler.Cafe;
 import com.wanted.preonboarding.cafe.service.handler.Cashier;
 import com.wanted.preonboarding.cafe.service.handler.Customer;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class CafeService {
     private final Cafe wantedCafe;
 
-    public String orderFrom(HashMap<String, Integer> menu){
-        List<Order> orders = new ArrayList<>();
-        for (String key : menu.keySet()) {
-            Order order = new Order(Coffee.findByName(key), menu.get(key));
-            orders.add(order);
-        }
+    public String orderFrom(CustomerRequestDto requestDto){
+        List<Order> orders = getOrders(requestDto);
         Cashier cashier = new Cashier(wantedCafe);
         Customer c1 = new Customer("Card", orders);
         return c1.buyCoffee(cashier);
+    }
+
+    private List<Order> getOrders(CustomerRequestDto requestDto) {
+        return requestDto.getOrders().stream()
+                .map(CustomerRequest::toOrder)
+                .toList();
     }
 }
