@@ -19,7 +19,6 @@ public class Customer {
     }
 
     public String buyCoffee(Cashier cashier) {
-        long totalPrice = cashier.calculateTotalPrice(myOrders);
-        return cashier.takeOrder(myOrders, totalPrice);
+        return cashier.takeOrder(myOrders);
     }
 }

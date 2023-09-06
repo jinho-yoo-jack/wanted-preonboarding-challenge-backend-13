@@ -24,8 +24,8 @@ public class Cashier {
         return barista.makeCoffeeTo(receivedOrders);
     }
 
-    public String takeOrder(List<Order> receivedOrders, long totalPrice) {
-        cafe.plusSales(totalPrice);
+    public String takeOrder(List<Order> receivedOrders) {
+        cafe.plusSales(calculateTotalPrice(receivedOrders));
         return sendTo(new Barista(0, 0), receivedOrders);
     }
 }
