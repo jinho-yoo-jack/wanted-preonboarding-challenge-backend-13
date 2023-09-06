@@ -21,8 +21,11 @@ class TheaterServiceTest {
     @DisplayName("영화관에 입장시킨다.")
     void enter() {
         // given
+        long amount = 3000L;
+        boolean doesHaveInvitation = true;
 
         // when
+        theaterService.enter(amount, doesHaveInvitation);
 
         // then
     }

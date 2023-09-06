@@ -47,10 +47,15 @@ class TheaterControllerTest {
     @DisplayName("영화관에 입장시킨다. ")
     void enter() throws Exception {
         // given
-        given(theaterService.enter()).willReturn("Have a good time.");
+        long amount = 3000L;
+        boolean doesHaveInvitation = true;
+        given(theaterService.enter(amount, doesHaveInvitation)).willReturn("Have a good time.");
 
         // when
-        ResultActions actions = mvc.perform(get(ENTER_API));
+        ResultActions actions = mvc.perform(get(ENTER_API)
+                .param("amount", String.valueOf(amount))
+                .param("doesHaveInvitation", String.valueOf(doesHaveInvitation))
+        );
 
         // then
         String responseBody = actions.andReturn().getResponse().getContentAsString();
