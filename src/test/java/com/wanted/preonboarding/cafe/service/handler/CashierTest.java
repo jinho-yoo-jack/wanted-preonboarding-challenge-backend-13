@@ -12,9 +12,10 @@ import java.util.List;
 class CashierTest {
     @Test
     @DisplayName("주문을 바탕으로 총액을 계산한다. (커피 한종류)")
-    void test() {
+    void calculateCoffee() {
         // given
         List<Order> orders = List.of(new Order(Coffee.AMERICANO, 3L));
+
         Cafe cafe = new Cafe();
         Cashier cashier = new Cashier(cafe);
 
@@ -23,5 +24,21 @@ class CashierTest {
 
         // then
         Assertions.assertThat(totalPrice).isEqualTo(300L);
+    }
+
+    @Test
+    @DisplayName("주문을 바탕으로 총액을 계산한다. (커피 여러 종류)")
+    void calculateCoffees() {
+        // given
+        List<Order> orders = List.of(new Order(Coffee.AMERICANO, 3L), new Order(Coffee.LATTE, 2L), new Order(Coffee.ADE, 1L));
+
+        Cafe cafe = new Cafe();
+        Cashier cashier = new Cashier(cafe);
+
+        // when
+        long totalPrice = cashier.calculateTotalPrice(orders);
+
+        // then
+        Assertions.assertThat(totalPrice).isEqualTo(800L);
     }
 }

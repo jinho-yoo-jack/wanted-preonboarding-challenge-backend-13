@@ -8,6 +8,10 @@ import lombok.Getter;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Order {
-    Coffee coffee;
-    long quantity;
+    private Coffee coffee;
+    private long quantity;
+
+    public long getAmount(){
+        return coffee.getPrice() * quantity;
+    }
 }

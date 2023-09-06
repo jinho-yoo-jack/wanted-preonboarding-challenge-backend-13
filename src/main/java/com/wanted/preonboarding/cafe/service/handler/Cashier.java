@@ -15,7 +15,7 @@ public class Cashier {
     public long calculateTotalPrice(List<Order> orders) {
         long totalPrice = 0L;
         for (Order order : orders) {
-            totalPrice += order.getCoffee().getPrice() * order.getQuantity();
+            totalPrice += order.getAmount();
         }
         return totalPrice;
     }

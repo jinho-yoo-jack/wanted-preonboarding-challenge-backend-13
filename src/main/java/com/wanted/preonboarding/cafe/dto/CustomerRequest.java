@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerRequest {
-    String coffeeName;
-    long quantity;
+    private String coffeeName;
+    private long quantity;
 
     public Order toOrder(){
         return new Order(Coffee.findByName(coffeeName), quantity);
