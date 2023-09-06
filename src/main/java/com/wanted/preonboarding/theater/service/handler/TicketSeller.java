@@ -7,7 +7,19 @@ public class TicketSeller {
         this.ticketOffice = ticketOffice;
     }
 
-    public TicketOffice getTicketOffice(){
-        return ticketOffice;
+    public void giveTo(Audience audience) {
+        Ticket ticket = ticketOffice.getTicket();
+        audience.holdTicket(ticket);
+    }
+
+    public void sellTo(Audience audience) {
+        Ticket ticket = ticketOffice.getTicket();
+        charge(audience, ticket);
+        audience.holdTicket(ticket);
+    }
+
+    private void charge(Audience audience, Ticket ticket) {
+        audience.pay(ticket.getFee());
+        ticketOffice.plusAmount(ticket.getFee());
     }
 }

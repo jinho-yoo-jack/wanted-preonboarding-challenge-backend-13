@@ -49,7 +49,7 @@ class TheaterControllerTest {
         // given
         long amount = 3000L;
         boolean doesHaveInvitation = true;
-        given(theaterService.enter(amount, doesHaveInvitation)).willReturn("Have a good time.");
+        given(theaterService.enter(amount, doesHaveInvitation)).willReturn(TheaterService.ENTER_MESSAGE);
 
         // when
         ResultActions actions = mvc.perform(get(ENTER_API)
@@ -59,6 +59,6 @@ class TheaterControllerTest {
 
         // then
         String responseBody = actions.andReturn().getResponse().getContentAsString();
-        assertThat(responseBody).isEqualTo("Have a good time.");
+        assertThat(responseBody).isEqualTo(TheaterService.ENTER_MESSAGE);
     }
 }
