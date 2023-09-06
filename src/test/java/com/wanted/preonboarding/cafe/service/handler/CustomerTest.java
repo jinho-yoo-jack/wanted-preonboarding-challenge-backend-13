@@ -2,6 +2,7 @@ package com.wanted.preonboarding.cafe.service.handler;
 
 import com.wanted.preonboarding.cafe.entity.Coffee;
 import com.wanted.preonboarding.cafe.entity.Order;
+import com.wanted.preonboarding.cafe.entity.PaymentMethod;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ class CustomerTest {
     void test() {
         // given
         List<Order> orders = List.of(new Order(Coffee.AMERICANO, 3L));
-        Customer customer = new Customer("Card", orders);
+        Customer customer = new Customer(PaymentMethod.CARD, orders);
         Cafe cafe = new Cafe();
         Cashier cashier = new Cashier(cafe);
 
