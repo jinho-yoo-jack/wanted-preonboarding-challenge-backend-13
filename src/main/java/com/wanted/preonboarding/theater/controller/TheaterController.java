@@ -13,11 +13,12 @@ import java.util.HashMap;
 @RequestMapping("/theater")
 @RequiredArgsConstructor
 public class TheaterController {
+    public static final String WELCOME_MESSAGE = "Welcome to The Wanted Theater";
     private final TheaterService theaterService;
 
     @GetMapping("hello")
     public String welcomeMessage(){
-        return "Welcome to The Wanted Theater";
+        return WELCOME_MESSAGE;
     }
 
     @GetMapping("enter")
