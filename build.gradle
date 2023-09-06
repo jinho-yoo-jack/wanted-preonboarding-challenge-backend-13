@@ -1,5 +1,5 @@
 plugins {
-    java
+    id 'java'
     id("org.springframework.boot") version "3.1.2"
     id("io.spring.dependency-management") version "1.1.2"
 }
@@ -13,7 +13,7 @@ java {
 
 configurations {
     compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
+        extendsFrom annotationProcessor
     }
 }
 
@@ -30,6 +30,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.withType<Test> {
+tasks.named('test') {
     useJUnitPlatform()
 }
