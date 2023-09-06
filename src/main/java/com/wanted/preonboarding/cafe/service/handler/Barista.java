@@ -3,7 +3,6 @@ package com.wanted.preonboarding.cafe.service.handler;
 import com.wanted.preonboarding.cafe.entity.Order;
 
 import java.util.List;
-import java.util.Map;
 
 public class Barista {
     private int rank; // 0: Beginner 1: Middle 2: Master
@@ -25,10 +24,12 @@ public class Barista {
     public String makeCoffeeTo(List<Order> orders){
         StringBuilder makeOrders = new StringBuilder();
         for (Order order : orders) {
-            makeOrders.append(order.getCoffee().getName())
-                    .append(":")
-                    .append(order.getQuantity());
+            makeOrders.append(getMakingInfo(order));
         }
         return makeOrders.toString();
+    }
+
+    public String getMakingInfo(Order order){
+        return order.getCoffee().getName() + ":" + order.getQuantity() + " ";
     }
 }

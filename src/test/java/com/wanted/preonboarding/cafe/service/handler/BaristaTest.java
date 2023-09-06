@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BaristaTest {
     @Test
     @DisplayName("주문에 맞게 하나의 커피를 제조한다. ")
@@ -22,6 +20,6 @@ class BaristaTest {
         String makeOrders = barista.makeCoffeeTo(orders);
 
         // then
-        Assertions.assertThat(makeOrders).isEqualTo("AMERICANO:3");
+        Assertions.assertThat(makeOrders).isEqualTo("AMERICANO:3 ");
     }
 }

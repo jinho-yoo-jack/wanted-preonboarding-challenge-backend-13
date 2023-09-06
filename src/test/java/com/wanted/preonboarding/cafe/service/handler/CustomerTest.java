@@ -24,6 +24,6 @@ class CustomerTest {
         String message = customer.buyCoffee(cashier);
 
         // then
-        Assertions.assertThat(message).isEqualTo("AMERICANO:3");
+        Assertions.assertThat(message).isEqualTo("AMERICANO:3 ");
     }
 }
