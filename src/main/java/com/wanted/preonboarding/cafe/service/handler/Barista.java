@@ -1,5 +1,8 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import com.wanted.preonboarding.cafe.entity.Order;
+
+import java.util.List;
 import java.util.Map;
 
 public class Barista {
@@ -19,16 +22,13 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(List<Order> orders){
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
+        for (Order order : orders) {
+            makeOrders.append(order.getCoffee().getName())
                     .append(":")
-                    .append(quantity);
+                    .append(order.getQuantity());
         }
         return makeOrders.toString();
     }
-
-
 }
