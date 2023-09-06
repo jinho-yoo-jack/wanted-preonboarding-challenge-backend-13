@@ -1,10 +1,13 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
+import java.util.logging.Logger;
 
 @Component
 public class Cafe {
+    private static final Logger logger = Logger.getGlobal();
     private final String name;
     private Long sales;
 
@@ -17,11 +20,17 @@ public class Cafe {
         return name;
     }
 
-    public void plusSales(Long amount){
+    private void plusSales(Long amount){
         this.sales += amount;
+        logger.info("sales = " + this.sales);
     }
 
-    public void minusSales(Long amount){
+    private void minusSales(Long amount){
         this.sales -= amount;
+    }
+
+    public String sellBeverage(Cashier cashier, Map<Drink, Integer> receivedOrders) {
+        plusSales(cashier.calculateTotalPrice(receivedOrders));
+        return cashier.takeOrder(receivedOrders);
     }
 }

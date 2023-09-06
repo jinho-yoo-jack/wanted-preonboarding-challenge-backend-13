@@ -19,9 +19,9 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(Map<Drink, Integer> orders){
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
+        for(Drink coffeeName : orders.keySet()){
             int quantity = orders.get(coffeeName);
             makeOrders.append(coffeeName)
                     .append(":")
