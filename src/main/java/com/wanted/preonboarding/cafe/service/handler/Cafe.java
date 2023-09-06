@@ -1,17 +1,16 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
 
-@Component
+import java.util.Map;
+
+@AllArgsConstructor
 public class Cafe {
-    private final String name;
-    private Long sales;
 
-    public Cafe(){
-        this.name = "wantedCodingCafe";
-        this.sales = 10000L;
-    }
+    private String name;
+    private Long sales;
+    private Cashier cashier;
+    private Barista barista;
 
     public String getCafeName(){
         return name;
@@ -24,4 +23,11 @@ public class Cafe {
     public void minusSales(Long amount){
         this.sales -= amount;
     }
+
+    public String takeOrder(Map<Beverage, Integer> myOrders) {
+        long totalPrice = cashier.calculateTotalPrice(myOrders);
+        this.plusSales(totalPrice);
+        return barista.makeCoffeeTo(myOrders);
+    }
+
 }

@@ -1,0 +1,4 @@
+###
+GET http://localhost:8080/cafe/order
+Content-Type: application/json
+

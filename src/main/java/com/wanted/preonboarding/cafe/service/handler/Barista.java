@@ -19,13 +19,14 @@ public class Barista {
         this.status = status;
     }
 
-    public String makeCoffeeTo(Map<String, Integer> orders){
+    public String makeCoffeeTo(Map<Beverage, Integer> orders){
         StringBuilder makeOrders = new StringBuilder();
-        for(String coffeeName : orders.keySet()){
-            int quantity = orders.get(coffeeName);
-            makeOrders.append(coffeeName)
-                    .append(":")
-                    .append(quantity);
+        for(Beverage beverage : orders.keySet()){
+            int quantity = orders.get(beverage);
+            makeOrders.append(beverage.getName())
+                .append(":")
+                .append(quantity)
+                .append("\n");
         }
         return makeOrders.toString();
     }
