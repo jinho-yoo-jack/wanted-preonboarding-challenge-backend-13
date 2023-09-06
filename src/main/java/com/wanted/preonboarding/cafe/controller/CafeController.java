@@ -19,8 +19,15 @@ public class CafeController {
         return "Welcome to The Wanted coding cafe!!";
     }
 
-    @PostMapping("order")
-    public String orderFromMenu(@RequestBody List<MenuRequestDto> menuList){
-        return cafeService.orderFrom(menuList);
+    @GetMapping("test")
+    public String test(){
+        return "test";
+    }
+
+    @GetMapping("order")
+    public String orderFromMenu(){
+        HashMap<String, Integer> menu = new HashMap<String, Integer>();
+        menu.put("AMERICANO", 3);
+        return cafeService.orderFrom(menu);
     }
 }

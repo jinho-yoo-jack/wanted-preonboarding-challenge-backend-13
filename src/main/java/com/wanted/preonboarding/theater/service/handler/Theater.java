@@ -9,10 +9,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class Theater {
 
-    public void enter(Audience audience){
-        TicketSeller ticketSeller = new TicketSeller(20000L, 100L);
-        if(!audience.hasInvitation()){
-            ticketSeller.sellTicket(audience);
-        }
+    public void enter(Audience audience, TicketSeller ticketSeller){
+        long ticketFee = ticketSeller.sellTo(audience);
+        ticketSeller.receivePay(ticketFee);
     }
+
 }

@@ -3,22 +3,16 @@ package com.wanted.preonboarding.theater.service.handler;
 public class TicketSeller {
     private final TicketOffice ticketOffice;
 
-    public TicketSeller(long amount, long ticketFee) {
-        this.ticketOffice = new TicketOffice(amount, new Ticket(ticketFee));
+    public TicketSeller(TicketOffice ticketOffice) {
+        this.ticketOffice = ticketOffice;
     }
 
-    public void sellTicket(Audience audience) {
-        Ticket ticket = ticketOffice.getTicket();
-        audience.minusAmount(ticket.getFee());
-        ticketOffice.plusAmount(ticket.getFee());
-        audience.setTicket(ticket);
+    public long sellTo(Audience a) {
+        return a.buy(ticketOffice.publishTicket());
     }
 
-    public Long getTicketFee(){
-        return ticketOffice.getTicket().getFee();
-    }
+    public void receivePay(long ticketFee){
+        ticketOffice.increaseSalesAmount(ticketFee);
 
-    public Long getOfficeAmount(){
-        return ticketOffice.getAmount();
     }
 }

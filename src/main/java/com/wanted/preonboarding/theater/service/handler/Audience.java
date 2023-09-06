@@ -12,27 +12,7 @@ public class Audience {
         this.bag = new Bag(invitation, amount);
     }
 
-    public Bag getBag(){
-        return bag;
-    }
-
-    public boolean hasInvitation(){
-        return bag.hasInvitation();
-    }
-
-    public void setTicket(Ticket ticket) {
-        bag.setTicket(ticket);
-    }
-
-    public void minusAmount(Long fee) {
-        try {
-            bag.minusAmount(fee);
-        } catch (RuntimeException e){
-            throw new BadRequest("금액이 부족합니다.");
-        }
-    }
-
-    public Long getAmount(){
-        return bag.getAmount();
+    public long buy(Ticket t){
+        return bag.hold(t);
     }
 }

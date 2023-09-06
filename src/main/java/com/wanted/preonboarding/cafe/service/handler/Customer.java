@@ -3,19 +3,22 @@ package com.wanted.preonboarding.cafe.service.handler;
 import java.util.Map;
 
 public class Customer {
-    private PaymentMethod paymentMethod;
-    private final Map<String, Integer> myOrders;
+    private String paymentMethod;
+    private final Cashier cashier;
+    private final Map<Beverage, Integer> myOrders;
 
-    public Customer(PaymentMethod paymentMethod, Map<String, Integer> orders) {
-        this.paymentMethod = paymentMethod;
-        this.myOrders = orders;
+    public Customer(String p, Map<Beverage, Integer> o, Cashier c) {
+        this.paymentMethod = p;
+        this.myOrders = o;
+        this.cashier = c;
     }
 
     private void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
-    public String buyCoffee(Cashier cashier) {
-        return cashier.takeOrder(myOrders);
+    public String buy() {
+        long totalPrice = cashier.calculateTotalPrice(myOrders);
+        return cashier.takeOrder(myOrders, totalPrice);
     }
 }
