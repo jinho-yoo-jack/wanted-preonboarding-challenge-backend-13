@@ -23,10 +23,12 @@ public class Bag {
      * @return 구매한 티켓의 가격
      */
     public long buy(Ticket ticket) {
+        
         if (hasInvitation()) {
             registerTicket(ticket);
             return 0L;
         } else {
+            registerTicket(ticket);
             minusAmount(ticket.getFee());
             return ticket.getFee();
         }
