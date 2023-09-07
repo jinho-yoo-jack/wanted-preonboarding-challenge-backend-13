@@ -1,11 +1,25 @@
 package com.wanted.preonboarding.theater.service.handler;
 
-public class Audience {
-    private final Bag bag;
+import lombok.Builder;
+import lombok.Getter;
 
-    public Audience(Bag bag){
+@Getter
+public class Audience {
+    
+    private final Bag bag;
+    
+    @Builder
+    public Audience(Bag bag) {
         this.bag = bag;
     }
-
-    public Bag getBag(){ return bag;}
+    
+    /**
+     * 티켓 구매 메서드
+     *
+     * @param ticket 구매할 티켓
+     * @return 티켓 비용
+     */
+    public long buy(Ticket ticket) {
+        return bag.buy(ticket);
+    }
 }
