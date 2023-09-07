@@ -19,6 +19,11 @@ public class CafeController {
         return "Welcome to The Wanted coding cafe!!";
     }
 
+    @GetMapping("test")
+    public String test(){
+        return "test";
+    }
+
     @GetMapping("order")
     public String orderFromMenu(){
         HashMap<String, Integer> menu = new HashMap<String, Integer>();
