@@ -1,7 +1,7 @@
 package com.wanted.preonboarding.theater.service;
 
+import com.wanted.preonboarding.theater.dto.AudienceRequestDto;
 import com.wanted.preonboarding.theater.service.handler.Audience;
-import com.wanted.preonboarding.theater.service.handler.Bag;
 import com.wanted.preonboarding.theater.service.handler.Theater;
 import com.wanted.preonboarding.theater.service.handler.Ticket;
 import com.wanted.preonboarding.theater.service.handler.TicketOffice;
@@ -17,18 +17,10 @@ public class TheaterService {
     
     private final Theater theater;
     
-    public String enter() {
-        
-        // 관객의 가방(초대장이 없는 상태)
-        Bag bag = Bag.builder()
-                .invitation(null)
-                .amount(1000L)
-                .build();
+    public String enter(AudienceRequestDto requestDto) {
         
         // 관객
-        Audience audience = Audience.builder()
-                .bag(bag)
-                .build();
+        Audience audience = Audience.of(requestDto);
         
         // 판매 중인 티켓
         Ticket ticket = Ticket.builder().fee(100L).build();

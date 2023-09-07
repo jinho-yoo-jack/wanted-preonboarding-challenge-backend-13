@@ -1,5 +1,6 @@
 package com.wanted.preonboarding.theater.service.handler;
 
+import com.wanted.preonboarding.theater.dto.AudienceRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,5 +22,17 @@ public class Audience {
      */
     public long buy(Ticket ticket) {
         return bag.buy(ticket);
+    }
+    
+    public static Audience of(AudienceRequestDto requestDto) {
+        
+        Bag bag = Bag.builder()
+                .amount(requestDto.getAmount())
+                .invitation(null)
+                .build();
+    
+        return Audience.builder()
+                .bag(bag)
+                .build();
     }
 }
