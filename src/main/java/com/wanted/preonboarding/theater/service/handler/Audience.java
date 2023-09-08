@@ -2,11 +2,7 @@ package com.wanted.preonboarding.theater.service.handler;
 
 import com.wanted.preonboarding.theater.exception.TheaterErrorCode;
 import com.wanted.preonboarding.theater.exception.TheaterException;
-import lombok.Getter;
 
-import java.util.Optional;
-
-@Getter
 public class Audience {
 
     private String name;
@@ -17,22 +13,39 @@ public class Audience {
         this.bag = bag;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public Long getMoney() {
         return this.bag.getAmount();
     }
 
     public boolean hasInvitation() {
-        return this.bag.getInvitation().isPresent();
+        return this.bag.hasInvitation();
     }
 
-    public Optional<Invitation> getInvitation() {
-        return this.bag.getInvitation();
-    }
-
-    public void validHasTicket() {
-        if (this.bag.getTicket() == null) {
-            throw new TheaterException(TheaterErrorCode.NOT_FOUND_TICKET);
+    public Invitation getInvitation() {
+        if (hasInvitation()) {
+            return bag.getInvitation();
         }
+        throw new TheaterException(TheaterErrorCode.NOT_FOUND_INVITATION);
+    }
+
+    public boolean isValidInvitation() {
+        return this.bag.isValidInvitation();
+    }
+
+    public boolean hasTicket() {
+        return this.bag.hasTicket();
+    }
+
+    public void takeTicket(Ticket ticket) {
+        this.bag.takeTicket(ticket);
+    }
+
+    public void takeRefundMoney(long ticketPrice) {
+        this.bag.takeForRefund(ticketPrice);
     }
 
     public Ticket getTicket() {
@@ -40,20 +53,13 @@ public class Audience {
     }
 
     public void buyTicket(Ticket ticket) {
-        this.bag.minusAmount(ticket.getFee());
-        takeTicket(ticket);
+        this.bag.payForTicket(ticket.getFee());
     }
 
-    public void refundTicket(Ticket ticket) {
-        this.bag.plusAmount(ticket.getFee());
-        removeTicket();
-    }
-
-    public void removeTicket() {
-        this.bag.setTicket(null);
-    }
-
-    public void takeTicket(Ticket ticket) {
-        this.bag.setTicket(ticket);
+    public Ticket refundTicket() {
+        if (!hasTicket()) {
+            throw new TheaterException(TheaterErrorCode.NOT_FOUND_TICKET);
+        }
+        return this.bag.refundTicket();
     }
 }

@@ -10,24 +10,11 @@ public class TicketSeller {
 
     private Status status;
 
-    public void sellTicketTo(Audience audience, Ticket ticket) {
-        startWork();
-        audience.buyTicket(ticket);
-        finishWork();
-    }
-
-    public void refundTicketTo(TicketOffice ticketOffice, Ticket ticket) {
-        startWork();
-        ticketOffice.setTicket(ticket);
-        ticketOffice.minusAmount(ticket.getFee());
-        finishWork();
-    }
-
-    private void startWork() {
+    public void startWork() {
         this.status = Status.WORKING;
     }
 
-    private void finishWork() {
+    public void finishWork() {
         this.status = Status.WAITING;
     }
 }

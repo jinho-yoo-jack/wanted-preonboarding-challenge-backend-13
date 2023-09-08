@@ -15,6 +15,10 @@ public class Invitation {
     @JsonProperty("isUsed")
     private boolean isUsed;
 
+    public Invitation(LocalDateTime localDateTime, boolean isUsed) {
+        this.when = localDateTime;
+        this.isUsed = isUsed;
+    }
 
     public void modifyUsed() {
         isAlreadyUsed();
@@ -22,9 +26,10 @@ public class Invitation {
     }
 
     // 초대권을 사용했는지, 유효기간이 지났는지 검증.
-    public void verify() {
+    public boolean verifyInvitation() {
         isAlreadyUsed();
         isExpired();
+        return true;
     }
 
     private void isAlreadyUsed() {
@@ -34,7 +39,7 @@ public class Invitation {
     }
 
     private void isExpired() {
-        if (this.getWhen().isBefore(LocalDateTime.now())) {
+        if (this.when.isBefore(LocalDateTime.now())) {
             throw new TheaterException(TheaterErrorCode.INVITATION_EXPIRED);
         }
     }
