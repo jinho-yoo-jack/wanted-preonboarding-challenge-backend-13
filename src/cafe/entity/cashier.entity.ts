@@ -1,28 +1,33 @@
-import { Barista, Rank, Status } from './barista.entity';
+import { Injectable } from '@nestjs/common';
+import { Barista } from './barista.entity';
 import { Cafe } from './cafe.entity';
+import { PaymentMethod } from './customer.entity';
 
+@Injectable()
 export class Cashier {
-  constructor(private readonly cafe: Cafe) {}
+  constructor(
+    private readonly cafe: Cafe,
+    private readonly barista: Barista,
+  ) {}
 
-  calculateTotalPrice(orders: Map<string, number>): bigint {
+  takeOrder(
+    receivedOrders: Map<string, number>,
+    paymentMethod: PaymentMethod,
+  ): string {
+    const totalPrice: bigint = this.calculateTotalPrice(receivedOrders);
+
+    this.cafe.plusSales(totalPrice, paymentMethod);
+
+    return this.barista.makeCoffeeTo(receivedOrders);
+  }
+
+  private calculateTotalPrice(orders: Map<string, number>): bigint {
     let totalPrice = 0n;
-    const americanoPrice = 100n;
 
-    for (const [coffeeName, quantity] of orders) {
-      if (coffeeName === 'AMERICANO')
-        totalPrice += americanoPrice * BigInt(quantity);
+    for (const [menuName, quantity] of orders) {
+      totalPrice += this.cafe.getPrice(menuName) * BigInt(quantity);
     }
 
     return totalPrice;
-  }
-
-  sendTo(barista: Barista, receivedOrders: Map<string, number>): string {
-    return barista.makeCoffeeTo(receivedOrders);
-  }
-
-  takeOrder(receivedOrders: Map<string, number>, totalPrice: bigint): string {
-    this.cafe.plusSales(totalPrice);
-
-    return this.sendTo(new Barista(Rank[0], Status[0]), receivedOrders);
   }
 }
