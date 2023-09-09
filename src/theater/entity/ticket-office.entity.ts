@@ -1,5 +1,5 @@
 import { Ticket } from './ticket.entity';
-import { BaseEntity, CreateEntityProps } from '../../base/base.entity';
+import { BaseEntity, CreateEntityProps } from '../base/base.entity';
 
 //todo 완료 ticketOffice에 constructor 추가. 기본 티켓 수 레포지토리에 추가하기.
 //todo 완료 TicketRepository 필요하면 setter로 주입.

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Theater } from './../entity/theater.entity';
-import { BaseRepository } from '../../base/base.repository';
+import { BaseRepository } from '../base/base.repository';
 import { TicketSellerRepository } from './ticket-seller.repository';
 import { Seat } from '../entity/seat.entity';
 

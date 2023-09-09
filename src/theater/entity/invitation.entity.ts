@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { BaseEntity, CreateEntityProps } from '../../base/base.entity';
+import { BaseEntity, CreateEntityProps } from '../base/base.entity';
 
 //todo 초대권이 여러개일 수 있음. 그 중 오늘 날짜의 초대권이 있는지 확인해야 함.
 

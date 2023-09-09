@@ -1,7 +1,7 @@
 import { User } from './user.entity';
 import { TicketSeller } from './ticket-seller.entity';
 import { MessageType } from '../types/seller-message.type';
-import { BaseEntity, CreateEntityProps } from '../../base/base.entity';
+import { BaseEntity, CreateEntityProps } from '../base/base.entity';
 import { Seat } from './seat.entity';
 
 // 3. 완료 ticketSeller는 언제나 Theater에 종속적이다. 생성자 주입하자. 그리고 enter 인자의 ticketSeller를 없고 필드 값을 사용하자.

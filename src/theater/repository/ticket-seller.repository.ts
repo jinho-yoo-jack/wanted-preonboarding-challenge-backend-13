@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BaseRepository } from '../../base/base.repository';
+import { BaseRepository } from '../base/base.repository';
 import { TicketSeller } from '../entity/ticket-seller.entity';
 import { TicketOfficeRepository } from './ticket-office.repository';
 

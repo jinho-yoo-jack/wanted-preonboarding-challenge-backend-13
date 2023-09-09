@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { BaseEntity, CreateEntityProps } from '../../base/base.entity';
+import { BaseEntity, CreateEntityProps } from '../base/base.entity';
 
 interface TicketProps {
   name: string;

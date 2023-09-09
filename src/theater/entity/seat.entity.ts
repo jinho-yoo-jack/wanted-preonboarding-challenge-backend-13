@@ -1,5 +1,5 @@
-import { CreateEntityProps } from '../../base/base.entity';
-import { BaseEntity } from '../../base/base.entity';
+import { CreateEntityProps } from '../base/base.entity';
+import { BaseEntity } from '../base/base.entity';
 
 interface SeatProps {
   ticketId?: string;

@@ -2,7 +2,7 @@ import { TicketOffice } from './ticket-office.entity';
 import { Ticket } from './ticket.entity';
 import { User } from './user.entity';
 import { Message } from '../types/seller-message.type';
-import { BaseEntity, CreateEntityProps } from '../../base/base.entity';
+import { BaseEntity, CreateEntityProps } from '../base/base.entity';
 import { Invitation } from './invitation.entity';
 
 // 완료 복잡한 getter 메소드로 묶기

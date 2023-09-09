@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BaseRepository } from '../../base/base.repository';
+import { BaseRepository } from '../base/base.repository';
 import { Invitation } from '../entity/invitation.entity';
 import * as dayjs from 'dayjs';
 
