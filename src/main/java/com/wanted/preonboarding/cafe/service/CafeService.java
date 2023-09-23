@@ -4,6 +4,9 @@ import com.wanted.preonboarding.cafe.service.handler.Cafe;
 import com.wanted.preonboarding.cafe.service.handler.Cashier;
 import com.wanted.preonboarding.cafe.service.handler.Customer;
 import com.wanted.preonboarding.cafe.service.handler.Beverage;
+import com.wanted.preonboarding.cafe.service.handler.discount.DiscountPolicy;
+import com.wanted.preonboarding.cafe.service.handler.discount.MembershipDiscountPolicy;
+import com.wanted.preonboarding.cafe.service.handler.discount.TelecomDiscountPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,15 @@ public class CafeService {
     public String orderFrom(HashMap<String, Integer> menu){
         // 들어 온 주문에 따라서 적절한 `Beverage` 객체를 상속 받은 객체를 생성
         // Cashier 생성자 파라미터에 Barista 추가 필요
+    
+        String type = "telecom";
+    
+        DiscountPolicy discountPolicy = switch (type.toLowerCase()) {
+            case "telecom" -> new TelecomDiscountPolicy();
+            case "membership" -> new MembershipDiscountPolicy();
+            default -> null;
+        };
+    
         Cashier cashier = new Cashier(wantedCafe);
         Map<Beverage, Integer> myOrders = new HashMap<>();
         myOrders.put(new Americano(), 3);
