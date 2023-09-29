@@ -19,7 +19,7 @@ public record Orders(Map<Menu, Integer> orderItems) {
         return orderItems;
     }
 
-    public long calculateTotalPrice() {
+    public long calculateTotalPrice(Payment payment) {
         long totalPrice = 0L;
         Map<Menu, Integer> orderItems = this.getOrderItems();
         for (Map.Entry<Menu, Integer> entry : orderItems.entrySet()) {
@@ -27,6 +27,6 @@ public record Orders(Map<Menu, Integer> orderItems) {
             Integer quantity = entry.getValue();
             totalPrice += (long) menu.getPrice() * quantity;
         }
-        return totalPrice;
+        return payment.discount(totalPrice);
     }
 }

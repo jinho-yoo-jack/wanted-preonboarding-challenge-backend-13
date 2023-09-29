@@ -1,15 +1,14 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 
-@Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class Cashier {
 
+    private final Cafe cafe;
     private Status status;
 
     private void startWork() {
@@ -20,11 +19,18 @@ public class Cashier {
         this.status = Status.WAITING;
     }
 
-    public void takeOrder(Cafe cafe, Orders orders) {
-        startWork();
-        long totalPrice = orders.calculateTotalPrice();
-        cafe.plusSales(totalPrice);
-        finishWork();
+    protected Status getStatus() {
+        return this.status;
     }
 
+    public String takeOrder(Customer customer) {
+        startWork();
+        Orders orders = customer.submitOrders();
+        long totalPrice = orders.calculateTotalPrice(customer.getPayment());
+        customer.payPrice(totalPrice);
+        this.cafe.plusSales(totalPrice);
+        Barista availableBarista = cafe.findAvailableBarista();
+        finishWork();
+        return availableBarista.makeCoffeeTo(orders);
+    }
 }

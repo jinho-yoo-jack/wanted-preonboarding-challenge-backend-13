@@ -9,26 +9,30 @@ public class Theater {
     private final TicketOffice ticketOffice;
 
     public String enter(Audience audience) {
-        handleEnterAudience(audience);
+        handleEnter(audience);
         return "Have a good time " + audience.getName()+ ".";
     }
 
     public String refund(Audience audience) {
-        handleRefundAudience(audience);
+        handleRefund(audience);
         return audience.getName() + "'s refund success";
     }
 
-    private void handleEnterAudience(Audience audience) {
+    private void handleEnter(Audience audience) {
         if (audience.hasInvitation()) {
             handleInvitation(audience);
             return;
         }
-        handlePurchase(audience);
+        this.ticketOffice.sellTicketTo(audience);
     }
 
-    private void handleRefundAudience(Audience audience) {
-        if (refundInvitationTicket(audience)) return;
-        this.refundTicketTo(audience);
+    private void handleRefund(Audience audience) {
+        if (audience.hasInvitation() && audience.isValidInvitation()) {
+            Ticket refundTicket = audience.refundTicket();
+            this.ticketOffice.setTicket(refundTicket);
+            return;
+        }
+        this.ticketOffice.refundTicketTo(audience);
     }
 
     // 관객이 초대권이 있다면, 초대권과 티켓을 교환하여 관객에게 지급.
@@ -36,37 +40,7 @@ public class Theater {
         Invitation invitation = audience.getInvitation();
         invitation.verifyInvitation();
 
-        Ticket freeTicket = this.getAvailableTicket();
+        Ticket freeTicket = this.ticketOffice.getAvailableTicket();
         audience.takeTicket(freeTicket);
-    }
-
-    // 초대권이 없으면 판매원에게 티켓을 사서 관객에게 지급.
-    private void handlePurchase(Audience audience) {
-        this.sellToTicket(audience);
-    }
-
-    private boolean refundInvitationTicket(Audience audience) {
-        if (audience.hasInvitation() && audience.isValidInvitation()) {
-            Ticket refundTicket = audience.refundTicket();
-            this.setTicket(refundTicket);
-            return true;
-        }
-        return false;
-    }
-
-    private Ticket getAvailableTicket() {
-        return this.ticketOffice.getAvailableTicket();
-    }
-
-    private void sellToTicket(Audience audience) {
-        this.ticketOffice.sellTicketTo(audience);
-    }
-
-    private void setTicket(Ticket ticket) {
-        this.ticketOffice.setTicket(ticket);
-    }
-
-    private void refundTicketTo(Audience audience) {
-        this.ticketOffice.refundTicketTo(audience);
     }
 }

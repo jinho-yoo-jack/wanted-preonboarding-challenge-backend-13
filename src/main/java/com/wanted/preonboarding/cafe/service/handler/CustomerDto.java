@@ -11,14 +11,11 @@ import java.util.stream.Collectors;
 public record CustomerDto(String name, String payment, Map<String, Integer> orders) {
 
     public Customer toEntity() {
+        System.out.println(payment);
         if (name == null || payment == null || orders == null) {
             throw new CafeException(CafeErrorCode.ORDER_REQUEST_ERROR);
         }
-        return new Customer(name, setPayment(payment), setOrders(orders));
-    }
-
-    public Payment setPayment(String payment) {
-        return Payment.fromString(payment).orElseThrow();
+        return new Customer(name, payment, setOrders(orders));
     }
 
     public Orders setOrders(Map<String, Integer> orders) {

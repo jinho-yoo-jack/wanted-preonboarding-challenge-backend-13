@@ -46,7 +46,7 @@ public class WantedCafe implements Cafe {
     public List<Cashier> createCashiers(int count) {
         List<Cashier> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            list.add(new Cashier(Status.WAITING));
+            list.add(new Cashier(this, Status.WAITING));
         }
         return list;
     }
@@ -62,7 +62,7 @@ public class WantedCafe implements Cafe {
         Rank[] ranks = Rank.values();
         List<Barista> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            list.add(new Barista(ranks[i % ranks.length], Status.WAITING));
+            list.add(new Barista(this, ranks[i % ranks.length], Status.WAITING));
         }
         return list;
     }

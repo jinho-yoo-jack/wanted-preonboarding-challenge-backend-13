@@ -17,7 +17,7 @@ class TicketSellerTest {
     @Test
     @DisplayName("판매원이 티켓을 팔면 관람객이 돈을 내고 티켓을 산다.")
     void givenAudienceWithMoneyWhenCallSellTicketToThenAudiencePayFeeAndTakeTicket() {
-        TicketSeller ticketSeller = new TicketSeller(Status.WAITING);
+        TicketSeller ticketSeller = new TicketSeller(null, Status.WAITING);
         TicketOffice ticketOffice = new TicketOffice(List.of(ticketSeller), new ArrayList<>());
         Audience audience = new Audience("test", new Bag(new Invitation(LocalDateTime.now().plusDays(1), false), 1000L));
         Ticket ticket = new Ticket(1000L);
@@ -30,7 +30,7 @@ class TicketSellerTest {
     @Test
     @DisplayName("관람객이 환불 요청을 하면 티켓을 반납하고 돈을 돌려받는다.")
     void givenAudienceWithTicketWhenCallRefundTicketToThenAudienceRemoveTicketAndPayBackFee() {
-        TicketSeller ticketSeller = new TicketSeller(Status.WAITING);
+        TicketSeller ticketSeller = new TicketSeller(null, Status.WAITING);
         TicketOffice ticketOffice = new TicketOffice(List.of(ticketSeller), new ArrayList<>());
         Audience audience = new Audience("test", new Bag(new Invitation(LocalDateTime.now().plusDays(1), false), 0L));
         Ticket ticket = new Ticket(1000L);

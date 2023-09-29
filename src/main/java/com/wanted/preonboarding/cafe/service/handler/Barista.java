@@ -1,23 +1,25 @@
 package com.wanted.preonboarding.cafe.service.handler;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
-@Getter
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Barista {
+    private final Cafe cafe;
     private Rank rank;
     private Status status;
 
-    public Barista(Rank rank, Status status){
-        this.rank = rank;
-        this.status = status;
-    }
 
     private void setRank(Rank rank){
         this.rank = rank;
+    }
+
+    protected Status getStatus() {
+        return this.status;
     }
 
     public String makeCoffeeTo(Orders orders){
