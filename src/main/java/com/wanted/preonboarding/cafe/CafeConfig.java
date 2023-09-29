@@ -3,6 +3,7 @@ package com.wanted.preonboarding.cafe;
 import com.wanted.preonboarding.cafe.service.handler.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Configuration
+@ComponentScan
 public class CafeConfig {
 
     @Bean

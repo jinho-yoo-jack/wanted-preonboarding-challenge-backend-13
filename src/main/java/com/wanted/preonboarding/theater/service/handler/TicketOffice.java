@@ -24,7 +24,7 @@ public class TicketOffice {
     public List<TicketSeller> createTicketSeller(int count) {
         List<TicketSeller> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            list.add(new TicketSeller(Status.WAITING));
+            list.add(new TicketSeller(this, Status.WAITING));
         }
         return list;
     }
@@ -48,18 +48,18 @@ public class TicketOffice {
         throw new TheaterException(TheaterErrorCode.TICKET_SOLD_OUT);
     }
 
-    public void removedSoldTicket(Ticket ticket) {
+    protected void removedSoldTicket(Ticket ticket) {
         this.tickets.remove(ticket);
     }
 
-    public long getTicketPrice() {
+    protected long getTicketPrice() {
         return tickets.stream()
                 .findFirst()
                 .orElseThrow(() -> new TheaterException(TheaterErrorCode.NOT_FOUND_TICKET))
                 .getFee();
     }
 
-    public TicketSeller findAvailableTicketSeller() {
+    protected TicketSeller findAvailableTicketSeller() {
         return this.ticketSellers.stream()
                 .filter(ticketSeller -> ticketSeller.getStatus() == Status.WAITING)
                 .findAny()
@@ -69,36 +69,19 @@ public class TicketOffice {
     public void sellTicketTo(Audience audience) {
         TicketSeller ticketSeller = findAvailableTicketSeller();
         Ticket ticket = getAvailableTicket();
-        try {
-            ticketSeller.startWork();
-            audience.buyTicket(ticket);
-            this.plusAmount(ticket.getFee());
-            this.removedSoldTicket(ticket);
-            audience.takeTicket(ticket);
-        } finally {
-            ticketSeller.finishWork();
-        }
+        ticketSeller.sellTicketTo(audience, ticket);
     }
 
     public void refundTicketTo(Audience audience) {
         TicketSeller ticketSeller = findAvailableTicketSeller();
-        try {
-            ticketSeller.startWork();
-            Ticket refundTicket = audience.refundTicket();
-            Long ticketFee = refundTicket.getFee();
-            this.setTicket(refundTicket);
-            this.minusAmount(ticketFee);
-            audience.takeRefundMoney(ticketFee);
-        } finally {
-            ticketSeller.finishWork();
-        }
+        ticketSeller.refundTicketTo(audience);
     }
 
-    public List<TicketSeller> getTicketSellers() {
+    protected List<TicketSeller> getTicketSellers() {
         return this.ticketSellers;
     }
 
-    public List<Ticket> getTicketList() {
+    protected List<Ticket> getTicketList() {
         return this.tickets;
     }
 
@@ -106,15 +89,15 @@ public class TicketOffice {
         this.tickets.add(ticket);
     }
 
-    public long getAmount() {
+    protected long getAmount() {
         return this.amount;
     }
 
-    public void minusAmount(long amount) {
+    protected void minusAmount(long amount) {
         this.amount -= amount;
     }
 
-    public void plusAmount(long amount) {
+    protected void plusAmount(long amount) {
         this.amount += amount;
     }
 }

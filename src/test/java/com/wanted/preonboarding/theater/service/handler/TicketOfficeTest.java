@@ -18,7 +18,7 @@ class TicketOfficeTest {
     @DisplayName("티켓 판매원을 생성한다.")
     public void createTicketSeller() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Ticket> tickets = Stream.of(new Ticket(1000L))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -38,7 +38,7 @@ class TicketOfficeTest {
     @DisplayName("티켓 판매원을 리스트에 추가한다.")
     public void setTicketSeller() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Ticket> tickets = Stream.of(new Ticket(1000L))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -57,7 +57,7 @@ class TicketOfficeTest {
     @DisplayName("티켓을 생성한다.")
     public void createTicket() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Ticket> tickets = Stream.of(new Ticket(1000L))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -77,7 +77,7 @@ class TicketOfficeTest {
     @DisplayName("티켓 오피스에서 티켓을 꺼내오면 티켓 리스트에서 티켓이 하나씩 줄어든다.")
     public void getTicket() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Ticket> tickets = Stream.of(new Ticket(1000L))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -96,7 +96,7 @@ class TicketOfficeTest {
     @DisplayName("티켓 오피스에서 티켓 가격을 얻어온다.")
     public void getTicketPrice() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         ArrayList<Ticket> tickets = Stream.of(new Ticket(1000L))
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -113,7 +113,7 @@ class TicketOfficeTest {
     @DisplayName("티켓리스트가 없는데 티켓 가격을 요청하면 에러 반환.")
     public void getTicketPriceWithNoTickets() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         TicketOffice ticketOffice = new TicketOffice(ticketSellers, new ArrayList<>());
 
@@ -126,7 +126,7 @@ class TicketOfficeTest {
     @DisplayName("쉬고있는 티켓 판매원을 반환한다.")
     public void findAvailableTicketSeller() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WAITING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WAITING))
                 .collect(Collectors.toCollection(ArrayList::new));
         TicketOffice ticketOffice = new TicketOffice(ticketSellers, new ArrayList<>());
 
@@ -141,7 +141,7 @@ class TicketOfficeTest {
     @DisplayName("쉬고있는 티켓 판매원이 없으면 에러를 반환한다.")
     public void findAvailableTicketSellerWithException() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WORKING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WORKING))
                 .collect(Collectors.toCollection(ArrayList::new));
         TicketOffice ticketOffice = new TicketOffice(ticketSellers, new ArrayList<>());
 
@@ -153,7 +153,7 @@ class TicketOfficeTest {
     @DisplayName("티켓을 티켓 리스트에 추가한다.")
     public void setTicket() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WORKING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WORKING))
                 .collect(Collectors.toCollection(ArrayList::new));
         TicketOffice ticketOffice = new TicketOffice(ticketSellers, new ArrayList<>());
 
@@ -170,7 +170,7 @@ class TicketOfficeTest {
     @DisplayName("판매금액을 감소시킨다.")
     public void minusAmount() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WORKING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WORKING))
                 .collect(Collectors.toCollection(ArrayList::new));
         TicketOffice ticketOffice = new TicketOffice(ticketSellers, new ArrayList<>(), 10000L);
 
@@ -185,7 +185,7 @@ class TicketOfficeTest {
     @DisplayName("판매금액을 증가시킨다.")
     public void plusAmount() throws Exception {
         // given
-        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(Status.WORKING))
+        ArrayList<TicketSeller> ticketSellers = Stream.of(new TicketSeller(null, Status.WORKING))
                 .collect(Collectors.toCollection(ArrayList::new));
         TicketOffice ticketOffice = new TicketOffice(ticketSellers, new ArrayList<>(), 0L);
 
