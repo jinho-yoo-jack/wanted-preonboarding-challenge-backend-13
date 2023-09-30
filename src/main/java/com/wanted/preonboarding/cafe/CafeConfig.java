@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = "com.wanted.preonboarding.cafe.service.handler")
 public class CafeConfig {
 
     @Bean

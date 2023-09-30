@@ -4,19 +4,23 @@ import com.wanted.preonboarding.cafe.exception.CafeErrorCode;
 import com.wanted.preonboarding.cafe.exception.CafeException;
 
 
-public class Cash extends CashDiscountPolicy implements Payment {
+public class Cash implements Payment {
 
     private Long balance;
+    private final DiscountPolicy discountPolicy;
 
-    public Cash(Long balance) {
+    public Cash(Long balance, DiscountPolicy discountPolicy) {
         this.balance = balance;
+        this.discountPolicy = discountPolicy;
     }
 
     @Override
-    public void pay(Long price) {
-        if (balance < price) {
+    public Long pay(Long price) {
+        Long discountedPrice = discountPolicy.discount(price);
+        if (balance < discountedPrice) {
             throw new CafeException(CafeErrorCode.NOT_ENOUGH_MONEY);
         }
-        balance -= price;
+        balance -= discountedPrice;
+        return discountedPrice;
     }
 }

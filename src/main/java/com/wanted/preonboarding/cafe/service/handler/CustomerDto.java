@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public record CustomerDto(String name, String payment, Map<String, Integer> orders) {
+public record CustomerDto(String name, String payment, long balance, Map<String, Integer> orders) {
 
     public Customer toEntity() {
-        System.out.println(payment);
         if (name == null || payment == null || orders == null) {
             throw new CafeException(CafeErrorCode.ORDER_REQUEST_ERROR);
         }
-        return new Customer(name, payment, setOrders(orders));
+
+        return new Customer(name,null, setOrders(orders));
     }
 
     public Orders setOrders(Map<String, Integer> orders) {

@@ -27,6 +27,6 @@ public record Orders(Map<Menu, Integer> orderItems) {
             Integer quantity = entry.getValue();
             totalPrice += (long) menu.getPrice() * quantity;
         }
-        return payment.discount(totalPrice);
+        return totalPrice;
     }
 }

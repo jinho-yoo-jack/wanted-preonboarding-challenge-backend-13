@@ -13,9 +13,8 @@ public class CafeServiceImpl implements CafeService {
 
     private final Cafe cafe;
 
-    public String orderFrom(CustomerDto customerDto) {
-        Customer customer = customerDto.toEntity();
+    public String orderFrom(Customer customer) {
         Cashier cashier = cafe.findAvailableCashier();
-        return customer.getName()+"'s order [ " + cashier.takeOrder(customer) + "] complete";
+        return customer.getName()+"'s order [ " + cashier.takeOrder(customer) + " ] complete";
     }
 }

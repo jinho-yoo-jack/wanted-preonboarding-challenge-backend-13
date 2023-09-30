@@ -27,10 +27,10 @@ public class Cashier {
         startWork();
         Orders orders = customer.submitOrders();
         long totalPrice = orders.calculateTotalPrice(customer.getPayment());
-        customer.payPrice(totalPrice);
-        this.cafe.plusSales(totalPrice);
+        Long discountedTotalPrice = customer.payPrice(totalPrice);
+        this.cafe.plusSales(discountedTotalPrice);
         Barista availableBarista = cafe.findAvailableBarista();
         finishWork();
-        return availableBarista.makeCoffeeTo(orders);
+        return availableBarista.makeCoffeeTo(orders) + ", Discounted total price: " + discountedTotalPrice;
     }
 }

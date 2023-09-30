@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum CafeErrorCode {
 
-    NOT_ENOUGH_MONEY(HttpStatus.BAD_REQUEST, "Audience does not have enough money for a ticket"),
+    NOT_ENOUGH_MONEY(HttpStatus.BAD_REQUEST, "Customer does not have enough money for a beverage"),
     MENU_NOT_FOUND(HttpStatus.NOT_FOUND, "Customer's order menu is not founded"),
     PAYMENT_NOT_ACCEPTABLE(HttpStatus.NOT_FOUND, "Customer's payment is not acceptable this cafe"),
     ALL_CASHIERS_IN_WORK(HttpStatus.NOT_FOUND, "All cashiers in work. Please wait a few minutes"),

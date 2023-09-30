@@ -24,11 +24,11 @@ public class Customer {
         return this.myOrders;
     }
 
-    public void payPrice(long totalPrice) {
-        this.payment.pay(totalPrice);
+    public Long payPrice(long totalPrice) {
+        return this.payment.pay(totalPrice);
     }
 
-    private void setPayment(Payment payment) {
+    public void setPayment(Payment payment) {
         this.payment = payment;
     }
 
