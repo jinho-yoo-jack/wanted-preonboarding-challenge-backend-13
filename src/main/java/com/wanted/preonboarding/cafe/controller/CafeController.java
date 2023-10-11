@@ -1,12 +1,12 @@
 package com.wanted.preonboarding.cafe.controller;
 
+import com.wanted.preonboarding.cafe.domain.MenuRequestDto;
 import com.wanted.preonboarding.cafe.service.CafeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cafe")

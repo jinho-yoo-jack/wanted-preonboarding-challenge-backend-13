@@ -2,7 +2,7 @@ package com.wanted.preonboarding.cafe.service.handler;
 
 import java.util.UUID;
 
-public class Barista {
+public class Barista implements BaristaBehavior{
     private int rank; // 0: Beginner 1: Middle 2: Master
     private int status; // 0: Waiting 1: Making
 

@@ -13,7 +13,7 @@ public class Customer {
         this.cashier = c;
     }
 
-    private void setPaymentMethod(String paymentMethod) {
+    private void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 

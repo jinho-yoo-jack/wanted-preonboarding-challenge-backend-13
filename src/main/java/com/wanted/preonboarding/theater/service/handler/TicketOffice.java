@@ -30,4 +30,8 @@ public class TicketOffice {
     private void plusAmount(long amount) {
         this.amount += amount;
     }
+
+    public Long getAmount(){
+        return amount;
+    }
 }
